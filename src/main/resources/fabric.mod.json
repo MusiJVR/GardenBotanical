@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "gardenbotanical",
+  "version": "${version}",
+  "name": "GardenBotanical",
+  "description": "This mod adds flowers",
+  "authors": [
+    "MouseJava",
+    "redbad"
+  ],
+  "contact": {
+    "website": "https://modrinth.com/mod/gardenbotanical",
+    "repo": "https://github.com/MouseJava/GardenBotanical"
+  },
+  "license": "MIT",
+  "icon": "assets/gardenbotanical/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "net.gardenbotanical.client.GardenBotanicalClient"
+    ],
+    "main": [
+      "net.gardenbotanical.GardenBotanical"
+    ]
+  },
+  "mixins": [
+    "gardenbotanical.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

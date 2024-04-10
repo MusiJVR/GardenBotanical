@@ -1,0 +1,21 @@
+# Default ignored files
+
+.idea/
+
+.gradle/
+
+run/
+
+build/
+
+gradle/
+
+gradlew
+
+gradlew.bat
+
+build.gradle
+
+settings.gradle
+
+gradle.properties
