@@ -1,6 +1,9 @@
 {
-  "item.crystalcaves.ruby": "Ruby",
-  "item.crystalcaves.raw_ruby": "Raw ruby",
+  "block.gardenbotanical.bouvardia": "Bouvardia",
+  "block.gardenbotanical.brunia": "Brunia",
+  "block.gardenbotanical.gerbera": "Gerbera",
+  "block.gardenbotanical.peony": "Peony",
+  "block.gardenbotanical.veronica": "Veronica",
 
-  "itemgroup.crystalcaves.crystalcaves_group": "CrystalCaves"
+  "itemgroup.gardenbotanical.gardenbotanical_group": "GardenBotanical"
 }
