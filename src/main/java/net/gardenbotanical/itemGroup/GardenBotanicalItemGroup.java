@@ -19,7 +19,7 @@ public class GardenBotanicalItemGroup {
                         entries.add(GardenBotanicalBlock.BOUVARDIA);
                         entries.add(GardenBotanicalBlock.BRUNIA);
                         entries.add(GardenBotanicalBlock.GERBERA);
-                        entries.add(GardenBotanicalBlock.PEONY);
+                        entries.add(GardenBotanicalBlock.HERBAL_PEONY);
                         entries.add(GardenBotanicalBlock.VERONICA);
                     }).build());
 

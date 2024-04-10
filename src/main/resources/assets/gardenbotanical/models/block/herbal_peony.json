@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "gardenbotanical:block/peony"
+    "cross": "gardenbotanical:block/herbal_peony"
   }
 }

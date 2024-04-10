@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gardenbotanical:block/peony"
+    "layer0": "gardenbotanical:block/herbal_peony"
   }
 }

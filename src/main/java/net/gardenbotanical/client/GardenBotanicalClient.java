@@ -15,13 +15,13 @@ public class GardenBotanicalClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlock.BOUVARDIA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlock.GERBERA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlock.BRUNIA, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlock.PEONY, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlock.HERBAL_PEONY, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlock.VERONICA, RenderLayer.getCutout());
 
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlock.POTTED_BOUVARDIA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlock.POTTED_GERBERA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlock.POTTED_BRUNIA, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlock.POTTED_PEONY, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlock.POTTED_HERBAL_PEONY, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlock.POTTED_VERONICA, RenderLayer.getCutout());
     }
 }
