@@ -16,11 +16,14 @@
   "icon": "assets/gardenbotanical/icon.png",
   "environment": "*",
   "entrypoints": {
+    "main": [
+      "net.gardenbotanical.GardenBotanical"
+    ],
     "client": [
       "net.gardenbotanical.client.GardenBotanicalClient"
     ],
-    "main": [
-      "net.gardenbotanical.GardenBotanical"
+    "fabric-datagen": [
+      "net.gardenbotanical.GardenBotanicalDataGenerator"
     ]
   },
   "mixins": [
