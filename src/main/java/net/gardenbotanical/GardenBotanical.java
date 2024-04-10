@@ -1,3 +1,5 @@
+package net.gardenbotanical;
+
 import net.fabricmc.api.ModInitializer;
 
 public class GardenBotanical implements ModInitializer {
