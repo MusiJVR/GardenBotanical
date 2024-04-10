@@ -1,3 +1,6 @@
 {
-  "parent": "gardenbotanical:block/gerbera"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gardenbotanical:block/gerbera"
+  }
 }

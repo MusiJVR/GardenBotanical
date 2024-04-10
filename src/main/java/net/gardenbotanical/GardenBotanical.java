@@ -3,6 +3,7 @@ package net.gardenbotanical;
 import net.fabricmc.api.ModInitializer;
 import net.gardenbotanical.block.GardenBotanicalBlock;
 import net.gardenbotanical.item.GardenBotanicalItem;
+import net.gardenbotanical.itemGroup.GardenBotanicalItemGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +16,7 @@ public class GardenBotanical implements ModInitializer {
     public void onInitialize() {
         GardenBotanicalItem.register();
         GardenBotanicalBlock.register();
+        GardenBotanicalItemGroup.registerItemGroups();
 
         LOGGER.info("Initialize " + MOD_ID + "...");
     }

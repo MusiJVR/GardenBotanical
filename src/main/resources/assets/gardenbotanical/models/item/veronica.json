@@ -1,3 +1,6 @@
 {
-  "parent": "gardenbotanical:block/veronica"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gardenbotanical:block/veronica"
+  }
 }
