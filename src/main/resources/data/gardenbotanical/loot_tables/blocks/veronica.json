@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "items": [
+              "gardenbotanical:garden_pruner"
+            ]
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "gardenbotanical:veronica"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "gardenbotanical:blocks/veronica"
+}

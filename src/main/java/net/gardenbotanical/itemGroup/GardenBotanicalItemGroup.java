@@ -3,6 +3,7 @@ package net.gardenbotanical.itemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.gardenbotanical.GardenBotanical;
 import net.gardenbotanical.block.GardenBotanicalBlock;
+import net.gardenbotanical.item.GardenBotanicalItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -21,6 +22,8 @@ public class GardenBotanicalItemGroup {
                         entries.add(GardenBotanicalBlock.GERBERA);
                         entries.add(GardenBotanicalBlock.HERBAL_PEONY);
                         entries.add(GardenBotanicalBlock.VERONICA);
+
+                        entries.add(GardenBotanicalItem.GARDEN_PRUNER);
                     }).build());
 
     public static void registerItemGroups() {

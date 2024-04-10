@@ -1,7 +1,9 @@
 package net.gardenbotanical.item;
 
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.gardenbotanical.GardenBotanical;
+import net.gardenbotanical.item.tool.GardenPrunerItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
@@ -11,6 +13,8 @@ import net.minecraft.util.Identifier;
 
 
 public class GardenBotanicalItem {
+    public static final Item GARDEN_PRUNER = registerItem("garden_pruner", new GardenPrunerItem(new FabricItemSettings().maxDamage(64)));
+
     public static Item registerItem(String id, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(GardenBotanical.MOD_ID, id), item);
     }
