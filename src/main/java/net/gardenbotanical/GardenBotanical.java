@@ -14,10 +14,9 @@ public class GardenBotanical implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        LOGGER.info("Initialize " + MOD_ID + "...");
         GardenBotanicalItem.register();
         GardenBotanicalBlock.register();
         GardenBotanicalItemGroup.registerItemGroups();
-
-        LOGGER.info("Initialize " + MOD_ID + "...");
     }
 }
