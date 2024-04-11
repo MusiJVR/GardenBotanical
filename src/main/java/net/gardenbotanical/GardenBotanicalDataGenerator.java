@@ -6,10 +6,9 @@ import net.gardenbotanical.datagen.*;
 
 
 public class GardenBotanicalDataGenerator implements DataGeneratorEntrypoint {
-
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
-        GardenBotanical.LOGGER.info("Registering Data Generator for: " + GardenBotanical.MOD_ID);
+        GardenBotanical.LOGGER.info("Generate datas for: " + GardenBotanical.MOD_ID);
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
         pack.addProvider(GardenBotanicalItemTagProvider::new);

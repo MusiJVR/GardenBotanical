@@ -3,10 +3,7 @@ package net.gardenbotanical.block;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.gardenbotanical.GardenBotanical;
 import net.gardenbotanical.item.GardenBotanicalItem;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FlowerBlock;
-import net.minecraft.block.FlowerPotBlock;
+import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -39,7 +36,7 @@ public class GardenBotanicalBlock {
         return Registry.register(Registries.BLOCK, new Identifier(GardenBotanical.MOD_ID, id), block);
     }
 
-    private static Block registerBlock(String id, Block block, RegistryKey<ItemGroup> group) {
+    private static Block registerBlockWithVanillaGroup(String id, Block block, RegistryKey<ItemGroup> group) {
         GardenBotanicalItem.registerItem(id, new BlockItem(block, new Item.Settings()), group);
         return Registry.register(Registries.BLOCK, new Identifier(GardenBotanical.MOD_ID, id), block);
     }
