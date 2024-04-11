@@ -4,6 +4,9 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.gardenbotanical.GardenBotanical;
 import net.gardenbotanical.block.GardenBotanicalBlock;
+import net.gardenbotanical.screen.GardenBotanicalScreenHandlers;
+import net.gardenbotanical.screen.PreparationTableScreen;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 
 
@@ -23,5 +26,7 @@ public class GardenBotanicalClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlock.POTTED_BRUNIA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlock.POTTED_HERBAL_PEONY, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlock.POTTED_VERONICA, RenderLayer.getCutout());
+
+        HandledScreens.register(GardenBotanicalScreenHandlers.PREPARATION_TABLE_SCREEN_HANDLER, PreparationTableScreen::new);
     }
 }
