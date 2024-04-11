@@ -19,18 +19,22 @@ import net.minecraft.util.Identifier;
 
 public class GardenBotanicalBlock {
     public static final Block BOUVARDIA = registerBlock("bouvardia", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY)));
-    public static final Block POTTED_BOUVARDIA = Registry.register(Registries.BLOCK, new Identifier(GardenBotanical.MOD_ID, "potted_bouvardia"), new FlowerPotBlock(BOUVARDIA, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
+    public static final Block POTTED_BOUVARDIA = registerBlockNoItem("potted_bouvardia", new FlowerPotBlock(BOUVARDIA, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
     public static final Block BRUNIA = registerBlock("brunia", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY)));
-    public static final Block POTTED_BRUNIA = Registry.register(Registries.BLOCK, new Identifier(GardenBotanical.MOD_ID, "potted_brunia"), new FlowerPotBlock(BRUNIA, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
+    public static final Block POTTED_BRUNIA = registerBlockNoItem("potted_brunia", new FlowerPotBlock(BRUNIA, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
     public static final Block GERBERA = registerBlock("gerbera", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY)));
-    public static final Block POTTED_GERBERA = Registry.register(Registries.BLOCK, new Identifier(GardenBotanical.MOD_ID, "potted_gerbera"), new FlowerPotBlock(GERBERA, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
+    public static final Block POTTED_GERBERA = registerBlockNoItem("potted_gerbera", new FlowerPotBlock(GERBERA, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
     public static final Block HERBAL_PEONY = registerBlock("herbal_peony", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY)));
-    public static final Block POTTED_HERBAL_PEONY = Registry.register(Registries.BLOCK, new Identifier(GardenBotanical.MOD_ID, "potted_herbal_peony"), new FlowerPotBlock(HERBAL_PEONY, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
+    public static final Block POTTED_HERBAL_PEONY = registerBlockNoItem("potted_herbal_peony", new FlowerPotBlock(HERBAL_PEONY, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
     public static final Block VERONICA = registerBlock("veronica", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY)));
-    public static final Block POTTED_VERONICA = Registry.register(Registries.BLOCK, new Identifier(GardenBotanical.MOD_ID, "potted_veronica"), new FlowerPotBlock(VERONICA, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
+    public static final Block POTTED_VERONICA = registerBlockNoItem("potted_veronica", new FlowerPotBlock(VERONICA, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
 
     private static Block registerBlock(String id, Block block) {
         GardenBotanicalItem.registerItem(id, new BlockItem(block, new Item.Settings()));
+        return Registry.register(Registries.BLOCK, new Identifier(GardenBotanical.MOD_ID, id), block);
+    }
+
+    private static Block registerBlockNoItem(String id, Block block) {
         return Registry.register(Registries.BLOCK, new Identifier(GardenBotanical.MOD_ID, id), block);
     }
 
@@ -40,6 +44,6 @@ public class GardenBotanicalBlock {
     }
 
     public static void register() {
-        GardenBotanical.LOGGER.info("Registering blocks for: " + GardenBotanical.MOD_ID);
+        GardenBotanical.LOGGER.info("Registering Blocks for: " + GardenBotanical.MOD_ID);
     }
 }

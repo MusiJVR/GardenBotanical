@@ -45,6 +45,6 @@ public class GardenBotanicalItemGroup {
                     }).build());
 
     public static void registerItemGroups() {
-        GardenBotanical.LOGGER.info("Registering Item Groups for " + GardenBotanical.MOD_ID);
+        GardenBotanical.LOGGER.info("Registering Item Groups for: " + GardenBotanical.MOD_ID);
     }
 }
