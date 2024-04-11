@@ -27,6 +27,12 @@ public class GardenBotanicalLootTableProvider extends FabricBlockLootTableProvid
         addDrop(GardenBotanicalBlock.BRUNIA, createPool(GardenBotanicalBlock.BRUNIA, WITH_PRUNER, 1.0f));
         addDrop(GardenBotanicalBlock.GERBERA, createPool(GardenBotanicalBlock.GERBERA, WITH_PRUNER, 1.0f));
         addDrop(GardenBotanicalBlock.HERBAL_PEONY, createPool(GardenBotanicalBlock.HERBAL_PEONY, WITH_PRUNER, 1.0f));
+
+        addPottedPlantDrops(GardenBotanicalBlock.POTTED_BOUVARDIA);
+        addPottedPlantDrops(GardenBotanicalBlock.POTTED_VERONICA);
+        addPottedPlantDrops(GardenBotanicalBlock.POTTED_BRUNIA);
+        addPottedPlantDrops(GardenBotanicalBlock.POTTED_GERBERA);
+        addPottedPlantDrops(GardenBotanicalBlock.POTTED_HERBAL_PEONY);
     }
 
     private LootTable.Builder createPool(Block entryBlock, LootCondition.Builder condition, float rolls) {
