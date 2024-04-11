@@ -1,6 +1,24 @@
 {
   "item.gardenbotanical.garden_pruner": "Садовый секатор",
 
+  "item.gardenbotanical.bouvardia_petal": "Лепесток  бувардии",
+  "item.gardenbotanical.brunia_petal": "Лепесток  брунии",
+  "item.gardenbotanical.gerbera_petal": "Лепесток  герберы",
+  "item.gardenbotanical.herbal_peony_petal": "Лепесток  травянистого пиона",
+  "item.gardenbotanical.veronica_petal": "Лепесток  вероники",
+
+  "item.gardenbotanical.powdered_bouvardia": "Измельченная бувардия",
+  "item.gardenbotanical.powdered_brunia": "Измельченная бруния",
+  "item.gardenbotanical.powdered_gerbera": "Измельченная гербера",
+  "item.gardenbotanical.powdered_herbal_peony": "Измельченный травянистый пион",
+  "item.gardenbotanical.powdered_veronica": "Измельченная вероника",
+
+  "item.gardenbotanical.bouvardia_seeds": "Семена бувардии",
+  "item.gardenbotanical.brunia_seeds": "Семена брунии",
+  "item.gardenbotanical.gerbera_seeds": "Семена герберы",
+  "item.gardenbotanical.herbal_peony_seeds": "Семена травянистого пиона",
+  "item.gardenbotanical.veronica_seeds": "Семена вероники",
+
   "block.gardenbotanical.bouvardia": "Бувардия",
   "block.gardenbotanical.brunia": "Бруния",
   "block.gardenbotanical.gerbera": "Гербера",

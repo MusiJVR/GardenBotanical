@@ -1,6 +1,24 @@
 {
   "item.gardenbotanical.garden_pruner": "Garden pruner",
 
+  "item.gardenbotanical.bouvardia_petal": "Bouvardia petal",
+  "item.gardenbotanical.brunia_petal": "Brunia petal",
+  "item.gardenbotanical.gerbera_petal": "Gerbera petal",
+  "item.gardenbotanical.herbal_peony_petal": "Herbal peony petal",
+  "item.gardenbotanical.veronica_petal": "Veronica petal",
+
+  "item.gardenbotanical.powdered_bouvardia": "Powdered bouvardia",
+  "item.gardenbotanical.powdered_brunia": "Powdered brunia",
+  "item.gardenbotanical.powdered_gerbera": "Powdered gerbera",
+  "item.gardenbotanical.powdered_herbal_peony": "Powdered herbal peony",
+  "item.gardenbotanical.powdered_veronica": "Powdered veronica",
+
+  "item.gardenbotanical.bouvardia_seeds": "Bouvardia seeds",
+  "item.gardenbotanical.brunia_seeds": "Brunia seeds",
+  "item.gardenbotanical.gerbera_seeds": "Gerbera seeds",
+  "item.gardenbotanical.herbal_peony_seeds": "Herbal peony seeds",
+  "item.gardenbotanical.veronica_seeds": "Veronica seeds",
+
   "block.gardenbotanical.bouvardia": "Bouvardia",
   "block.gardenbotanical.brunia": "Brunia",
   "block.gardenbotanical.gerbera": "Gerbera",
