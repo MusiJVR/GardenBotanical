@@ -17,6 +17,8 @@ public class GardenBotanicalItemGroup {
             new Identifier(GardenBotanical.MOD_ID, "gardenbotanical_group"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.gardenbotanical.gardenbotanical_group"))
                     .icon(() -> new ItemStack(GardenBotanicalBlock.BOUVARDIA)).entries((displayContext, entries) -> {
+                        entries.add(GardenBotanicalBlock.PREPARATION_TABLE);
+
                         entries.add(GardenBotanicalItem.GARDEN_PRUNER);
 
                         entries.add(GardenBotanicalBlock.BOUVARDIA);
