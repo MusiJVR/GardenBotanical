@@ -1,7 +1,6 @@
 package net.gardenbotanical.block.entity;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.gardenbotanical.item.GardenBotanicalItem;
 import net.gardenbotanical.recipe.PreparationTableRecipe;
 import net.gardenbotanical.screen.PreparationTableScreenHandler;
 import net.minecraft.block.BlockState;
@@ -130,11 +129,9 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
         Optional<PreparationTableRecipe> recipe = getCurrentRecipe();
 
         this.removeStack(INPUT_SLOT, 1);
-        /*ItemStack resultFirst = new ItemStack(GardenBotanicalItem.BOUVARDIA_PETAL);
-        ItemStack resultSecond = new ItemStack(GardenBotanicalItem.BOUVARDIA_SEEDS);*/
 
         putItemInOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_FIRST);
-        putItemInOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_SECOND);
+        putItemInOutputSlot(recipe.get().getOutput2(null), OUTPUT_SLOT_SECOND);
     }
 
     private void putItemInOutputSlot(ItemStack result, int slot) {
@@ -152,11 +149,11 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
     private boolean hasRecipe() {
         Optional<PreparationTableRecipe> recipe = getCurrentRecipe();
 
-        /*ItemStack resultFirst = new ItemStack(GardenBotanicalItem.BOUVARDIA_PETAL);
-        ItemStack resultSecond = new ItemStack(GardenBotanicalItem.BOUVARDIA_SEEDS);
-        boolean hasInput = getStack(INPUT_SLOT).getItem() == GardenBotanicalBlock.BOUVARDIA.asItem();*/
-
-        return recipe.isPresent() && canInsertAmountIntoOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_FIRST) && canInsertItemIntoOutputSlot(recipe.get().getOutput(null).getItem(), OUTPUT_SLOT_FIRST) && canInsertAmountIntoOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_SECOND) && canInsertItemIntoOutputSlot(recipe.get().getOutput(null).getItem(), OUTPUT_SLOT_SECOND);
+        return recipe.isPresent()
+                && canInsertAmountIntoOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_FIRST)
+                && canInsertItemIntoOutputSlot(recipe.get().getOutput(null).getItem(), OUTPUT_SLOT_FIRST)
+                && canInsertAmountIntoOutputSlot(recipe.get().getOutput2(null), OUTPUT_SLOT_SECOND)
+                && canInsertItemIntoOutputSlot(recipe.get().getOutput2(null).getItem(), OUTPUT_SLOT_SECOND);
     }
 
     private Optional<PreparationTableRecipe> getCurrentRecipe() {

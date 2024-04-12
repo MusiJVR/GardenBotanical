@@ -5,8 +5,14 @@
       "item": "gardenbotanical:bouvardia"
     }
   ],
-  "output": {
-    "count": 1,
-    "item": "gardenbotanical:bouvardia_petal"
-  }
+  "outputs": [
+    {
+      "count": 1,
+      "item": "gardenbotanical:bouvardia_petal"
+    },
+    {
+      "count": 1,
+      "item": "gardenbotanical:bouvardia_seeds"
+    }
+  ]
 }

@@ -15,18 +15,19 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
-
 import java.util.List;
 
 
 public class PreparationTableRecipe implements Recipe<SimpleInventory> {
     private final Identifier id;
     private final ItemStack output;
+    private final ItemStack output2;
     private final List<Ingredient> recipeItems;
 
-    public PreparationTableRecipe(Identifier id, ItemStack itemStack, List<Ingredient> ingredients) {
+    public PreparationTableRecipe(Identifier id, ItemStack itemStack1, ItemStack itemStack2, List<Ingredient> ingredients) {
         this.id = id;
-        this.output = itemStack;
+        this.output = itemStack1;
+        this.output2 = itemStack2;
         this.recipeItems = ingredients;
     }
 
@@ -52,6 +53,10 @@ public class PreparationTableRecipe implements Recipe<SimpleInventory> {
     @Override
     public ItemStack getOutput(DynamicRegistryManager registryManager) {
         return output.copy();
+    }
+
+    public ItemStack getOutput2(DynamicRegistryManager registryManager) {
+        return output2.copy();
     }
 
     @Override
@@ -88,28 +93,29 @@ public class PreparationTableRecipe implements Recipe<SimpleInventory> {
 
         @Override
         public PreparationTableRecipe read(Identifier id, JsonObject json) {
-            ItemStack output = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "output"));
+            JsonArray outputs = JsonHelper.getArray(json, "outputs");
+            ItemStack output1 = ShapedRecipe.outputFromJson(outputs.get(0).getAsJsonObject());
+            ItemStack output2 = ShapedRecipe.outputFromJson(outputs.get(1).getAsJsonObject());
 
             JsonArray ingredients = JsonHelper.getArray(json, "ingredients");
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(1, Ingredient.EMPTY);
-
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new PreparationTableRecipe(id, output, inputs);
+            return new PreparationTableRecipe(id, output1, output2, inputs);
         }
 
         @Override
         public PreparationTableRecipe read(Identifier id, PacketByteBuf buf) {
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
-
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromPacket(buf));
             }
 
-            ItemStack output = buf.readItemStack();
-            return new PreparationTableRecipe(id, output, inputs);
+            ItemStack output1 = buf.readItemStack();
+            ItemStack output2 = buf.readItemStack();
+            return new PreparationTableRecipe(id, output1, output2, inputs);
         }
 
         @Override
@@ -119,6 +125,7 @@ public class PreparationTableRecipe implements Recipe<SimpleInventory> {
                 ing.write(buf);
             }
             buf.writeItemStack(recipe.getOutput(null));
+            buf.writeItemStack(recipe.getOutput2(null));
         }
     }
 }
