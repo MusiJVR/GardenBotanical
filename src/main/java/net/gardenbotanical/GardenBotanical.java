@@ -3,7 +3,7 @@ package net.gardenbotanical;
 import net.fabricmc.api.ModInitializer;
 import net.gardenbotanical.block.GardenBotanicalBlock;
 import net.gardenbotanical.block.entity.GardenBotanicalBlockEntities;
-import net.gardenbotanical.item.GardenBotanicalItem;
+import net.gardenbotanical.item.GardenBotanicalItems;
 import net.gardenbotanical.itemGroup.GardenBotanicalItemGroup;
 import net.gardenbotanical.recipe.GardenBotanicalRecipes;
 import net.gardenbotanical.screen.GardenBotanicalScreenHandlers;
@@ -18,7 +18,7 @@ public class GardenBotanical implements ModInitializer {
     @Override
     public void onInitialize() {
         LOGGER.info("Initialize " + MOD_ID + "...");
-        GardenBotanicalItem.register();
+        GardenBotanicalItems.register();
         GardenBotanicalBlock.register();
         GardenBotanicalItemGroup.registerItemGroups();
         GardenBotanicalBlockEntities.registerBlockEntities();

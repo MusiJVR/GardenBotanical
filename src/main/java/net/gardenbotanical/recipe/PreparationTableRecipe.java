@@ -20,14 +20,14 @@ import java.util.List;
 
 public class PreparationTableRecipe implements Recipe<SimpleInventory> {
     private final Identifier id;
-    private final ItemStack output;
-    private final ItemStack output2;
+    private final ItemStack outputFirst;
+    private final ItemStack outputSecond;
     private final List<Ingredient> recipeItems;
 
-    public PreparationTableRecipe(Identifier id, ItemStack itemStack1, ItemStack itemStack2, List<Ingredient> ingredients) {
+    public PreparationTableRecipe(Identifier id, ItemStack itemStackFirst, ItemStack itemStackSecond, List<Ingredient> ingredients) {
         this.id = id;
-        this.output = itemStack1;
-        this.output2 = itemStack2;
+        this.outputFirst = itemStackFirst;
+        this.outputSecond = itemStackSecond;
         this.recipeItems = ingredients;
     }
 
@@ -41,8 +41,13 @@ public class PreparationTableRecipe implements Recipe<SimpleInventory> {
     }
 
     @Override
+    public boolean isIgnoredInRecipeBook() {
+        return true;
+    }
+
+    @Override
     public ItemStack craft(SimpleInventory inventory, DynamicRegistryManager registryManager) {
-        return output;
+        return outputFirst;
     }
 
     @Override
@@ -52,11 +57,15 @@ public class PreparationTableRecipe implements Recipe<SimpleInventory> {
 
     @Override
     public ItemStack getOutput(DynamicRegistryManager registryManager) {
-        return output.copy();
+        return null;
     }
 
-    public ItemStack getOutput2(DynamicRegistryManager registryManager) {
-        return output2.copy();
+    public ItemStack getOutputFirst(DynamicRegistryManager registryManager) {
+        return outputFirst.copy();
+    }
+
+    public ItemStack getOutputSecond(DynamicRegistryManager registryManager) {
+        return outputSecond.copy();
     }
 
     @Override
@@ -94,16 +103,16 @@ public class PreparationTableRecipe implements Recipe<SimpleInventory> {
         @Override
         public PreparationTableRecipe read(Identifier id, JsonObject json) {
             JsonArray outputs = JsonHelper.getArray(json, "outputs");
-            ItemStack output1 = ShapedRecipe.outputFromJson(outputs.get(0).getAsJsonObject());
-            ItemStack output2 = ShapedRecipe.outputFromJson(outputs.get(1).getAsJsonObject());
+            ItemStack outputFirst = ShapedRecipe.outputFromJson(outputs.get(0).getAsJsonObject());
+            ItemStack outputSecond = ShapedRecipe.outputFromJson(outputs.get(1).getAsJsonObject());
 
-            JsonArray ingredients = JsonHelper.getArray(json, "ingredients");
+            JsonArray ingredient = JsonHelper.getArray(json, "ingredient");
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(1, Ingredient.EMPTY);
             for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
+                inputs.set(i, Ingredient.fromJson(ingredient.get(i)));
             }
 
-            return new PreparationTableRecipe(id, output1, output2, inputs);
+            return new PreparationTableRecipe(id, outputFirst, outputSecond, inputs);
         }
 
         @Override
@@ -113,9 +122,9 @@ public class PreparationTableRecipe implements Recipe<SimpleInventory> {
                 inputs.set(i, Ingredient.fromPacket(buf));
             }
 
-            ItemStack output1 = buf.readItemStack();
-            ItemStack output2 = buf.readItemStack();
-            return new PreparationTableRecipe(id, output1, output2, inputs);
+            ItemStack outputFirst = buf.readItemStack();
+            ItemStack outputSecond = buf.readItemStack();
+            return new PreparationTableRecipe(id, outputFirst, outputSecond, inputs);
         }
 
         @Override
@@ -124,8 +133,8 @@ public class PreparationTableRecipe implements Recipe<SimpleInventory> {
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.write(buf);
             }
-            buf.writeItemStack(recipe.getOutput(null));
-            buf.writeItemStack(recipe.getOutput2(null));
+            buf.writeItemStack(recipe.getOutputFirst(null));
+            buf.writeItemStack(recipe.getOutputSecond(null));
         }
     }
 }

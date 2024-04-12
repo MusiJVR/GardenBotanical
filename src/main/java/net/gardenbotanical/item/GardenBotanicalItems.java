@@ -12,7 +12,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 
 
-public class GardenBotanicalItem {
+public class GardenBotanicalItems {
     public static final Item GARDEN_PRUNER = registerItem("garden_pruner", new GardenPrunerItem(new FabricItemSettings().maxDamage(64)));
 
     public static final Item BOUVARDIA_PETAL = registerItem("bouvardia_petal", new Item(new FabricItemSettings()));

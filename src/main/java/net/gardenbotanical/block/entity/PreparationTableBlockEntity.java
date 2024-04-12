@@ -130,8 +130,8 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
 
         this.removeStack(INPUT_SLOT, 1);
 
-        putItemInOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_FIRST);
-        putItemInOutputSlot(recipe.get().getOutput2(null), OUTPUT_SLOT_SECOND);
+        putItemInOutputSlot(recipe.get().getOutputFirst(null), OUTPUT_SLOT_FIRST);
+        putItemInOutputSlot(recipe.get().getOutputSecond(null), OUTPUT_SLOT_SECOND);
     }
 
     private void putItemInOutputSlot(ItemStack result, int slot) {
@@ -150,10 +150,10 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
         Optional<PreparationTableRecipe> recipe = getCurrentRecipe();
 
         return recipe.isPresent()
-                && canInsertAmountIntoOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_FIRST)
-                && canInsertItemIntoOutputSlot(recipe.get().getOutput(null).getItem(), OUTPUT_SLOT_FIRST)
-                && canInsertAmountIntoOutputSlot(recipe.get().getOutput2(null), OUTPUT_SLOT_SECOND)
-                && canInsertItemIntoOutputSlot(recipe.get().getOutput2(null).getItem(), OUTPUT_SLOT_SECOND);
+                && canInsertAmountIntoOutputSlot(recipe.get().getOutputFirst(null), OUTPUT_SLOT_FIRST)
+                && canInsertItemIntoOutputSlot(recipe.get().getOutputFirst(null).getItem(), OUTPUT_SLOT_FIRST)
+                && canInsertAmountIntoOutputSlot(recipe.get().getOutputSecond(null), OUTPUT_SLOT_SECOND)
+                && canInsertItemIntoOutputSlot(recipe.get().getOutputSecond(null).getItem(), OUTPUT_SLOT_SECOND);
     }
 
     private Optional<PreparationTableRecipe> getCurrentRecipe() {

@@ -3,7 +3,7 @@ package net.gardenbotanical.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.gardenbotanical.block.GardenBotanicalBlock;
-import net.gardenbotanical.item.GardenBotanicalItem;
+import net.gardenbotanical.item.GardenBotanicalItems;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
@@ -25,24 +25,24 @@ public class GardenBotanicalModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        itemModelGenerator.register(GardenBotanicalItem.BOUVARDIA_PETAL, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItem.HERBAL_PEONY_PETAL, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItem.BRUNIA_PETAL, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItem.GERBERA_PETAL, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItem.VERONICA_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.BOUVARDIA_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.HERBAL_PEONY_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.BRUNIA_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.GERBERA_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.VERONICA_PETAL, Models.GENERATED);
 
-        itemModelGenerator.register(GardenBotanicalItem.POWDERED_BOUVARDIA, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItem.POWDERED_BRUNIA, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItem.POWDERED_GERBERA, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItem.POWDERED_VERONICA, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItem.POWDERED_HERBAL_PEONY, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_BOUVARDIA, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_BRUNIA, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_GERBERA, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_VERONICA, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_HERBAL_PEONY, Models.GENERATED);
 
-        itemModelGenerator.register(GardenBotanicalItem.BOUVARDIA_SEEDS, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItem.BRUNIA_SEEDS, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItem.GERBERA_SEEDS, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItem.HERBAL_PEONY_SEEDS, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItem.VERONICA_SEEDS, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.BOUVARDIA_SEEDS, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.BRUNIA_SEEDS, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.GERBERA_SEEDS, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.HERBAL_PEONY_SEEDS, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.VERONICA_SEEDS, Models.GENERATED);
 
-        itemModelGenerator.register(GardenBotanicalItem.GARDEN_PRUNER, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.GARDEN_PRUNER, Models.GENERATED);
     }
 }

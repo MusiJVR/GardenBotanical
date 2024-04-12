@@ -1,6 +1,6 @@
 {
   "type": "gardenbotanical:preparation_table",
-  "ingredients": [
+  "ingredient": [
     {
       "item": "gardenbotanical:bouvardia"
     }

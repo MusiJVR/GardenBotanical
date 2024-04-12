@@ -2,7 +2,7 @@ package net.gardenbotanical.block;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.gardenbotanical.GardenBotanical;
-import net.gardenbotanical.item.GardenBotanicalItem;
+import net.gardenbotanical.item.GardenBotanicalItems;
 import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
@@ -28,7 +28,7 @@ public class GardenBotanicalBlock {
     public static final Block POTTED_VERONICA = registerBlockNoItem("potted_veronica", new FlowerPotBlock(VERONICA, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY).nonOpaque()));
 
     private static Block registerBlock(String id, Block block) {
-        GardenBotanicalItem.registerItem(id, new BlockItem(block, new Item.Settings()));
+        GardenBotanicalItems.registerItem(id, new BlockItem(block, new Item.Settings()));
         return Registry.register(Registries.BLOCK, new Identifier(GardenBotanical.MOD_ID, id), block);
     }
 
@@ -37,7 +37,7 @@ public class GardenBotanicalBlock {
     }
 
     private static Block registerBlockWithVanillaGroup(String id, Block block, RegistryKey<ItemGroup> group) {
-        GardenBotanicalItem.registerItem(id, new BlockItem(block, new Item.Settings()), group);
+        GardenBotanicalItems.registerItem(id, new BlockItem(block, new Item.Settings()), group);
         return Registry.register(Registries.BLOCK, new Identifier(GardenBotanical.MOD_ID, id), block);
     }
 
