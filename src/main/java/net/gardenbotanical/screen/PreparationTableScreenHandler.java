@@ -32,8 +32,16 @@ public class PreparationTableScreenHandler extends ScreenHandler {
         this.blockEntity = ((PreparationTableBlockEntity) blockEntity);
 
         this.addSlot(new Slot(inventory, 0, 70, 35));
-        this.addSlot(new Slot(inventory, 1, 124, 26));
-        this.addSlot(new Slot(inventory, 2, 124, 44));
+        this.addSlot(new Slot(inventory, 1, 124, 26) {
+            public boolean canInsert(ItemStack stack) {
+                return false;
+            }
+        });
+        this.addSlot(new Slot(inventory, 2, 124, 44) {
+            public boolean canInsert(ItemStack stack) {
+                return false;
+            }
+        });
 
 
         addPlayerInventory(playerInventory);
