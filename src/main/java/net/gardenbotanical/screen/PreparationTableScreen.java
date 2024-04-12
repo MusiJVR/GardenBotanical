@@ -32,7 +32,7 @@ public class PreparationTableScreen extends HandledScreen<PreparationTableScreen
 
     private void renderProgressArrow(DrawContext context, int x, int y) {
         if (handler.isCrafting()) {
-            context.drawTexture(TEXTURE, x + 62, y + 30, 176, 0, 53, handler.getScaledProgress());
+            context.drawTexture(TEXTURE, x + 89, y + 31, 176, 0, handler.getScaledProgress(), 26);
         }
     }
 

@@ -1,0 +1,12 @@
+{
+  "type": "gardenbotanical:preparation_table",
+  "ingredients": [
+    {
+      "item": "gardenbotanical:bouvardia"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "item": "gardenbotanical:bouvardia_petal"
+  }
+}

@@ -1,15 +1,15 @@
 package net.gardenbotanical.block.entity;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.gardenbotanical.block.GardenBotanicalBlock;
 import net.gardenbotanical.item.GardenBotanicalItem;
+import net.gardenbotanical.recipe.PreparationTableRecipe;
 import net.gardenbotanical.screen.PreparationTableScreenHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -22,6 +22,9 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
+
 
 public class PreparationTableBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
@@ -124,12 +127,14 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
     }
 
     private void craftItem() {
-        this.removeStack(INPUT_SLOT, 1);
-        ItemStack resultFirst = new ItemStack(GardenBotanicalItem.BOUVARDIA_PETAL);
-        ItemStack resultSecond = new ItemStack(GardenBotanicalItem.BOUVARDIA_SEEDS);
+        Optional<PreparationTableRecipe> recipe = getCurrentRecipe();
 
-        putItemInOutputSlot(resultFirst, OUTPUT_SLOT_FIRST);
-        putItemInOutputSlot(resultSecond, OUTPUT_SLOT_SECOND);
+        this.removeStack(INPUT_SLOT, 1);
+        /*ItemStack resultFirst = new ItemStack(GardenBotanicalItem.BOUVARDIA_PETAL);
+        ItemStack resultSecond = new ItemStack(GardenBotanicalItem.BOUVARDIA_SEEDS);*/
+
+        putItemInOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_FIRST);
+        putItemInOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_SECOND);
     }
 
     private void putItemInOutputSlot(ItemStack result, int slot) {
@@ -145,11 +150,22 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
     }
 
     private boolean hasRecipe() {
-        ItemStack resultFirst = new ItemStack(GardenBotanicalItem.BOUVARDIA_PETAL);
-        ItemStack resultSecond = new ItemStack(GardenBotanicalItem.BOUVARDIA_SEEDS);
-        boolean hasInput = getStack(INPUT_SLOT).getItem() == GardenBotanicalBlock.BOUVARDIA.asItem();
+        Optional<PreparationTableRecipe> recipe = getCurrentRecipe();
 
-        return hasInput && canInsertAmountIntoOutputSlot(resultFirst, OUTPUT_SLOT_FIRST) && canInsertItemIntoOutputSlot(resultFirst.getItem(), OUTPUT_SLOT_FIRST) && canInsertAmountIntoOutputSlot(resultSecond, OUTPUT_SLOT_SECOND) && canInsertItemIntoOutputSlot(resultSecond.getItem(), OUTPUT_SLOT_SECOND);
+        /*ItemStack resultFirst = new ItemStack(GardenBotanicalItem.BOUVARDIA_PETAL);
+        ItemStack resultSecond = new ItemStack(GardenBotanicalItem.BOUVARDIA_SEEDS);
+        boolean hasInput = getStack(INPUT_SLOT).getItem() == GardenBotanicalBlock.BOUVARDIA.asItem();*/
+
+        return recipe.isPresent() && canInsertAmountIntoOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_FIRST) && canInsertItemIntoOutputSlot(recipe.get().getOutput(null).getItem(), OUTPUT_SLOT_FIRST) && canInsertAmountIntoOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_SECOND) && canInsertItemIntoOutputSlot(recipe.get().getOutput(null).getItem(), OUTPUT_SLOT_SECOND);
+    }
+
+    private Optional<PreparationTableRecipe> getCurrentRecipe() {
+        SimpleInventory inv = new SimpleInventory(this.size());
+        for(int i = 0; i < this.size(); i++) {
+            inv.setStack(i, this.getStack(i));
+        }
+
+        return getWorld().getRecipeManager().getFirstMatch(PreparationTableRecipe.Type.INSTANCE, inv, getWorld());
     }
 
     private boolean canInsertItemIntoOutputSlot(Item item, int slot) {

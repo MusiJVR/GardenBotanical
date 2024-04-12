@@ -30,9 +30,9 @@ public class PreparationTableScreenHandler extends ScreenHandler {
         this.propertyDelegate = arrayPropertyDelegate;
         this.blockEntity = ((PreparationTableBlockEntity) blockEntity);
 
-        this.addSlot(new Slot(inventory, 0, 80, 11));
-        this.addSlot(new Slot(inventory, 1, 57, 59));
-        this.addSlot(new Slot(inventory, 2, 103, 59));
+        this.addSlot(new Slot(inventory, 0, 70, 35));
+        this.addSlot(new Slot(inventory, 1, 124, 26));
+        this.addSlot(new Slot(inventory, 2, 124, 44));
 
 
         addPlayerInventory(playerInventory);
@@ -48,7 +48,7 @@ public class PreparationTableScreenHandler extends ScreenHandler {
     public int getScaledProgress() {
         int progress = this.propertyDelegate.get(0);
         int maxProgress = this.propertyDelegate.get(1);
-        int progressArrowSize = 26;
+        int progressArrowSize = 32;
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
