@@ -29,8 +29,8 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
 
     private static final int INPUT_SLOT = 0;
-    private static final int OUTPUT_SLOT_FIRST = 1;
-    private static final int OUTPUT_SLOT_SECOND = 2;
+    private static final int OUTPUT_SLOT_PETAL = 1;
+    private static final int OUTPUT_SLOT_SEEDS = 2;
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
@@ -103,7 +103,7 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
             return;
         }
 
-        if (isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_FIRST) && isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_SECOND)) {
+        if (isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_PETAL) && isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_SEEDS)) {
             if (this.hasRecipe()) {
                 this.increaseCraftProgress();
                 markDirty(world, pos, state);
@@ -130,8 +130,8 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
 
         this.removeStack(INPUT_SLOT, 1);
 
-        putItemInOutputSlot(recipe.get().getOutputFirst(null), OUTPUT_SLOT_FIRST);
-        putItemInOutputSlot(recipe.get().getOutputSecond(null), OUTPUT_SLOT_SECOND);
+        putItemInOutputSlot(recipe.get().getOutputPetals(null), OUTPUT_SLOT_PETAL);
+        putItemInOutputSlot(recipe.get().getOutputSeeds(null), OUTPUT_SLOT_SEEDS);
     }
 
     private void putItemInOutputSlot(ItemStack result, int slot) {
@@ -150,10 +150,10 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
         Optional<PreparationTableRecipe> recipe = getCurrentRecipe();
 
         return recipe.isPresent()
-                && canInsertAmountIntoOutputSlot(recipe.get().getOutputFirst(null), OUTPUT_SLOT_FIRST)
-                && canInsertItemIntoOutputSlot(recipe.get().getOutputFirst(null).getItem(), OUTPUT_SLOT_FIRST)
-                && canInsertAmountIntoOutputSlot(recipe.get().getOutputSecond(null), OUTPUT_SLOT_SECOND)
-                && canInsertItemIntoOutputSlot(recipe.get().getOutputSecond(null).getItem(), OUTPUT_SLOT_SECOND);
+                && canInsertAmountIntoOutputSlot(recipe.get().getOutputPetals(null), OUTPUT_SLOT_PETAL)
+                && canInsertItemIntoOutputSlot(recipe.get().getOutputPetals(null).getItem(), OUTPUT_SLOT_PETAL)
+                && canInsertAmountIntoOutputSlot(recipe.get().getOutputSeeds(null), OUTPUT_SLOT_SEEDS)
+                && canInsertItemIntoOutputSlot(recipe.get().getOutputSeeds(null).getItem(), OUTPUT_SLOT_SEEDS);
     }
 
     private Optional<PreparationTableRecipe> getCurrentRecipe() {

@@ -8,6 +8,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
+
 public class GardenBotanicalBlockEntities {
     public static final BlockEntityType<PreparationTableBlockEntity> PREPARATION_TABLE_BLOCK_ENTITY =
             Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(GardenBotanical.MOD_ID, "preparation_table_block_entity"),

@@ -8,6 +8,7 @@ import net.minecraft.registry.tag.BlockTags;
 
 import java.util.concurrent.CompletableFuture;
 
+
 public class GardenBotanicalBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     public GardenBotanicalBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture) {
         super(output, completableFuture);

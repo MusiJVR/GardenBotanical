@@ -11,8 +11,8 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class GardenBotanicalItemGroup {
 
+public class GardenBotanicalItemGroup {
     public static final ItemGroup GARDENBOTANICAL_GROUP = Registry.register(Registries.ITEM_GROUP,
             new Identifier(GardenBotanical.MOD_ID, "gardenbotanical_group"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.gardenbotanical.gardenbotanical_group"))

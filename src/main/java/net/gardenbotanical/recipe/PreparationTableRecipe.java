@@ -1,6 +1,5 @@
 package net.gardenbotanical.recipe;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -15,20 +14,19 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
-import java.util.List;
 
 
 public class PreparationTableRecipe implements Recipe<SimpleInventory> {
     private final Identifier id;
-    private final ItemStack outputFirst;
-    private final ItemStack outputSecond;
-    private final List<Ingredient> recipeItems;
+    private final ItemStack outputPetal;
+    private final ItemStack outputSeeds;
+    private final Ingredient ingredient;
 
-    public PreparationTableRecipe(Identifier id, ItemStack itemStackFirst, ItemStack itemStackSecond, List<Ingredient> ingredients) {
+    public PreparationTableRecipe(Identifier id, ItemStack itemStackFirst, ItemStack itemStackSecond, Ingredient ingredient) {
         this.id = id;
-        this.outputFirst = itemStackFirst;
-        this.outputSecond = itemStackSecond;
-        this.recipeItems = ingredients;
+        this.outputPetal = itemStackFirst;
+        this.outputSeeds = itemStackSecond;
+        this.ingredient = ingredient;
     }
 
     @Override
@@ -37,7 +35,7 @@ public class PreparationTableRecipe implements Recipe<SimpleInventory> {
             return false;
         }
 
-        return recipeItems.get(0).test(inventory.getStack(0));
+        return ingredient.test(inventory.getStack(0));
     }
 
     @Override
@@ -47,7 +45,7 @@ public class PreparationTableRecipe implements Recipe<SimpleInventory> {
 
     @Override
     public ItemStack craft(SimpleInventory inventory, DynamicRegistryManager registryManager) {
-        return outputFirst;
+        return null;
     }
 
     @Override
@@ -60,12 +58,12 @@ public class PreparationTableRecipe implements Recipe<SimpleInventory> {
         return null;
     }
 
-    public ItemStack getOutputFirst(DynamicRegistryManager registryManager) {
-        return outputFirst.copy();
+    public ItemStack getOutputPetals(DynamicRegistryManager registryManager) {
+        return outputPetal.copy();
     }
 
-    public ItemStack getOutputSecond(DynamicRegistryManager registryManager) {
-        return outputSecond.copy();
+    public ItemStack getOutputSeeds(DynamicRegistryManager registryManager) {
+        return outputSeeds.copy();
     }
 
     @Override
@@ -75,9 +73,7 @@ public class PreparationTableRecipe implements Recipe<SimpleInventory> {
 
     @Override
     public DefaultedList<Ingredient> getIngredients() {
-        DefaultedList<Ingredient> list = DefaultedList.ofSize(this.recipeItems.size());
-        list.addAll(recipeItems);
-        return list;
+        return DefaultedList.of();
     }
 
     @Override
@@ -102,39 +98,26 @@ public class PreparationTableRecipe implements Recipe<SimpleInventory> {
 
         @Override
         public PreparationTableRecipe read(Identifier id, JsonObject json) {
-            JsonArray outputs = JsonHelper.getArray(json, "outputs");
-            ItemStack outputFirst = ShapedRecipe.outputFromJson(outputs.get(0).getAsJsonObject());
-            ItemStack outputSecond = ShapedRecipe.outputFromJson(outputs.get(1).getAsJsonObject());
+            ItemStack outputPetals = ShapedRecipe.outputFromJson(JsonHelper.getObject(JsonHelper.getObject(json, "output"), "petal"));
+            ItemStack outputSeeds = ShapedRecipe.outputFromJson(JsonHelper.getObject(JsonHelper.getObject(json, "output"), "seeds"));
+            Ingredient ingredient = Ingredient.fromJson(JsonHelper.getElement(json, "ingredient"));
 
-            JsonArray ingredient = JsonHelper.getArray(json, "ingredient");
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(1, Ingredient.EMPTY);
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromJson(ingredient.get(i)));
-            }
-
-            return new PreparationTableRecipe(id, outputFirst, outputSecond, inputs);
+            return new PreparationTableRecipe(id, outputPetals, outputSeeds, ingredient);
         }
 
         @Override
         public PreparationTableRecipe read(Identifier id, PacketByteBuf buf) {
-            DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
-            for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromPacket(buf));
-            }
-
-            ItemStack outputFirst = buf.readItemStack();
-            ItemStack outputSecond = buf.readItemStack();
-            return new PreparationTableRecipe(id, outputFirst, outputSecond, inputs);
+            Ingredient ingredient = Ingredient.fromPacket(buf);
+            ItemStack outputPetals = buf.readItemStack();
+            ItemStack outputSeeds = buf.readItemStack();
+            return new PreparationTableRecipe(id, outputPetals, outputSeeds, ingredient);
         }
 
         @Override
         public void write(PacketByteBuf buf, PreparationTableRecipe recipe) {
-            buf.writeInt(recipe.getIngredients().size());
-            for (Ingredient ing : recipe.getIngredients()) {
-                ing.write(buf);
-            }
-            buf.writeItemStack(recipe.getOutputFirst(null));
-            buf.writeItemStack(recipe.getOutputSecond(null));
+            recipe.ingredient.write(buf);
+            buf.writeItemStack(recipe.getOutputPetals(null));
+            buf.writeItemStack(recipe.getOutputSeeds(null));
         }
     }
 }
