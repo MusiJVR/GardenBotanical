@@ -7,6 +7,7 @@ import net.gardenbotanical.item.GardenBotanicalItems;
 import net.gardenbotanical.itemGroup.GardenBotanicalItemGroup;
 import net.gardenbotanical.recipe.GardenBotanicalRecipes;
 import net.gardenbotanical.screen.GardenBotanicalScreenHandlers;
+import net.gardenbotanical.world.gen.GardenBotanicalWorldGen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,5 +25,6 @@ public class GardenBotanical implements ModInitializer {
         GardenBotanicalBlockEntities.registerBlockEntities();
         GardenBotanicalScreenHandlers.registerScreenHandlers();
         GardenBotanicalRecipes.registerRecipes();
+        GardenBotanicalWorldGen.registerWorldGen();
     }
 }

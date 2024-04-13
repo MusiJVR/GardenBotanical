@@ -14,6 +14,6 @@ public class GardenBotanicalScreenHandlers {
                     new ExtendedScreenHandlerType<>(PreparationTableScreenHandler::new));
 
     public static void registerScreenHandlers() {
-        GardenBotanical.LOGGER.info("Registering Screen Handlers for " + GardenBotanical.MOD_ID);
+        GardenBotanical.LOGGER.info("Registering Screen Handlers for: " + GardenBotanical.MOD_ID);
     }
 }

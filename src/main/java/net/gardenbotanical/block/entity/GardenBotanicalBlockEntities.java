@@ -16,6 +16,6 @@ public class GardenBotanicalBlockEntities {
                             GardenBotanicalBlocks.PREPARATION_TABLE).build());
 
     public static void registerBlockEntities() {
-        GardenBotanical.LOGGER.info("Registering Block Entities for " + GardenBotanical.MOD_ID);
+        GardenBotanical.LOGGER.info("Registering Block Entities for: " + GardenBotanical.MOD_ID);
     }
 }
