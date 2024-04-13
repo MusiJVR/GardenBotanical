@@ -2,7 +2,7 @@ package net.gardenbotanical.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.gardenbotanical.block.GardenBotanicalBlock;
+import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 
@@ -16,7 +16,7 @@ public class GardenBotanicalItemTagProvider extends FabricTagProvider.ItemTagPro
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup arg) {
-        getOrCreateTagBuilder(ItemTags.SMALL_FLOWERS).add(GardenBotanicalBlock.BOUVARDIA.asItem(), GardenBotanicalBlock.BRUNIA.asItem(),
-                GardenBotanicalBlock.GERBERA.asItem(), GardenBotanicalBlock.HERBAL_PEONY.asItem(), GardenBotanicalBlock.VERONICA.asItem());
+        getOrCreateTagBuilder(ItemTags.SMALL_FLOWERS).add(GardenBotanicalBlocks.BOUVARDIA.asItem(), GardenBotanicalBlocks.BRUNIA.asItem(),
+                GardenBotanicalBlocks.GERBERA.asItem(), GardenBotanicalBlocks.HERBAL_PEONY.asItem(), GardenBotanicalBlocks.VERONICA.asItem());
     }
 }

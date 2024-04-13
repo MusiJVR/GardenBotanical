@@ -2,7 +2,7 @@ package net.gardenbotanical.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.gardenbotanical.block.GardenBotanicalBlock;
+import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.item.GardenBotanicalItems;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
@@ -16,11 +16,11 @@ public class GardenBotanicalModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlock.GERBERA, GardenBotanicalBlock.POTTED_GERBERA, BlockStateModelGenerator.TintType.NOT_TINTED);
-        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlock.BRUNIA, GardenBotanicalBlock.POTTED_BRUNIA, BlockStateModelGenerator.TintType.NOT_TINTED);
-        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlock.HERBAL_PEONY, GardenBotanicalBlock.POTTED_HERBAL_PEONY, BlockStateModelGenerator.TintType.NOT_TINTED);
-        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlock.VERONICA, GardenBotanicalBlock.POTTED_VERONICA, BlockStateModelGenerator.TintType.NOT_TINTED);
-        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlock.BOUVARDIA, GardenBotanicalBlock.POTTED_BOUVARDIA, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.GERBERA, GardenBotanicalBlocks.POTTED_GERBERA, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.BRUNIA, GardenBotanicalBlocks.POTTED_BRUNIA, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.HERBAL_PEONY, GardenBotanicalBlocks.POTTED_HERBAL_PEONY, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.VERONICA, GardenBotanicalBlocks.POTTED_VERONICA, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.BOUVARDIA, GardenBotanicalBlocks.POTTED_BOUVARDIA, BlockStateModelGenerator.TintType.NOT_TINTED);
     }
 
     @Override

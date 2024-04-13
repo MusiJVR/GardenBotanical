@@ -2,7 +2,7 @@ package net.gardenbotanical.itemGroup;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.gardenbotanical.GardenBotanical;
-import net.gardenbotanical.block.GardenBotanicalBlock;
+import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.item.GardenBotanicalItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -16,16 +16,16 @@ public class GardenBotanicalItemGroup {
     public static final ItemGroup GARDENBOTANICAL_GROUP = Registry.register(Registries.ITEM_GROUP,
             new Identifier(GardenBotanical.MOD_ID, "gardenbotanical_group"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.gardenbotanical.gardenbotanical_group"))
-                    .icon(() -> new ItemStack(GardenBotanicalBlock.BOUVARDIA)).entries((displayContext, entries) -> {
-                        entries.add(GardenBotanicalBlock.PREPARATION_TABLE);
+                    .icon(() -> new ItemStack(GardenBotanicalBlocks.BOUVARDIA)).entries((displayContext, entries) -> {
+                        entries.add(GardenBotanicalBlocks.PREPARATION_TABLE);
 
                         entries.add(GardenBotanicalItems.GARDEN_PRUNER);
 
-                        entries.add(GardenBotanicalBlock.BOUVARDIA);
-                        entries.add(GardenBotanicalBlock.BRUNIA);
-                        entries.add(GardenBotanicalBlock.GERBERA);
-                        entries.add(GardenBotanicalBlock.HERBAL_PEONY);
-                        entries.add(GardenBotanicalBlock.VERONICA);
+                        entries.add(GardenBotanicalBlocks.BOUVARDIA);
+                        entries.add(GardenBotanicalBlocks.BRUNIA);
+                        entries.add(GardenBotanicalBlocks.GERBERA);
+                        entries.add(GardenBotanicalBlocks.HERBAL_PEONY);
+                        entries.add(GardenBotanicalBlocks.VERONICA);
 
                         entries.add(GardenBotanicalItems.BOUVARDIA_PETAL);
                         entries.add(GardenBotanicalItems.BRUNIA_PETAL);

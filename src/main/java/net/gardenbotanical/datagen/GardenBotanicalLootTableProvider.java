@@ -2,7 +2,7 @@ package net.gardenbotanical.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.gardenbotanical.block.GardenBotanicalBlock;
+import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.item.GardenBotanicalItems;
 import net.minecraft.block.Block;
 import net.minecraft.loot.LootPool;
@@ -22,17 +22,17 @@ public class GardenBotanicalLootTableProvider extends FabricBlockLootTableProvid
 
     @Override
     public void generate() {
-        addDrop(GardenBotanicalBlock.BOUVARDIA, createPool(GardenBotanicalBlock.BOUVARDIA, WITH_GARDEN_PRUNER, 1.0f));
-        addDrop(GardenBotanicalBlock.VERONICA, createPool(GardenBotanicalBlock.VERONICA, WITH_GARDEN_PRUNER, 1.0f));
-        addDrop(GardenBotanicalBlock.BRUNIA, createPool(GardenBotanicalBlock.BRUNIA, WITH_GARDEN_PRUNER, 1.0f));
-        addDrop(GardenBotanicalBlock.GERBERA, createPool(GardenBotanicalBlock.GERBERA, WITH_GARDEN_PRUNER, 1.0f));
-        addDrop(GardenBotanicalBlock.HERBAL_PEONY, createPool(GardenBotanicalBlock.HERBAL_PEONY, WITH_GARDEN_PRUNER, 1.0f));
+        addDrop(GardenBotanicalBlocks.BOUVARDIA, createPool(GardenBotanicalBlocks.BOUVARDIA, WITH_GARDEN_PRUNER, 1.0f));
+        addDrop(GardenBotanicalBlocks.VERONICA, createPool(GardenBotanicalBlocks.VERONICA, WITH_GARDEN_PRUNER, 1.0f));
+        addDrop(GardenBotanicalBlocks.BRUNIA, createPool(GardenBotanicalBlocks.BRUNIA, WITH_GARDEN_PRUNER, 1.0f));
+        addDrop(GardenBotanicalBlocks.GERBERA, createPool(GardenBotanicalBlocks.GERBERA, WITH_GARDEN_PRUNER, 1.0f));
+        addDrop(GardenBotanicalBlocks.HERBAL_PEONY, createPool(GardenBotanicalBlocks.HERBAL_PEONY, WITH_GARDEN_PRUNER, 1.0f));
 
-        addPottedPlantDrops(GardenBotanicalBlock.POTTED_BOUVARDIA);
-        addPottedPlantDrops(GardenBotanicalBlock.POTTED_VERONICA);
-        addPottedPlantDrops(GardenBotanicalBlock.POTTED_BRUNIA);
-        addPottedPlantDrops(GardenBotanicalBlock.POTTED_GERBERA);
-        addPottedPlantDrops(GardenBotanicalBlock.POTTED_HERBAL_PEONY);
+        addPottedPlantDrops(GardenBotanicalBlocks.POTTED_BOUVARDIA);
+        addPottedPlantDrops(GardenBotanicalBlocks.POTTED_VERONICA);
+        addPottedPlantDrops(GardenBotanicalBlocks.POTTED_BRUNIA);
+        addPottedPlantDrops(GardenBotanicalBlocks.POTTED_GERBERA);
+        addPottedPlantDrops(GardenBotanicalBlocks.POTTED_HERBAL_PEONY);
     }
 
     private LootTable.Builder createPool(Block entryBlock, LootCondition.Builder condition, float rolls) {

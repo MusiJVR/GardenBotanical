@@ -14,7 +14,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 
 
-public class GardenBotanicalBlock {
+public class GardenBotanicalBlocks {
     public static final Block PREPARATION_TABLE = registerBlock("preparation_table", new PreparationTableBlock(FabricBlockSettings.copyOf(Blocks.CRAFTING_TABLE).nonOpaque()));
     public static final Block BOUVARDIA = registerBlock("bouvardia", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY).nonOpaque()));
     public static final Block POTTED_BOUVARDIA = registerBlockNoItem("potted_bouvardia", new FlowerPotBlock(BOUVARDIA, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY).nonOpaque()));

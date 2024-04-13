@@ -1,7 +1,7 @@
 package net.gardenbotanical;
 
 import net.fabricmc.api.ModInitializer;
-import net.gardenbotanical.block.GardenBotanicalBlock;
+import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.block.entity.GardenBotanicalBlockEntities;
 import net.gardenbotanical.item.GardenBotanicalItems;
 import net.gardenbotanical.itemGroup.GardenBotanicalItemGroup;
@@ -19,7 +19,7 @@ public class GardenBotanical implements ModInitializer {
     public void onInitialize() {
         LOGGER.info("Initialize " + MOD_ID + "...");
         GardenBotanicalItems.register();
-        GardenBotanicalBlock.register();
+        GardenBotanicalBlocks.register();
         GardenBotanicalItemGroup.registerItemGroups();
         GardenBotanicalBlockEntities.registerBlockEntities();
         GardenBotanicalScreenHandlers.registerScreenHandlers();

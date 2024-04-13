@@ -65,15 +65,27 @@ public class PreparationTableScreenHandler extends ScreenHandler {
     @Override
     public ItemStack quickMove(PlayerEntity player, int invSlot) {
         ItemStack newStack = ItemStack.EMPTY;
-        Slot slot = this.slots.get(invSlot);
+        Slot slot = (Slot)this.slots.get(invSlot);
         if (slot != null && slot.hasStack()) {
             ItemStack originalStack = slot.getStack();
             newStack = originalStack.copy();
-            if (invSlot < this.inventory.size()) {
-                if (!this.insertItem(originalStack, this.inventory.size(), this.slots.size(), true)) {
+            if (invSlot == 1 || invSlot == 2) {
+                if (!this.insertItem(originalStack, 3, 39, true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.insertItem(originalStack, 0, this.inventory.size(), false)) {
+
+                slot.onQuickTransfer(originalStack, newStack);
+            } else if (invSlot >= 3 && invSlot < 39) {
+                if (!this.insertItem(originalStack, 0, 1, false)) {
+                    if (invSlot < 30) {
+                        if (!this.insertItem(originalStack, 30, 39, false)) {
+                            return ItemStack.EMPTY;
+                        }
+                    } else if (!this.insertItem(originalStack, 3, 30, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                }
+            } else if (!this.insertItem(originalStack, 3, 39, false)) {
                 return ItemStack.EMPTY;
             }
 
@@ -81,6 +93,15 @@ public class PreparationTableScreenHandler extends ScreenHandler {
                 slot.setStack(ItemStack.EMPTY);
             } else {
                 slot.markDirty();
+            }
+
+            if (originalStack.getCount() == newStack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
+            slot.onTakeItem(player, originalStack);
+            if (invSlot == 1 || invSlot == 2) {
+                player.dropItem(originalStack, false);
             }
         }
 
