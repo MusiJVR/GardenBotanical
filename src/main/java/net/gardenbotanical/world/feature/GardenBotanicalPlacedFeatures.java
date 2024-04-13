@@ -27,15 +27,15 @@ public class GardenBotanicalPlacedFeatures {
         var configuredFeatureRegistryEntryLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
         //47 demo
         register(context, BOUVARDIA_PLACED, configuredFeatureRegistryEntryLookup.getOrThrow(GardenBotanicalConfiguredFeatures.BOUVARDIA),
-                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(RarityFilterPlacementModifier.of(2), GardenBotanicalBlocks.BOUVARDIA));
+                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(RarityFilterPlacementModifier.of(50), GardenBotanicalBlocks.BOUVARDIA));
         register(context, BRUNIA_PLACED, configuredFeatureRegistryEntryLookup.getOrThrow(GardenBotanicalConfiguredFeatures.BRUNIA),
-                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(RarityFilterPlacementModifier.of(2), GardenBotanicalBlocks.BRUNIA));
+                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(RarityFilterPlacementModifier.of(50), GardenBotanicalBlocks.BRUNIA));
         register(context, GERBERA_PLACED, configuredFeatureRegistryEntryLookup.getOrThrow(GardenBotanicalConfiguredFeatures.GERBERA),
-                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(RarityFilterPlacementModifier.of(2), GardenBotanicalBlocks.GERBERA));
+                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(RarityFilterPlacementModifier.of(50), GardenBotanicalBlocks.GERBERA));
         register(context, HERBAL_PEONY_PLACED, configuredFeatureRegistryEntryLookup.getOrThrow(GardenBotanicalConfiguredFeatures.HERBAL_PEONY),
-                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(RarityFilterPlacementModifier.of(2), GardenBotanicalBlocks.HERBAL_PEONY));
+                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(RarityFilterPlacementModifier.of(50), GardenBotanicalBlocks.HERBAL_PEONY));
         register(context, VERONICA_PLACED, configuredFeatureRegistryEntryLookup.getOrThrow(GardenBotanicalConfiguredFeatures.VERONICA),
-                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(RarityFilterPlacementModifier.of(2), GardenBotanicalBlocks.VERONICA));
+                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(RarityFilterPlacementModifier.of(50), GardenBotanicalBlocks.VERONICA));
     }
 
     public static RegistryKey<PlacedFeature> registerKey(String name) {
