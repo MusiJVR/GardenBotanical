@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "gardenbotanical:block/pounding_table" },
+    "facing=east":  { "model": "gardenbotanical:block/pounding_table", "y":  90 },
+    "facing=south": { "model": "gardenbotanical:block/pounding_table", "y": 180 },
+    "facing=west":  { "model": "gardenbotanical:block/pounding_table", "y": 270 }
+  }
+}

@@ -1,8 +1,8 @@
 package net.gardenbotanical.block.entity;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.gardenbotanical.recipe.PreparationTableRecipe;
-import net.gardenbotanical.screen.PreparationTableScreenHandler;
+import net.gardenbotanical.recipe.PoundingTableRecipe;
+import net.gardenbotanical.screen.PoundingTableScreenHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,6 +12,7 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.PropertyDelegate;
@@ -26,25 +27,27 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 
-public class PreparationTableBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
+public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
 
-    private static final int INPUT_SLOT = 0;
-    private static final int OUTPUT_SLOT_PETAL = 1;
-    private static final int OUTPUT_SLOT_SEEDS = 2;
+    private static final int INPUT_SLOT_FLINT = 0;
+    private static final int INPUT_SLOT_PETAL = 1;
+    private static final int OUTPUT_SLOT_POWDER = 2;
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
     private int maxProgress = 72;
+    private int fuel = 0;
 
-    public PreparationTableBlockEntity(BlockPos pos, BlockState state) {
-        super(GardenBotanicalBlockEntities.PREPARATION_TABLE_BLOCK_ENTITY, pos, state);
+    public PoundingTableBlockEntity(BlockPos pos, BlockState state) {
+        super(GardenBotanicalBlockEntities.POUNDING_TABLE_BLOCK_ENTITY, pos, state);
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> PreparationTableBlockEntity.this.progress;
-                    case 1 -> PreparationTableBlockEntity.this.maxProgress;
+                    case 0 -> PoundingTableBlockEntity.this.progress;
+                    case 1 -> PoundingTableBlockEntity.this.maxProgress;
+                    case 2 -> PoundingTableBlockEntity.this.fuel;
                     default -> 0;
                 };
             }
@@ -52,14 +55,15 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> PreparationTableBlockEntity.this.progress = value;
-                    case 1 -> PreparationTableBlockEntity.this.maxProgress = value;
+                    case 0 -> PoundingTableBlockEntity.this.progress = value;
+                    case 1 -> PoundingTableBlockEntity.this.maxProgress = value;
+                    case 2 -> PoundingTableBlockEntity.this.fuel = value;
                 }
             }
 
             @Override
             public int size() {
-                return 2;
+                return 3;
             }
         };
     }
@@ -83,25 +87,25 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
-        nbt.putInt("preparation_table.progress", progress);
+        nbt.putInt("pounding_table.progress", progress);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
         Inventories.readNbt(nbt, inventory);
-        progress = nbt.getInt("preparation_table.progress");
+        progress = nbt.getInt("pounding_table.progress");
     }
 
     @Override
     public Text getDisplayName() {
-        return Text.translatable("block.gardenbotanical.preparation_table");
+        return Text.translatable("block.gardenbotanical.pounding_table");
     }
 
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new PreparationTableScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+        return new PoundingTableScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
@@ -109,12 +113,18 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
             return;
         }
 
-        if (this.isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_PETAL) && this.isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_SEEDS)) {
+        if (this.isFuelSlotFlint(INPUT_SLOT_FLINT) && fuel <= 0) {
+            this.decreaseStackFuel(INPUT_SLOT_FLINT);
+            markDirty(world, pos, state);
+        }
+
+        if (this.isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_POWDER) && fuel > 0) {
             if (this.hasRecipe()) {
                 this.increaseCraftProgress();
                 markDirty(world, pos, state);
 
                 if (hasCraftingFinished()) {
+                    this.decreaseFuel();
                     this.craftItem();
                     this.resetProgress();
                 }
@@ -132,12 +142,11 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
     }
 
     private void craftItem() {
-        Optional<PreparationTableRecipe> recipe = getCurrentRecipe();
+        Optional<PoundingTableRecipe> recipe = getCurrentRecipe();
 
-        this.removeStack(INPUT_SLOT, 1);
+        this.removeStack(INPUT_SLOT_PETAL, 1);
 
-        putItemInOutputSlot(recipe.get().getOutputPetals(null), OUTPUT_SLOT_PETAL);
-        putItemInOutputSlot(recipe.get().getOutputSeeds(null), OUTPUT_SLOT_SEEDS);
+        putItemInOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_POWDER);
     }
 
     private void putItemInOutputSlot(ItemStack result, int slot) {
@@ -148,27 +157,34 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
         return progress >= maxProgress;
     }
 
+    private void decreaseStackFuel(int slot) {
+        fuel = 5;
+        inventory.get(slot).decrement(1);
+    }
+
+    private void decreaseFuel() {
+        fuel--;
+    }
+
     private void increaseCraftProgress() {
         progress++;
     }
 
     private boolean hasRecipe() {
-        Optional<PreparationTableRecipe> recipe = getCurrentRecipe();
+        Optional<PoundingTableRecipe> recipe = getCurrentRecipe();
 
         return recipe.isPresent()
-                && canInsertAmountIntoOutputSlot(recipe.get().getOutputPetals(null), OUTPUT_SLOT_PETAL)
-                && canInsertItemIntoOutputSlot(recipe.get().getOutputPetals(null).getItem(), OUTPUT_SLOT_PETAL)
-                && canInsertAmountIntoOutputSlot(recipe.get().getOutputSeeds(null), OUTPUT_SLOT_SEEDS)
-                && canInsertItemIntoOutputSlot(recipe.get().getOutputSeeds(null).getItem(), OUTPUT_SLOT_SEEDS);
+                && canInsertAmountIntoOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_POWDER)
+                && canInsertItemIntoOutputSlot(recipe.get().getOutput(null).getItem(), OUTPUT_SLOT_POWDER);
     }
 
-    private Optional<PreparationTableRecipe> getCurrentRecipe() {
+    private Optional<PoundingTableRecipe> getCurrentRecipe() {
         SimpleInventory inv = new SimpleInventory(this.size());
         for(int i = 0; i < this.size(); i++) {
             inv.setStack(i, this.getStack(i));
         }
 
-        return getWorld().getRecipeManager().getFirstMatch(PreparationTableRecipe.Type.INSTANCE, inv, getWorld());
+        return getWorld().getRecipeManager().getFirstMatch(PoundingTableRecipe.Type.INSTANCE, inv, getWorld());
     }
 
     private boolean canInsertItemIntoOutputSlot(Item item, int slot) {
@@ -177,6 +193,10 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
 
     private boolean canInsertAmountIntoOutputSlot(ItemStack result, int slot) {
         return this.getStack(slot).getCount() + result.getCount() <= getStack(slot).getMaxCount();
+    }
+
+    private boolean isFuelSlotFlint(int slot) {
+        return inventory.get(slot).isOf(Items.FLINT);
     }
 
     private boolean isOutputSlotEmptyOrReceivable(int slot) {

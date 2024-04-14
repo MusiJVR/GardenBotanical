@@ -1,0 +1,12 @@
+{
+  "type": "gardenbotanical:pounding_table",
+  "ingredient": {
+      "item": "gardenbotanical:veronica_petal"
+  },
+  "output": {
+    "powder": {
+      "count": 1,
+      "item": "gardenbotanical:powdered_veronica"
+    }
+  }
+}

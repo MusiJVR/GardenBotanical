@@ -15,6 +15,11 @@ public class GardenBotanicalBlockEntities {
                     FabricBlockEntityTypeBuilder.create(PreparationTableBlockEntity::new,
                             GardenBotanicalBlocks.PREPARATION_TABLE).build());
 
+    public static final BlockEntityType<PoundingTableBlockEntity> POUNDING_TABLE_BLOCK_ENTITY =
+            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(GardenBotanical.MOD_ID, "pounding_table_block_entity"),
+                    FabricBlockEntityTypeBuilder.create(PoundingTableBlockEntity::new,
+                            GardenBotanicalBlocks.POUNDING_TABLE).build());
+
     public static void registerBlockEntities() {
         GardenBotanical.LOGGER.info("Registering Block Entities for: " + GardenBotanical.MOD_ID);
     }
