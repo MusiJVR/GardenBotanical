@@ -3,7 +3,6 @@ package net.gardenbotanical.item;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.gardenbotanical.GardenBotanical;
-import net.gardenbotanical.item.tool.GardenPrunerItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;

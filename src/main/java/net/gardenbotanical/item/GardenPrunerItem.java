@@ -1,4 +1,4 @@
-package net.gardenbotanical.item.tool;
+package net.gardenbotanical.item;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EquipmentSlot;
@@ -6,7 +6,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 

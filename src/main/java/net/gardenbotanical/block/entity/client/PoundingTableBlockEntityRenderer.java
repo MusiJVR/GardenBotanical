@@ -29,25 +29,16 @@ public class PoundingTableBlockEntityRenderer implements BlockEntityRenderer<Pou
 
         ItemStack itemStack = entity.getRenderStack();
         matrices.push();
-        matrices.translate(0.5f, 0.645f, 0.5f);
+        matrices.translate(0.5f, 0.643f, 0.5f);
         matrices.scale(0.5f, 0.5f, 0.5f);
-        /*matrices.translate(0.5f, 0.645f, 0.5f);
-        matrices.scale(0.2f, 0.2f, 0.2f);*/
-        matrices.multiply(RotationAxis.POSITIVE_X.rotation(30));
+        matrices.multiply(RotationAxis.POSITIVE_X.rotation((float) Math.toRadians(270)));
 
         switch (entity.getCachedState().get(Properties.HORIZONTAL_FACING)) {
-            case NORTH -> matrices.multiply(RotationAxis.POSITIVE_Z.rotation(75));
-            case EAST -> matrices.multiply(RotationAxis.POSITIVE_Z.rotation(45));
-            case SOUTH -> matrices.multiply(RotationAxis.POSITIVE_Z.rotation(315));
-            case WEST -> matrices.multiply(RotationAxis.POSITIVE_Z.rotation(225));
+            case NORTH -> matrices.multiply(RotationAxis.POSITIVE_Z.rotation((float) Math.toRadians(180)));
+            case EAST -> matrices.multiply(RotationAxis.POSITIVE_Z.rotation((float) Math.toRadians(90)));
+            case SOUTH -> matrices.multiply(RotationAxis.POSITIVE_Z.rotation((float) Math.toRadians(0)));
+            case WEST -> matrices.multiply(RotationAxis.POSITIVE_Z.rotation((float) Math.toRadians(270)));
         }
-
-        /*switch (entity.getCachedState().get(Properties.HORIZONTAL_FACING)) {
-            case NORTH -> matrices.multiply(RotationAxis.POSITIVE_Z.rotation(180));
-            case EAST -> matrices.multiply(RotationAxis.POSITIVE_Z.rotation(270));
-            case SOUTH -> matrices.multiply(RotationAxis.POSITIVE_Z.rotation(0));
-            case WEST -> matrices.multiply(RotationAxis.POSITIVE_Z.rotation(90));
-        }*/
 
         itemRenderer.renderItem(itemStack, ModelTransformationMode.GUI, getLightLevel(entity.getWorld(), entity.getPos()), OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, entity.getWorld(), 1);
         matrices.pop();
