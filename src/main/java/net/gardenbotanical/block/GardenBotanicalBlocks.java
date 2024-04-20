@@ -43,6 +43,6 @@ public class GardenBotanicalBlocks {
     }
 
     public static void register() {
-        GardenBotanical.LOGGER.info("Registering Blocks for: " + GardenBotanical.MOD_ID);
+        GardenBotanical.LOGGER.info("Registering blocks for: " + GardenBotanical.MOD_ID);
     }
 }

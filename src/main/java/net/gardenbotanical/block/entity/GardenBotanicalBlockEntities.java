@@ -20,7 +20,7 @@ public class GardenBotanicalBlockEntities {
                     FabricBlockEntityTypeBuilder.create(PoundingTableBlockEntity::new,
                             GardenBotanicalBlocks.POUNDING_TABLE).build());
 
-    public static void registerBlockEntities() {
-        GardenBotanical.LOGGER.info("Registering Block Entities for: " + GardenBotanical.MOD_ID);
+    public static void register() {
+        GardenBotanical.LOGGER.info("Registering block entities for: " + GardenBotanical.MOD_ID);
     }
 }

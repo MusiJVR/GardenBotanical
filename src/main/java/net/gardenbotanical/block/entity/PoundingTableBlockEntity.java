@@ -2,9 +2,8 @@ package net.gardenbotanical.block.entity;
 
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.gardenbotanical.GardenBotanical;
+import net.gardenbotanical.network.GardenBotanicalNetwork;
 import net.gardenbotanical.recipe.PoundingTableRecipe;
 import net.gardenbotanical.screen.PoundingTableScreenHandler;
 import net.minecraft.block.BlockState;
@@ -24,7 +23,6 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -99,7 +97,7 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
             data.writeBlockPos(getPos());
 
             for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
-                ServerPlayNetworking.send(player, new Identifier(GardenBotanical.MOD_ID, "item_sync"), data);
+                GardenBotanicalNetwork.ITEM_SYNC_PACKET.send(player, data);
             }
         }
 

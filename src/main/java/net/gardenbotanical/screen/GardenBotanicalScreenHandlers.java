@@ -17,7 +17,7 @@ public class GardenBotanicalScreenHandlers {
             Registry.register(Registries.SCREEN_HANDLER, new Identifier(GardenBotanical.MOD_ID, "pounding_table"),
                     new ExtendedScreenHandlerType<>(PoundingTableScreenHandler::new));
 
-    public static void registerScreenHandlers() {
+    public static void register() {
         GardenBotanical.LOGGER.info("Registering Screen Handlers for: " + GardenBotanical.MOD_ID);
     }
 }

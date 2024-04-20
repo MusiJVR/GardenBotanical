@@ -22,11 +22,11 @@ public class GardenBotanical implements ModInitializer {
         LOGGER.info("Initialize " + MOD_ID + "...");
         GardenBotanicalItems.register();
         GardenBotanicalBlocks.register();
-        GardenBotanicalItemGroup.registerItemGroups();
-        GardenBotanicalBlockEntities.registerBlockEntities();
-        GardenBotanicalScreenHandlers.registerScreenHandlers();
-        GardenBotanicalRecipes.registerRecipes();
-        GardenBotanicalWorldGen.registerWorldGen();
-        GardenBotanicalNetwork.registerS2CPackets();
+        GardenBotanicalItemGroup.register();
+        GardenBotanicalBlockEntities.register();
+        GardenBotanicalScreenHandlers.register();
+        GardenBotanicalRecipes.register();
+        GardenBotanicalWorldGen.register();
+        GardenBotanicalNetwork.register();
     }
 }

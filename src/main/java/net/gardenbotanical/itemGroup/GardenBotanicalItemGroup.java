@@ -47,7 +47,7 @@ public class GardenBotanicalItemGroup {
                         entries.add(GardenBotanicalItems.VERONICA_SEEDS);
                     }).build());
 
-    public static void registerItemGroups() {
-        GardenBotanical.LOGGER.info("Registering Item Groups for: " + GardenBotanical.MOD_ID);
+    public static void register() {
+        GardenBotanical.LOGGER.info("Registering item groups for: " + GardenBotanical.MOD_ID);
     }
 }
