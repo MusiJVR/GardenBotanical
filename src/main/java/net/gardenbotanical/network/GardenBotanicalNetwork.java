@@ -2,8 +2,11 @@ package net.gardenbotanical.network;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.gardenbotanical.network.packets.ClientPacket;
-import net.gardenbotanical.network.packets.ServerPacket;
+import net.gardenbotanical.GardenBotanical;
+import net.gardenbotanical.network.packet.ClientPacket;
+import net.gardenbotanical.network.packet.ItemStackSyncS2CPacket;
+import net.gardenbotanical.network.packet.ServerPacket;
+import net.minecraft.util.Identifier;
 
 
 public class GardenBotanicalNetwork {
@@ -19,5 +22,9 @@ public class GardenBotanicalNetwork {
         ClientPlayNetworking.registerGlobalReceiver(packet.ID, handler);
 
         return packet;
+    }
+
+    public static void registerS2CPackets() {
+        ClientPlayNetworking.registerGlobalReceiver(new Identifier(GardenBotanical.MOD_ID, "item_sync"), ItemStackSyncS2CPacket::receive);
     }
 }

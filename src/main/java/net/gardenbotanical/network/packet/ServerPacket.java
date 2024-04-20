@@ -1,4 +1,4 @@
-package net.gardenbotanical.network.packets;
+package net.gardenbotanical.network.packet;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;

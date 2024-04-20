@@ -1,6 +1,10 @@
 package net.gardenbotanical.block.entity;
 
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.gardenbotanical.GardenBotanical;
 import net.gardenbotanical.recipe.PoundingTableRecipe;
 import net.gardenbotanical.screen.PoundingTableScreenHandler;
 import net.minecraft.block.BlockState;
@@ -18,7 +22,9 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -66,6 +72,38 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
                 return 3;
             }
         };
+    }
+
+    public ItemStack getRenderStack() {
+        if (this.getStack(OUTPUT_SLOT_POWDER).isEmpty()) {
+            return ItemStack.EMPTY;
+        } else {
+            return this.getStack(OUTPUT_SLOT_POWDER);
+        }
+    }
+
+    public void setInventory(DefaultedList<ItemStack> inventory) {
+        for (int i = 0; i < inventory.size(); i++) {
+            this.inventory.set(i, inventory.get(i));
+        }
+    }
+
+    @Override
+    public void markDirty() {
+        if (!world.isClient()) {
+            PacketByteBuf data = PacketByteBufs.create();
+            data.writeInt(inventory.size());
+            for (int i = 0; i < inventory.size(); i++) {
+                data.writeItemStack(inventory.get(i));
+            }
+            data.writeBlockPos(getPos());
+
+            for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
+                ServerPlayNetworking.send(player, new Identifier(GardenBotanical.MOD_ID, "item_sync"), data);
+            }
+        }
+
+        super.markDirty();
     }
 
     @Override
