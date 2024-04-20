@@ -15,6 +15,7 @@ import net.minecraft.util.Identifier;
 
 
 public class GardenBotanicalBlocks {
+    public static final Block TEST = registerBlock("test", new AnimatedBlock(FabricBlockSettings.copyOf(Blocks.STONE).nonOpaque()));
     public static final Block PREPARATION_TABLE = registerBlock("preparation_table", new PreparationTableBlock(FabricBlockSettings.copyOf(Blocks.CRAFTING_TABLE).nonOpaque()));
     public static final Block POUNDING_TABLE = registerBlock("pounding_table", new PoundingTableBlock(FabricBlockSettings.copyOf(Blocks.GRINDSTONE).nonOpaque()));
     public static final Block BOUVARDIA = registerBlock("bouvardia", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY).nonOpaque()));

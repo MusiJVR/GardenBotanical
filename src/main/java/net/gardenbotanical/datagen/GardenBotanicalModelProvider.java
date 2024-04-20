@@ -7,6 +7,7 @@ import net.gardenbotanical.item.GardenBotanicalItems;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
+import net.minecraft.item.Items;
 
 
 public class GardenBotanicalModelProvider extends FabricModelProvider {
@@ -44,5 +45,6 @@ public class GardenBotanicalModelProvider extends FabricModelProvider {
         itemModelGenerator.register(GardenBotanicalItems.VERONICA_SEEDS, Models.GENERATED);
 
         itemModelGenerator.register(GardenBotanicalItems.GARDEN_PRUNER, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.GUIDE_BOOK, Items.BOOK, Models.GENERATED);
     }
 }

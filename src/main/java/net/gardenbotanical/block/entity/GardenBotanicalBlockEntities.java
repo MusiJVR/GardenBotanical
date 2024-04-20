@@ -10,6 +10,11 @@ import net.minecraft.util.Identifier;
 
 
 public class GardenBotanicalBlockEntities {
+    public static BlockEntityType<AnimatedBlockEntity> TEST =
+            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(GardenBotanical.MOD_ID, "animated_block_entity"),
+                    FabricBlockEntityTypeBuilder.create(AnimatedBlockEntity::new,
+                            GardenBotanicalBlocks.TEST).build());;
+
     public static final BlockEntityType<PreparationTableBlockEntity> PREPARATION_TABLE_BLOCK_ENTITY =
             Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(GardenBotanical.MOD_ID, "preparation_table_block_entity"),
                     FabricBlockEntityTypeBuilder.create(PreparationTableBlockEntity::new,

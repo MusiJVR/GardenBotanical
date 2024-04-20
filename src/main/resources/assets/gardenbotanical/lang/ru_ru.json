@@ -1,11 +1,12 @@
 {
   "item.gardenbotanical.garden_pruner": "Садовый секатор",
+  "item.gardenbotanical.guide_book": "Ботанический справочник",
 
-  "item.gardenbotanical.bouvardia_petal": "Лепесток  бувардии",
-  "item.gardenbotanical.brunia_petal": "Лепесток  брунии",
-  "item.gardenbotanical.gerbera_petal": "Лепесток  герберы",
-  "item.gardenbotanical.herbal_peony_petal": "Лепесток  травянистого пиона",
-  "item.gardenbotanical.veronica_petal": "Лепесток  вероники",
+  "item.gardenbotanical.bouvardia_petal": "Лепесток бувардии",
+  "item.gardenbotanical.brunia_petal": "Лепесток брунии",
+  "item.gardenbotanical.gerbera_petal": "Лепесток герберы",
+  "item.gardenbotanical.herbal_peony_petal": "Лепесток травянистого пиона",
+  "item.gardenbotanical.veronica_petal": "Лепесток вероники",
 
   "item.gardenbotanical.powdered_bouvardia": "Измельченная бувардия",
   "item.gardenbotanical.powdered_brunia": "Измельченная бруния",
@@ -28,5 +29,9 @@
   "block.gardenbotanical.herbal_peony": "Травянистый пион",
   "block.gardenbotanical.veronica": "Вероника",
 
-  "itemgroup.gardenbotanical.gardenbotanical_group": "GardenBotanical"
+  "itemgroup.gardenbotanical.gardenbotanical_group": "Garden Botanical",
+
+  "tooltip.gardenbotanical.guide_book": "Справочник по Garden Botanical",
+
+  "message.gardenbotanical.patchouli_not_found": "Patchouli не установлен, открыть справочник невозможно!"
 }

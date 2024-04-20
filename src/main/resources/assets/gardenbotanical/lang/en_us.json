@@ -1,5 +1,6 @@
 {
   "item.gardenbotanical.garden_pruner": "Garden pruner",
+  "item.gardenbotanical.guide_book": "Botanical reference",
 
   "item.gardenbotanical.bouvardia_petal": "Bouvardia petal",
   "item.gardenbotanical.brunia_petal": "Brunia petal",
@@ -28,5 +29,9 @@
   "block.gardenbotanical.herbal_peony": "Herbal peony",
   "block.gardenbotanical.veronica": "Veronica",
 
-  "itemgroup.gardenbotanical.gardenbotanical_group": "GardenBotanical"
+  "itemgroup.gardenbotanical.gardenbotanical_group": "Garden Botanical",
+
+  "tooltip.gardenbotanical.guide_book": "Guide to Garden Botanical",
+
+  "message.gardenbotanical.patchouli_not_found": "Patchouli is not loaded, can't open guide book!"
 }

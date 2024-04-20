@@ -1,0 +1,9 @@
+{
+  "name": "item.gardenbotanical.guide_book",
+  "landing_text": "tooltip.gardenbotanical.guide_book",
+  "subtitle": "itemgroup.gardenbotanical.gardenbotanical_group",
+  "model": "gardenbotanical:guide_book",
+  "custom_book_item": "gardenbotanical:guide_book",
+  "show_progress": false,
+  "use_resource_pack": true
+}

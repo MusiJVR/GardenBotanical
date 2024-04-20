@@ -11,6 +11,7 @@ import net.gardenbotanical.screen.GardenBotanicalScreenHandlers;
 import net.gardenbotanical.world.gen.GardenBotanicalWorldGen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import software.bernie.geckolib.GeckoLib;
 
 
 public class GardenBotanical implements ModInitializer {
@@ -20,6 +21,7 @@ public class GardenBotanical implements ModInitializer {
     @Override
     public void onInitialize() {
         LOGGER.info("Initialize " + MOD_ID + "...");
+        GeckoLib.initialize();
         GardenBotanicalItems.register();
         GardenBotanicalBlocks.register();
         GardenBotanicalItemGroup.registerItemGroups();

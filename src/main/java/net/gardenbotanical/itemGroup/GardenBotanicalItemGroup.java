@@ -21,6 +21,8 @@ public class GardenBotanicalItemGroup {
                         entries.add(GardenBotanicalBlocks.POUNDING_TABLE);
 
                         entries.add(GardenBotanicalItems.GARDEN_PRUNER);
+                        entries.add(GardenBotanicalItems.GUIDE_BOOK);
+                        entries.add(GardenBotanicalBlocks.TEST);
 
                         entries.add(GardenBotanicalBlocks.BOUVARDIA);
                         entries.add(GardenBotanicalBlocks.BRUNIA);
