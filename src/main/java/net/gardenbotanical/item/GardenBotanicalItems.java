@@ -3,6 +3,7 @@ package net.gardenbotanical.item;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.gardenbotanical.GardenBotanical;
+import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
@@ -31,6 +32,8 @@ public class GardenBotanicalItems {
     public static final Item GERBERA_SEEDS = registerItem("gerbera_seeds", new Item(new FabricItemSettings()));
     public static final Item HERBAL_PEONY_SEEDS = registerItem("herbal_peony_seeds", new Item(new FabricItemSettings()));
     public static final Item VERONICA_SEEDS = registerItem("veronica_seeds", new Item(new FabricItemSettings()));
+
+    public static final Item DYE_MIXER = registerItem("dye_mixer", new DyeMixerItem(GardenBotanicalBlocks.DYE_MIXER, new FabricItemSettings()));
 
     public static Item registerItem(String id, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(GardenBotanical.MOD_ID, id), item);
