@@ -1,5 +1,8 @@
 {
   "variants": {
-    "": { "model": "gardenbotanical:block/dye_mixer" }
+    "facing=north": { "model": "gardenbotanical:block/dye_mixer" },
+    "facing=east":  { "model": "gardenbotanical:block/dye_mixer", "y":  90 },
+    "facing=south": { "model": "gardenbotanical:block/dye_mixer", "y": 180 },
+    "facing=west":  { "model": "gardenbotanical:block/dye_mixer", "y": 270 }
   }
 }

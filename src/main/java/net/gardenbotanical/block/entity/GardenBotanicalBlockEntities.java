@@ -23,7 +23,7 @@ public class GardenBotanicalBlockEntities {
     public static BlockEntityType<DyeMixerBlockEntity> DYE_MIXER_BLOCK_ENTITY =
             Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(GardenBotanical.MOD_ID, "dye_mixer_block_entity"),
                     FabricBlockEntityTypeBuilder.create(DyeMixerBlockEntity::new,
-                            GardenBotanicalBlocks.DYE_MIXER).build());;
+                            GardenBotanicalBlocks.DYE_MIXER).build());
 
     public static void register() {
         GardenBotanical.LOGGER.info("Registering block entities for: " + GardenBotanical.MOD_ID);

@@ -50,7 +50,7 @@ public class DyeMixerItem extends BlockItem implements GeoItem {
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-        tAnimationState.getController().setAnimation(RawAnimation.begin().then("progress", Animation.LoopType.LOOP));
+        tAnimationState.getController().setAnimation(RawAnimation.begin().then("process", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
 

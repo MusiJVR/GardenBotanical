@@ -1,10 +1,10 @@
 package net.gardenbotanical.block.entity;
 
+import net.gardenbotanical.block.DyeMixerBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
@@ -21,12 +21,20 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-        tAnimationState.getController().setAnimation(RawAnimation.begin().then("progress", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
+        controllers.add(new AnimationController<>(this, state -> {
+            if (state.getAnimatable().world != null)
+                if (!state.getAnimatable().world.getBlockState(state.getAnimatable().pos).isAir())
+                    if (state.getAnimatable().getWorld().getBlockState(state.getAnimatable().pos).get(DyeMixerBlock.PROCESS)) {
+                        state.setAnimation(RawAnimation.begin().then("process", Animation.LoopType.LOOP));
+                        return PlayState.CONTINUE;
+                    } else {
+                        return PlayState.STOP;
+                    }
+                else
+                    return PlayState.STOP;
+            else
+                return PlayState.STOP;
+        }));
     }
 
     @Override

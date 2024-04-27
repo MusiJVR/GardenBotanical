@@ -17,7 +17,7 @@ import net.minecraft.util.Identifier;
 public class GardenBotanicalBlocks {
     public static final Block PREPARATION_TABLE = registerBlock("preparation_table", new PreparationTableBlock(FabricBlockSettings.copyOf(Blocks.CRAFTING_TABLE).nonOpaque()));
     public static final Block POUNDING_TABLE = registerBlock("pounding_table", new PoundingTableBlock(FabricBlockSettings.copyOf(Blocks.GRINDSTONE).nonOpaque()));
-    public static final Block DYE_MIXER = Registry.register(Registries.BLOCK, new Identifier(GardenBotanical.MOD_ID, "dye_mixer"), new DyeMixerBlock(FabricBlockSettings.copyOf(Blocks.STONE).nonOpaque()));
+    public static final Block DYE_MIXER = registerBlockNoItem("dye_mixer", new DyeMixerBlock(FabricBlockSettings.copyOf(Blocks.CRAFTING_TABLE).nonOpaque()));
     public static final Block BOUVARDIA = registerBlock("bouvardia", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY).nonOpaque()));
     public static final Block POTTED_BOUVARDIA = registerBlockNoItem("potted_bouvardia", new FlowerPotBlock(BOUVARDIA, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY).nonOpaque()));
     public static final Block BRUNIA = registerBlock("brunia", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY).nonOpaque()));
