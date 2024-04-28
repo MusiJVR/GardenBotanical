@@ -16,7 +16,10 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class DyeMixerBlock extends BlockWithEntity {
-    private static final VoxelShape SHAPE = VoxelShapes.union(Block.createCuboidShape(3, 0, 4, 12, 15, 13));
+    private static final VoxelShape NORTH_SHAPE = VoxelShapes.union(Block.createCuboidShape(4, 0, 3, 13, 15, 12));
+    private static final VoxelShape SOUTH_SHAPE = VoxelShapes.union(Block.createCuboidShape(3, 0, 4, 12, 15, 13));
+    private static final VoxelShape WEST_SHAPE = VoxelShapes.union(Block.createCuboidShape(3, 0, 3, 12, 15, 12));
+    private static final VoxelShape EAST_SHAPE = VoxelShapes.union(Block.createCuboidShape(4, 0, 4, 13, 15, 13));
     public static final BooleanProperty PROCESS = BooleanProperty.of("process");
 
     protected DyeMixerBlock(Settings settings) {
@@ -38,7 +41,18 @@ public class DyeMixerBlock extends BlockWithEntity {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPE;
+        Direction direction = (Direction) state.get(Properties.HORIZONTAL_FACING);
+        if (direction == Direction.NORTH) {
+            return NORTH_SHAPE;
+        } else if (direction == Direction.SOUTH) {
+            return SOUTH_SHAPE;
+        } else if (direction == Direction.WEST) {
+            return WEST_SHAPE;
+        } else if (direction == Direction.EAST) {
+            return EAST_SHAPE;
+        } else {
+            return NORTH_SHAPE;
+        }
     }
 
     @Nullable
