@@ -15,5 +15,8 @@ public class GardenBotanicalRecipes {
 
         Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(GardenBotanical.MOD_ID, PoundingTableRecipe.Serializer.ID), PoundingTableRecipe.Serializer.INSTANCE);
         Registry.register(Registries.RECIPE_TYPE, new Identifier(GardenBotanical.MOD_ID, PoundingTableRecipe.Type.ID), PoundingTableRecipe.Type.INSTANCE);
+
+        Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(GardenBotanical.MOD_ID, DyeMixerRecipe.Serializer.ID), DyeMixerRecipe.Serializer.INSTANCE);
+        Registry.register(Registries.RECIPE_TYPE, new Identifier(GardenBotanical.MOD_ID, DyeMixerRecipe.Type.ID), DyeMixerRecipe.Type.INSTANCE);
     }
 }

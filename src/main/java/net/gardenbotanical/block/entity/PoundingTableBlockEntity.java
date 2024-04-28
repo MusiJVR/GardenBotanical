@@ -124,6 +124,7 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
         nbt.putInt("pounding_table.progress", progress);
+        nbt.putInt("pounding_table.fuel", fuel);
     }
 
     @Override
@@ -131,6 +132,7 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
         super.readNbt(nbt);
         Inventories.readNbt(nbt, inventory);
         progress = nbt.getInt("pounding_table.progress");
+        fuel = nbt.getInt("pounding_table.fuel");
     }
 
     @Override
@@ -159,7 +161,7 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
                 this.increaseCraftProgress();
                 markDirty(world, pos, state);
 
-                if (hasCraftingFinished()) {
+                if (this.hasCraftingFinished()) {
                     this.decreaseFuel();
                     this.craftItem();
                     this.resetProgress();

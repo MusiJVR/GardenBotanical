@@ -1,0 +1,12 @@
+{
+  "type": "gardenbotanical:dye_mixer",
+  "ingredient": {
+      "item": "gardenbotanical:powdered_bouvardia"
+  },
+  "output": {
+    "dye": {
+      "count": 1,
+      "item": "minecraft:red_dye"
+    }
+  }
+}

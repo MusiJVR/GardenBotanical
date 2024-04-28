@@ -8,6 +8,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RotationAxis;
@@ -24,6 +25,8 @@ public class DyeMixerBlockRenderer extends GeoBlockRenderer<DyeMixerBlockEntity>
     @Override
     public void defaultRender(MatrixStack poseStack, DyeMixerBlockEntity animatable, VertexConsumerProvider bufferSource, RenderLayer renderType, VertexConsumer buffer, float yaw, float partialTick, int packedLight) {
         ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
+
+        ItemStack itemStack = animatable.waterIsEmpty();
 
         poseStack.push();
 
@@ -44,7 +47,7 @@ public class DyeMixerBlockRenderer extends GeoBlockRenderer<DyeMixerBlockEntity>
             case WEST -> poseStack.multiply(RotationAxis.POSITIVE_Z.rotation((float) Math.toRadians(270)));
         }
 
-        itemRenderer.renderItem(GardenBotanicalItems.WATER_DYE_MIXER.getDefaultStack(), ModelTransformationMode.GUI, getLightLevel(animatable.getWorld(), animatable.getPos()), OverlayTexture.DEFAULT_UV, poseStack, bufferSource, animatable.getWorld(), 1);
+        itemRenderer.renderItem(itemStack, ModelTransformationMode.GUI, getLightLevel(animatable.getWorld(), animatable.getPos()), OverlayTexture.DEFAULT_UV, poseStack, bufferSource, animatable.getWorld(), 1);
         poseStack.pop();
 
         super.defaultRender(poseStack, animatable, bufferSource, renderType, buffer, yaw, partialTick, packedLight);

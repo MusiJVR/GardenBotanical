@@ -114,7 +114,7 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
                 this.increaseCraftProgress();
                 markDirty(world, pos, state);
 
-                if (hasCraftingFinished()) {
+                if (this.hasCraftingFinished()) {
                     this.craftItem();
                     this.resetProgress();
                 }
