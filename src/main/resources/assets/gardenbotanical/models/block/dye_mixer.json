@@ -1,5 +1,9 @@
 {
   "parent": "builtin/entity",
+  "textures": {
+    "0": "gardenbotanical:block/dye_mixer",
+    "particle":"minecraft:block/barrel_side"
+  },
   "texture_size": [
     64,
     64

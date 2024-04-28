@@ -29,6 +29,6 @@ public class GardenBotanical implements ModInitializer {
         GardenBotanicalScreenHandlers.register();
         GardenBotanicalRecipes.register();
         GardenBotanicalWorldGen.register();
-        GardenBotanicalNetwork.register();
+        GardenBotanicalNetwork.registerC2SPacket();
     }
 }

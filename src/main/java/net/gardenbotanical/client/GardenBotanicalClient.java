@@ -7,6 +7,7 @@ import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.block.entity.GardenBotanicalBlockEntities;
 import net.gardenbotanical.block.entity.client.DyeMixerBlockRenderer;
 import net.gardenbotanical.block.entity.client.PoundingTableBlockEntityRenderer;
+import net.gardenbotanical.network.GardenBotanicalNetwork;
 import net.gardenbotanical.screen.GardenBotanicalScreenHandlers;
 import net.gardenbotanical.screen.PoundingTableScreen;
 import net.gardenbotanical.screen.PreparationTableScreen;
@@ -19,6 +20,7 @@ public class GardenBotanicalClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         GardenBotanical.LOGGER.info("Initialize " + GardenBotanical.MOD_ID + " client...");
+        GardenBotanicalNetwork.registerS2CPacket();
 
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.BOUVARDIA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.GERBERA, RenderLayer.getCutout());

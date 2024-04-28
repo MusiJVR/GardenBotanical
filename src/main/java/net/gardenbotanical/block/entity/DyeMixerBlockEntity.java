@@ -1,6 +1,7 @@
 package net.gardenbotanical.block.entity;
 
 import net.gardenbotanical.block.DyeMixerBlock;
+import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
@@ -23,7 +24,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, state -> {
             if (state.getAnimatable().world != null)
-                if (!state.getAnimatable().world.getBlockState(state.getAnimatable().pos).isAir())
+                if (state.getAnimatable().world.getBlockState(state.getAnimatable().pos).isOf(GardenBotanicalBlocks.DYE_MIXER))
                     if (state.getAnimatable().getWorld().getBlockState(state.getAnimatable().pos).get(DyeMixerBlock.PROCESS)) {
                         state.setAnimation(RawAnimation.begin().then("process", Animation.LoopType.LOOP));
                         return PlayState.CONTINUE;
