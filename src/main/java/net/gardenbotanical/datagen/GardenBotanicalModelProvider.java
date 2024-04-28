@@ -44,5 +44,7 @@ public class GardenBotanicalModelProvider extends FabricModelProvider {
         itemModelGenerator.register(GardenBotanicalItems.VERONICA_SEEDS, Models.GENERATED);
 
         itemModelGenerator.register(GardenBotanicalItems.GARDEN_PRUNER, Models.GENERATED);
+
+        itemModelGenerator.register(GardenBotanicalItems.WATER_DYE_MIXER, Models.GENERATED);
     }
 }

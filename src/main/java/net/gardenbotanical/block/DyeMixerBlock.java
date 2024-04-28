@@ -3,15 +3,20 @@ package net.gardenbotanical.block;
 import net.gardenbotanical.block.entity.DyeMixerBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 
@@ -41,7 +46,7 @@ public class DyeMixerBlock extends BlockWithEntity {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        Direction direction = (Direction) state.get(Properties.HORIZONTAL_FACING);
+        Direction direction = state.get(Properties.HORIZONTAL_FACING);
         if (direction == Direction.NORTH) {
             return NORTH_SHAPE;
         } else if (direction == Direction.SOUTH) {
@@ -53,6 +58,11 @@ public class DyeMixerBlock extends BlockWithEntity {
         } else {
             return NORTH_SHAPE;
         }
+    }
+
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        return super.onUse(state, world, pos, player, hand, hit);
     }
 
     @Nullable

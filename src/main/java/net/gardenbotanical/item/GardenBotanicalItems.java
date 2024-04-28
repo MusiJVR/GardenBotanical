@@ -15,6 +15,8 @@ import net.minecraft.util.Identifier;
 public class GardenBotanicalItems {
     public static final Item GARDEN_PRUNER = registerItem("garden_pruner", new GardenPrunerItem(new FabricItemSettings().maxDamage(64)));
 
+    public static final Item WATER_DYE_MIXER = registerItem("water_dye_mixer", new Item(new FabricItemSettings()));
+
     public static final Item BOUVARDIA_PETAL = registerItem("bouvardia_petal", new Item(new FabricItemSettings()));
     public static final Item BRUNIA_PETAL = registerItem("brunia_petal", new Item(new FabricItemSettings()));
     public static final Item GERBERA_PETAL = registerItem("gerbera_petal", new Item(new FabricItemSettings()));
