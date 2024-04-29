@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.item.GardenBotanicalItems;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.Items;
@@ -27,7 +28,6 @@ public class GardenBotanicalRecipeProvider extends FabricRecipeProvider {
                 .input('#', Items.IRON_INGOT)
                 .input('X', Items.LEATHER)
                 .criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT))
-                .criterion(hasItem(Items.LEATHER), conditionsFromItem(Items.LEATHER))
                 .offerTo(exporter, new Identifier(getRecipeName(GardenBotanicalItems.GARDEN_PRUNER)));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, GardenBotanicalBlocks.PREPARATION_TABLE, 1)
@@ -36,9 +36,26 @@ public class GardenBotanicalRecipeProvider extends FabricRecipeProvider {
                 .input('#', ItemTags.WOODEN_SLABS)
                 .input('X', GardenBotanicalItems.GARDEN_PRUNER)
                 .input('L', Items.STICK)
-                .criterion("has_wooden_slabs", conditionsFromTag(ItemTags.WOODEN_SLABS))
                 .criterion(hasItem(GardenBotanicalItems.GARDEN_PRUNER), conditionsFromItem(GardenBotanicalItems.GARDEN_PRUNER))
-                .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
                 .offerTo(exporter, new Identifier(getRecipeName(GardenBotanicalBlocks.PREPARATION_TABLE)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, GardenBotanicalBlocks.POUNDING_TABLE, 1)
+                .pattern("XXX")
+                .pattern(" X ")
+                .pattern("LLL")
+                .input('X', Blocks.SMOOTH_STONE)
+                .input('L', Blocks.SMOOTH_STONE_SLAB)
+                .criterion(hasItem(Blocks.SMOOTH_STONE), conditionsFromItem(Blocks.SMOOTH_STONE))
+                .offerTo(exporter, new Identifier(getRecipeName(GardenBotanicalBlocks.POUNDING_TABLE)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, GardenBotanicalBlocks.DYE_MIXER, 1)
+                .pattern("#L#")
+                .pattern("X X")
+                .pattern(" X ")
+                .input('#', Items.IRON_INGOT)
+                .input('X', ItemTags.WOODEN_SLABS)
+                .input('L', Items.STICK)
+                .criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT))
+                .offerTo(exporter, new Identifier(getRecipeName(GardenBotanicalBlocks.DYE_MIXER)));
     }
 }

@@ -13,7 +13,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -147,35 +146,32 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
         }
 
         updateClientData();
-        if (this.isFuelSlotFlint(INPUT_SLOT_FLINT) && fuel <= 0) {
-            this.decreaseStackFuel(INPUT_SLOT_FLINT);
+        if (isFuelSlotFlint(INPUT_SLOT_FLINT) && fuel <= 0) {
+            decreaseStackFuel(INPUT_SLOT_FLINT);
             markDirty(world, pos, state);
         }
 
-        if (this.isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_POWDER) && fuel > 0) {
-            if (this.hasRecipe()) {
-                this.increaseCraftProgress();
+        if (isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_POWDER) && fuel > 0) {
+            if (hasRecipe()) {
+                progress++;
                 markDirty(world, pos, state);
 
-                if (this.hasCraftingFinished()) {
-                    this.decreaseFuel();
-                    this.craftItem();
-                    this.resetProgress();
+                if (progress >= maxProgress) {
+                    craftItem();
+                    resetProgress();
                 }
             } else {
-                this.resetProgress();
+                resetProgress();
             }
         } else {
-            this.resetProgress();
+            resetProgress();
             markDirty(world, pos, state);
         }
-    }
-
-    private void resetProgress() {
-        this.progress = 0;
     }
 
     private void craftItem() {
+        fuel--;
+
         Optional<PoundingTableRecipe> recipe = getCurrentRecipe();
 
         this.removeStack(INPUT_SLOT_PETAL, 1);
@@ -187,29 +183,15 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
         this.setStack(slot, new ItemStack(result.getItem(), getStack(slot).getCount() + result.getCount()));
     }
 
-    private boolean hasCraftingFinished() {
-        return progress >= maxProgress;
-    }
-
     private void decreaseStackFuel(int slot) {
         fuel = 5;
         inventory.get(slot).decrement(1);
     }
 
-    private void decreaseFuel() {
-        fuel--;
-    }
-
-    private void increaseCraftProgress() {
-        progress++;
-    }
-
     private boolean hasRecipe() {
         Optional<PoundingTableRecipe> recipe = getCurrentRecipe();
 
-        return recipe.isPresent()
-                && canInsertAmountIntoOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_POWDER)
-                && canInsertItemIntoOutputSlot(recipe.get().getOutput(null).getItem(), OUTPUT_SLOT_POWDER);
+        return recipe.isPresent() && canInsertItemIntoOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_POWDER);
     }
 
     private Optional<PoundingTableRecipe> getCurrentRecipe() {
@@ -221,12 +203,9 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
         return getWorld().getRecipeManager().getFirstMatch(PoundingTableRecipe.Type.INSTANCE, inv, getWorld());
     }
 
-    private boolean canInsertItemIntoOutputSlot(Item item, int slot) {
-        return this.getStack(slot).getItem() == item || this.getStack(slot).isEmpty();
-    }
-
-    private boolean canInsertAmountIntoOutputSlot(ItemStack result, int slot) {
-        return this.getStack(slot).getCount() + result.getCount() <= getStack(slot).getMaxCount();
+    private boolean canInsertItemIntoOutputSlot(ItemStack itemStack, int slot) {
+        return (this.getStack(slot).getItem() == itemStack.getItem() || this.getStack(slot).isEmpty())
+                && (this.getStack(slot).getCount() + itemStack.getCount() <= getStack(slot).getMaxCount());
     }
 
     private boolean isFuelSlotFlint(int slot) {
@@ -235,5 +214,9 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
 
     private boolean isOutputSlotEmptyOrReceivable(int slot) {
         return this.getStack(slot).isEmpty() || this.getStack(slot).getCount() < this.getStack(slot).getMaxCount();
+    }
+
+    private void resetProgress() {
+        this.progress = 0;
     }
 }

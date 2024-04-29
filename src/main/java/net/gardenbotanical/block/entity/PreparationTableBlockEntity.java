@@ -10,7 +10,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
@@ -109,26 +108,22 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
             return;
         }
 
-        if (this.isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_PETAL) && this.isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_SEEDS)) {
-            if (this.hasRecipe()) {
-                this.increaseCraftProgress();
+        if (isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_PETAL) && isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_SEEDS)) {
+            if (hasRecipe()) {
+                progress++;
                 markDirty(world, pos, state);
 
-                if (this.hasCraftingFinished()) {
-                    this.craftItem();
-                    this.resetProgress();
+                if (progress >= maxProgress) {
+                    craftItem();
+                    resetProgress();
                 }
             } else {
-                this.resetProgress();
+                resetProgress();
             }
         } else {
-            this.resetProgress();
+            resetProgress();
             markDirty(world, pos, state);
         }
-    }
-
-    private void resetProgress() {
-        this.progress = 0;
     }
 
     private void craftItem() {
@@ -144,22 +139,12 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
         this.setStack(slot, new ItemStack(result.getItem(), getStack(slot).getCount() + result.getCount()));
     }
 
-    private boolean hasCraftingFinished() {
-        return progress >= maxProgress;
-    }
-
-    private void increaseCraftProgress() {
-        progress++;
-    }
-
     private boolean hasRecipe() {
         Optional<PreparationTableRecipe> recipe = getCurrentRecipe();
 
         return recipe.isPresent()
-                && canInsertAmountIntoOutputSlot(recipe.get().getOutputPetals(null), OUTPUT_SLOT_PETAL)
-                && canInsertItemIntoOutputSlot(recipe.get().getOutputPetals(null).getItem(), OUTPUT_SLOT_PETAL)
-                && canInsertAmountIntoOutputSlot(recipe.get().getOutputSeeds(null), OUTPUT_SLOT_SEEDS)
-                && canInsertItemIntoOutputSlot(recipe.get().getOutputSeeds(null).getItem(), OUTPUT_SLOT_SEEDS);
+                && canInsertItemIntoOutputSlot(recipe.get().getOutputPetals(null), OUTPUT_SLOT_PETAL)
+                && canInsertItemIntoOutputSlot(recipe.get().getOutputSeeds(null), OUTPUT_SLOT_SEEDS);
     }
 
     private Optional<PreparationTableRecipe> getCurrentRecipe() {
@@ -171,15 +156,16 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
         return getWorld().getRecipeManager().getFirstMatch(PreparationTableRecipe.Type.INSTANCE, inv, getWorld());
     }
 
-    private boolean canInsertItemIntoOutputSlot(Item item, int slot) {
-        return this.getStack(slot).getItem() == item || this.getStack(slot).isEmpty();
-    }
-
-    private boolean canInsertAmountIntoOutputSlot(ItemStack result, int slot) {
-        return this.getStack(slot).getCount() + result.getCount() <= getStack(slot).getMaxCount();
+    private boolean canInsertItemIntoOutputSlot(ItemStack itemStack, int slot) {
+        return (this.getStack(slot).getItem() == itemStack.getItem() || this.getStack(slot).isEmpty())
+                && (this.getStack(slot).getCount() + itemStack.getCount() <= getStack(slot).getMaxCount());
     }
 
     private boolean isOutputSlotEmptyOrReceivable(int slot) {
         return this.getStack(slot).isEmpty() || this.getStack(slot).getCount() < this.getStack(slot).getMaxCount();
+    }
+
+    private void resetProgress() {
+        this.progress = 0;
     }
 }

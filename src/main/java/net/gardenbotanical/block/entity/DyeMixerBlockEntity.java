@@ -1,17 +1,22 @@
 package net.gardenbotanical.block.entity;
 
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.gardenbotanical.block.DyeMixerBlock;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.item.GardenBotanicalItems;
+import net.gardenbotanical.network.GardenBotanicalNetwork;
 import net.gardenbotanical.recipe.DyeMixerRecipe;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -34,7 +39,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
-    private int maxProgress = 72;
+    private int maxProgress = 100;
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     public DyeMixerBlockEntity(BlockPos pos, BlockState state) {
@@ -150,13 +155,16 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     }
 
     private void updateClientData() {
-        /*PacketByteBuf data = PacketByteBufs.create();
-        data.writeInt(water);
+        PacketByteBuf data = PacketByteBufs.create();
+        data.writeInt(inventory.size());
+        for (ItemStack itemStack : inventory) {
+            data.writeItemStack(itemStack);
+        }
         data.writeBlockPos(getPos());
 
         for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
             GardenBotanicalNetwork.WATER_LEVEL_SYNC_PACKET.send(player, data);
-        }*/
+        }
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
@@ -167,24 +175,26 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         updateClientData();
         if (waterIsFull()) {
             if (hasRecipe()) {
+                setProcessState(world, pos, state, true);
                 progress++;
                 markDirty(world, pos, state);
 
                 if (progress >= maxProgress) {
-                    inventory.set(SLOT_WATER, ItemStack.EMPTY);
                     craftItem();
-                    resetProgress();
+                    resetProgress(state);
                 }
             } else {
-                resetProgress();
+                resetProgress(state);
             }
         } else {
-            resetProgress();
+            resetProgress(state);
             markDirty(world, pos, state);
         }
     }
 
     private void craftItem() {
+        inventory.set(SLOT_WATER, ItemStack.EMPTY);
+
         Optional<DyeMixerRecipe> recipe = getCurrentRecipe();
 
         this.removeStack(INPUT_SLOT_POWDER, 1);
@@ -199,9 +209,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     private boolean hasRecipe() {
         Optional<DyeMixerRecipe> recipe = getCurrentRecipe();
 
-        return recipe.isPresent()
-                && canInsertAmountIntoOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_DYE)
-                && canInsertItemIntoOutputSlot(recipe.get().getOutput(null).getItem(), OUTPUT_SLOT_DYE);
+        return recipe.isPresent() && canInsertItemIntoOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_DYE);
     }
 
     private Optional<DyeMixerRecipe> getCurrentRecipe() {
@@ -213,15 +221,17 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         return getWorld().getRecipeManager().getFirstMatch(DyeMixerRecipe.Type.INSTANCE, inv, getWorld());
     }
 
-    private boolean canInsertItemIntoOutputSlot(Item item, int slot) {
-        return this.getStack(slot).getItem() == item || this.getStack(slot).isEmpty();
+    private boolean canInsertItemIntoOutputSlot(ItemStack itemStack, int slot) {
+        return (this.getStack(slot).getItem() == itemStack.getItem() || this.getStack(slot).isEmpty())
+                && (this.getStack(slot).getCount() + itemStack.getCount() <= getStack(slot).getMaxCount());
     }
 
-    private boolean canInsertAmountIntoOutputSlot(ItemStack result, int slot) {
-        return this.getStack(slot).getCount() + result.getCount() <= getStack(slot).getMaxCount();
+    private void setProcessState(World world, BlockPos pos, BlockState state, boolean value) {
+        world.setBlockState(pos, state.with(DyeMixerBlock.PROCESS, value));
     }
 
-    private void resetProgress() {
+    private void resetProgress(BlockState state) {
+        setProcessState(world, pos, state, false);
         this.progress = 0;
     }
 }

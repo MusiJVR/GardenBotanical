@@ -93,18 +93,20 @@ public class DyeMixerBlock extends BlockWithEntity implements BlockEntityProvide
                 itemEntity.setToDefaultPickupDelay();
                 world.spawnEntity(itemEntity);
                 entity.clearOutputSlot();
+                world.playSound(null, pos, SoundEvents.BLOCK_BEEHIVE_EXIT, SoundCategory.BLOCKS, 1f, 1f);
             } else if (entity.waterIsFull()) {
                 if (entity.inputSlotIsEmpty()) {
                     if (itemStack.getItem() == GardenBotanicalItems.POWDERED_BOUVARDIA) {
                         entity.getItems().set(0, new ItemStack(itemStack.getItem(), 1));
-                        player.setStackInHand(hand, new ItemStack(itemStack.getItem(), itemStack.getCount() - 1));
+                        itemStack.decrement(1);
+                        world.playSound(null, pos, SoundEvents.ITEM_BONE_MEAL_USE, SoundCategory.BLOCKS, 1f, 1f);
                     }
                 }
             } else if (!entity.waterIsFull()) {
                 if (itemStack.getItem() == Items.WATER_BUCKET) {
                     entity.fillWaterSlot();
                     player.setStackInHand(hand, Items.BUCKET.getDefaultStack());
-                    world.playSound(null, pos, SoundEvents.AMBIENT_UNDERWATER_ENTER, SoundCategory.AMBIENT, 1f, 1f);
+                    world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1f, 1f);
                 }
             }
         }
