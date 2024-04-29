@@ -42,6 +42,6 @@ public class GardenBotanicalClient implements ClientModInitializer {
         BlockEntityRendererFactories.register(GardenBotanicalBlockEntities.POUNDING_TABLE_BLOCK_ENTITY, PoundingTableBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(GardenBotanicalBlockEntities.DYE_MIXER_BLOCK_ENTITY, DyeMixerBlockEntityRenderer::new);
 
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> 0x45adf2, GardenBotanicalItems.WATER_DYE_MIXER);
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> 0x3F76E4, GardenBotanicalItems.WATER_DYE_MIXER);
     }
 }

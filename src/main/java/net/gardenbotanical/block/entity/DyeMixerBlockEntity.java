@@ -35,7 +35,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
     private int maxProgress = 72;
-    private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     public DyeMixerBlockEntity(BlockPos pos, BlockState state) {
         super(GardenBotanicalBlockEntities.DYE_MIXER_BLOCK_ENTITY, pos, state);
@@ -149,11 +149,22 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         progress = nbt.getInt("dye_mixer.progress");
     }
 
+    private void updateClientData() {
+        /*PacketByteBuf data = PacketByteBufs.create();
+        data.writeInt(water);
+        data.writeBlockPos(getPos());
+
+        for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
+            GardenBotanicalNetwork.WATER_LEVEL_SYNC_PACKET.send(player, data);
+        }*/
+    }
+
     public void tick(World world, BlockPos pos, BlockState state) {
         if (world.isClient()) {
             return;
         }
 
+        updateClientData();
         if (waterIsFull()) {
             if (hasRecipe()) {
                 progress++;

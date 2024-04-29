@@ -86,22 +86,17 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
         }
     }
 
-    @Override
-    public void markDirty() {
-        if (!world.isClient()) {
-            PacketByteBuf data = PacketByteBufs.create();
-            data.writeInt(inventory.size());
-            for (int i = 0; i < inventory.size(); i++) {
-                data.writeItemStack(inventory.get(i));
-            }
-            data.writeBlockPos(getPos());
-
-            for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
-                GardenBotanicalNetwork.ITEM_SYNC_PACKET.send(player, data);
-            }
+    public void updateClientData() {
+        PacketByteBuf data = PacketByteBufs.create();
+        data.writeInt(inventory.size());
+        for (ItemStack itemStack : inventory) {
+            data.writeItemStack(itemStack);
         }
+        data.writeBlockPos(getPos());
 
-        super.markDirty();
+        for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
+            GardenBotanicalNetwork.ITEM_SYNC_PACKET.send(player, data);
+        }
     }
 
     @Override
@@ -151,6 +146,7 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
             return;
         }
 
+        updateClientData();
         if (this.isFuelSlotFlint(INPUT_SLOT_FLINT) && fuel <= 0) {
             this.decreaseStackFuel(INPUT_SLOT_FLINT);
             markDirty(world, pos, state);
