@@ -1,7 +1,6 @@
 package net.gardenbotanical.block.entity.client;
 
 import net.gardenbotanical.block.entity.DyeMixerBlockEntity;
-import net.gardenbotanical.item.GardenBotanicalItems;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
@@ -17,16 +16,16 @@ import net.minecraft.world.World;
 import software.bernie.geckolib.renderer.GeoBlockRenderer;
 
 
-public class DyeMixerBlockRenderer extends GeoBlockRenderer<DyeMixerBlockEntity> {
-    public DyeMixerBlockRenderer(BlockEntityRendererFactory.Context context) {
-        super(new DyeMixerBlockModel());
+public class DyeMixerBlockEntityRenderer extends GeoBlockRenderer<DyeMixerBlockEntity> {
+    public DyeMixerBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
+        super(new DyeMixerBlockEntityModel());
     }
 
     @Override
     public void defaultRender(MatrixStack poseStack, DyeMixerBlockEntity animatable, VertexConsumerProvider bufferSource, RenderLayer renderType, VertexConsumer buffer, float yaw, float partialTick, int packedLight) {
         ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
 
-        ItemStack itemStack = animatable.waterIsEmpty();
+        ItemStack itemStack = animatable.getWaterSlot();
 
         poseStack.push();
 

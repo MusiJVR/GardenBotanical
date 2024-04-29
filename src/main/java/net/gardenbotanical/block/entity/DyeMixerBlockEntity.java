@@ -1,11 +1,9 @@
 package net.gardenbotanical.block.entity;
 
-import net.gardenbotanical.GardenBotanical;
 import net.gardenbotanical.block.DyeMixerBlock;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.item.GardenBotanicalItems;
 import net.gardenbotanical.recipe.DyeMixerRecipe;
-import net.gardenbotanical.recipe.PoundingTableRecipe;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.Inventories;
@@ -28,15 +26,15 @@ import java.util.Optional;
 
 
 public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, ImplementedInventory {
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
 
     private static final int INPUT_SLOT_POWDER = 0;
     private static final int OUTPUT_SLOT_DYE = 1;
+    private static final int SLOT_WATER = 2;
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
     private int maxProgress = 72;
-    private int water = 0;
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     public DyeMixerBlockEntity(BlockPos pos, BlockState state) {
@@ -47,7 +45,6 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
                 return switch (index) {
                     case 0 -> DyeMixerBlockEntity.this.progress;
                     case 1 -> DyeMixerBlockEntity.this.maxProgress;
-                    case 2 -> DyeMixerBlockEntity.this.water;
                     default -> 0;
                 };
             }
@@ -57,35 +54,44 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
                 switch (index) {
                     case 0 -> DyeMixerBlockEntity.this.progress = value;
                     case 1 -> DyeMixerBlockEntity.this.maxProgress = value;
-                    case 2 -> DyeMixerBlockEntity.this.water = value;
                 }
             }
 
             @Override
             public int size() {
-                return 3;
+                return 2;
             }
         };
     }
 
-    public ItemStack waterIsEmpty() {
-        if (water == 1) {
-            return new ItemStack(GardenBotanicalItems.WATER_DYE_MIXER);
-        } else {
+    public ItemStack getWaterSlot() {
+        if (this.getStack(SLOT_WATER).isEmpty()) {
             return ItemStack.EMPTY;
+        } else {
+            return this.getStack(SLOT_WATER);
         }
     }
 
-    public boolean getWaterLevel() {
-        return water == 1;
+    public void setInventory(DefaultedList<ItemStack> inventory) {
+        for (int i = 0; i < inventory.size(); i++) {
+            this.inventory.set(i, inventory.get(i));
+        }
     }
 
-    public void incrementWaterLevel() {
-        water = 1;
+    public boolean waterIsFull() {
+        return !this.getStack(SLOT_WATER).isEmpty();
+    }
+
+    public void fillWaterSlot() {
+        inventory.set(SLOT_WATER, new ItemStack(GardenBotanicalItems.WATER_DYE_MIXER, 1));
     }
 
     public ItemStack getOutputSlotDye() {
         return inventory.get(OUTPUT_SLOT_DYE);
+    }
+
+    public void clearOutputSlot() {
+        inventory.set(OUTPUT_SLOT_DYE, ItemStack.EMPTY);
     }
 
     public boolean inputSlotIsEmpty() {
@@ -134,7 +140,6 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
         nbt.putInt("dye_mixer.progress", progress);
-        nbt.putInt("dye_mixer.water", water);
     }
 
     @Override
@@ -142,7 +147,6 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         super.readNbt(nbt);
         Inventories.readNbt(nbt, inventory);
         progress = nbt.getInt("dye_mixer.progress");
-        water = nbt.getInt("dye_mixer.water");
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
@@ -150,35 +154,23 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
             return;
         }
 
-        if (water == 1) {
-            if (this.hasRecipe()) {
-                this.increaseCraftProgress();
+        if (waterIsFull()) {
+            if (hasRecipe()) {
+                progress++;
                 markDirty(world, pos, state);
 
-                if (this.hasCraftingFinished()) {
-                    this.decreaseWater();
-                    this.craftItem();
-                    this.resetProgress();
+                if (progress >= maxProgress) {
+                    inventory.set(SLOT_WATER, ItemStack.EMPTY);
+                    craftItem();
+                    resetProgress();
                 }
             } else {
-                this.resetProgress();
+                resetProgress();
             }
         } else {
-            this.resetProgress();
+            resetProgress();
             markDirty(world, pos, state);
         }
-    }
-
-    private void increaseCraftProgress() {
-        progress++;
-    }
-
-    private boolean hasCraftingFinished() {
-        return progress >= maxProgress;
-    }
-
-    private void decreaseWater() {
-        water = 0;
     }
 
     private void craftItem() {

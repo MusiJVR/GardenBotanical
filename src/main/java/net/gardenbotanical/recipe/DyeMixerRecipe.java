@@ -29,7 +29,7 @@ public class DyeMixerRecipe implements Recipe<SimpleInventory> {
             return false;
         }
 
-        return ingredient.test(inventory.getStack(1));
+        return ingredient.test(inventory.getStack(0));
     }
 
     @Override

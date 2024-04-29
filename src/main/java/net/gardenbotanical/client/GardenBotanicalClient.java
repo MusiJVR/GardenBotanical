@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.gardenbotanical.GardenBotanical;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.block.entity.GardenBotanicalBlockEntities;
-import net.gardenbotanical.block.entity.client.DyeMixerBlockRenderer;
+import net.gardenbotanical.block.entity.client.DyeMixerBlockEntityRenderer;
 import net.gardenbotanical.block.entity.client.PoundingTableBlockEntityRenderer;
 import net.gardenbotanical.item.GardenBotanicalItems;
 import net.gardenbotanical.network.GardenBotanicalNetwork;
@@ -40,8 +40,8 @@ public class GardenBotanicalClient implements ClientModInitializer {
         HandledScreens.register(GardenBotanicalScreenHandlers.POUNDING_TABLE_SCREEN_HANDLER, PoundingTableScreen::new);
 
         BlockEntityRendererFactories.register(GardenBotanicalBlockEntities.POUNDING_TABLE_BLOCK_ENTITY, PoundingTableBlockEntityRenderer::new);
-        BlockEntityRendererFactories.register(GardenBotanicalBlockEntities.DYE_MIXER_BLOCK_ENTITY, DyeMixerBlockRenderer::new);
+        BlockEntityRendererFactories.register(GardenBotanicalBlockEntities.DYE_MIXER_BLOCK_ENTITY, DyeMixerBlockEntityRenderer::new);
 
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> 0x0000ff, GardenBotanicalItems.WATER_DYE_MIXER);
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> 0x45adf2, GardenBotanicalItems.WATER_DYE_MIXER);
     }
 }

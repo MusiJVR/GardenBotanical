@@ -6,7 +6,7 @@ import net.minecraft.util.Identifier;
 import software.bernie.geckolib.model.GeoModel;
 
 
-public class DyeMixerBlockModel extends GeoModel<DyeMixerBlockEntity> {
+public class DyeMixerBlockEntityModel extends GeoModel<DyeMixerBlockEntity> {
     @Override
     public Identifier getModelResource(DyeMixerBlockEntity animatable) {
         return new Identifier(GardenBotanical.MOD_ID, "geo/dye_mixer_geo.json");

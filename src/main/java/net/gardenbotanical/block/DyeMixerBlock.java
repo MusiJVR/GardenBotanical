@@ -30,7 +30,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 
-public class DyeMixerBlock extends BlockWithEntity {
+public class DyeMixerBlock extends BlockWithEntity implements BlockEntityProvider {
     private static final VoxelShape NORTH_SHAPE = VoxelShapes.union(Block.createCuboidShape(4, 0, 3, 13, 15, 12));
     private static final VoxelShape SOUTH_SHAPE = VoxelShapes.union(Block.createCuboidShape(3, 0, 4, 12, 15, 13));
     private static final VoxelShape WEST_SHAPE = VoxelShapes.union(Block.createCuboidShape(3, 0, 3, 12, 15, 12));
@@ -71,6 +71,17 @@ public class DyeMixerBlock extends BlockWithEntity {
     }
 
     @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new DyeMixerBlockEntity(pos, state);
+    }
+
+    @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient()) {
             DyeMixerBlockEntity entity = (DyeMixerBlockEntity) world.getBlockEntity(pos);
@@ -81,16 +92,17 @@ public class DyeMixerBlock extends BlockWithEntity {
                 ItemEntity itemEntity = new ItemEntity(world, vec3d.getX(), vec3d.getY(), vec3d.getZ(), entity.getOutputSlotDye());
                 itemEntity.setToDefaultPickupDelay();
                 world.spawnEntity(itemEntity);
-            } else if (entity.getWaterLevel()) {
+                entity.clearOutputSlot();
+            } else if (entity.waterIsFull()) {
                 if (entity.inputSlotIsEmpty()) {
                     if (itemStack.getItem() == GardenBotanicalItems.POWDERED_BOUVARDIA) {
                         entity.getItems().set(0, new ItemStack(itemStack.getItem(), 1));
                         player.setStackInHand(hand, new ItemStack(itemStack.getItem(), itemStack.getCount() - 1));
                     }
                 }
-            } else if (!entity.getWaterLevel()) {
+            } else if (!entity.waterIsFull()) {
                 if (itemStack.getItem() == Items.WATER_BUCKET) {
-                    entity.incrementWaterLevel();
+                    entity.fillWaterSlot();
                     player.setStackInHand(hand, Items.BUCKET.getDefaultStack());
                     world.playSound(null, pos, SoundEvents.AMBIENT_UNDERWATER_ENTER, SoundCategory.AMBIENT, 1f, 1f);
                 }
@@ -104,16 +116,5 @@ public class DyeMixerBlock extends BlockWithEntity {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return checkType(type, GardenBotanicalBlockEntities.DYE_MIXER_BLOCK_ENTITY, (world1, pos, state1, blockEnity) -> blockEnity.tick(world1, pos, state1));
-    }
-
-    @Nullable
-    @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new DyeMixerBlockEntity(pos, state);
-    }
-
-    @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
     }
 }
