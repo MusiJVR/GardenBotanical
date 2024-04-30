@@ -6,7 +6,7 @@
   "output": {
     "dye": {
       "count": 1,
-      "item": "minecraft:red_dye"
+      "item": "gardenbotanical:dye"
     }
   }
 }

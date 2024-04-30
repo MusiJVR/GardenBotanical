@@ -23,6 +23,8 @@ public class GardenBotanicalItemGroup {
 
                         entries.add(GardenBotanicalItems.GARDEN_PRUNER);
 
+                        entries.add(GardenBotanicalItems.DYE);
+
                         entries.add(GardenBotanicalBlocks.BOUVARDIA);
                         entries.add(GardenBotanicalBlocks.BRUNIA);
                         entries.add(GardenBotanicalBlocks.GERBERA);

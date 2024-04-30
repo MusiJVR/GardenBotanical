@@ -94,17 +94,21 @@ public class DyeMixerBlock extends BlockWithEntity implements BlockEntityProvide
                 world.spawnEntity(itemEntity);
                 entity.clearOutputSlot();
                 world.playSound(null, pos, SoundEvents.BLOCK_BEEHIVE_EXIT, SoundCategory.BLOCKS, 1f, 1f);
-            } else if (entity.waterIsFull()) {
+            } else if (entity.fluidStorageIsFull()) {
                 if (entity.inputSlotIsEmpty()) {
-                    if (itemStack.getItem() == GardenBotanicalItems.POWDERED_BOUVARDIA) {
+                    if (itemStack.getItem() == Items.BUCKET) {
+                        entity.extractFluidStorage();
+                        player.setStackInHand(hand, Items.WATER_BUCKET.getDefaultStack());
+                        world.playSound(null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1f, 1f);
+                    } else if (itemStack.getItem() == GardenBotanicalItems.POWDERED_BOUVARDIA) {
                         entity.getItems().set(0, new ItemStack(itemStack.getItem(), 1));
                         itemStack.decrement(1);
                         world.playSound(null, pos, SoundEvents.ITEM_BONE_MEAL_USE, SoundCategory.BLOCKS, 1f, 1f);
                     }
                 }
-            } else if (!entity.waterIsFull()) {
+            } else if (!entity.fluidStorageIsFull()) {
                 if (itemStack.getItem() == Items.WATER_BUCKET) {
-                    entity.fillWaterSlot();
+                    entity.fillFluidStorage();
                     player.setStackInHand(hand, Items.BUCKET.getDefaultStack());
                     world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1f, 1f);
                 }

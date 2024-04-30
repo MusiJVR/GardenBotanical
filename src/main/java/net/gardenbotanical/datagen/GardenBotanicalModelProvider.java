@@ -25,6 +25,12 @@ public class GardenBotanicalModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+        itemModelGenerator.register(GardenBotanicalItems.GARDEN_PRUNER, Models.GENERATED);
+
+        itemModelGenerator.register(GardenBotanicalItems.WATER_DYE_MIXER, Models.GENERATED);
+
+        itemModelGenerator.register(GardenBotanicalItems.DYE, Models.GENERATED);
+
         itemModelGenerator.register(GardenBotanicalItems.BOUVARDIA_PETAL, Models.GENERATED);
         itemModelGenerator.register(GardenBotanicalItems.HERBAL_PEONY_PETAL, Models.GENERATED);
         itemModelGenerator.register(GardenBotanicalItems.BRUNIA_PETAL, Models.GENERATED);
@@ -42,9 +48,5 @@ public class GardenBotanicalModelProvider extends FabricModelProvider {
         itemModelGenerator.register(GardenBotanicalItems.GERBERA_SEEDS, Models.GENERATED);
         itemModelGenerator.register(GardenBotanicalItems.HERBAL_PEONY_SEEDS, Models.GENERATED);
         itemModelGenerator.register(GardenBotanicalItems.VERONICA_SEEDS, Models.GENERATED);
-
-        itemModelGenerator.register(GardenBotanicalItems.GARDEN_PRUNER, Models.GENERATED);
-
-        itemModelGenerator.register(GardenBotanicalItems.WATER_DYE_MIXER, Models.GENERATED);
     }
 }

@@ -2,13 +2,19 @@ package net.gardenbotanical.block.entity;
 
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.gardenbotanical.block.DyeMixerBlock;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.item.GardenBotanicalItems;
 import net.gardenbotanical.network.GardenBotanicalNetwork;
 import net.gardenbotanical.recipe.DyeMixerRecipe;
+import net.gardenbotanical.util.FluidStack;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -31,11 +37,27 @@ import java.util.Optional;
 
 
 public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, ImplementedInventory {
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
+
+    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<FluidVariant>() {
+        @Override
+        protected FluidVariant getBlankVariant() {
+            return FluidVariant.blank();
+        }
+
+        @Override
+        protected long getCapacity(FluidVariant variant) {
+            return FluidStack.convertDropletsToMb(FluidConstants.BUCKET);
+        }
+
+        @Override
+        protected void onFinalCommit() {
+            markDirty();
+        }
+    };
 
     private static final int INPUT_SLOT_POWDER = 0;
     private static final int OUTPUT_SLOT_DYE = 1;
-    private static final int SLOT_WATER = 2;
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
@@ -69,11 +91,16 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         };
     }
 
-    public ItemStack getWaterSlot() {
-        if (this.getStack(SLOT_WATER).isEmpty()) {
-            return ItemStack.EMPTY;
+    public void setFluidLevel(FluidVariant fluidVariant, long fluidLevel) {
+        this.fluidStorage.variant = fluidVariant;
+        this.fluidStorage.amount = fluidLevel;
+    }
+
+    public ItemStack getWater() {
+        if (fluidStorageIsFull()) {
+            return new ItemStack(GardenBotanicalItems.WATER_DYE_MIXER);
         } else {
-            return this.getStack(SLOT_WATER);
+            return ItemStack.EMPTY;
         }
     }
 
@@ -83,12 +110,22 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         }
     }
 
-    public boolean waterIsFull() {
-        return !this.getStack(SLOT_WATER).isEmpty();
+    public boolean fluidStorageIsFull() {
+        return fluidStorage.amount == 1000;
     }
 
-    public void fillWaterSlot() {
-        inventory.set(SLOT_WATER, new ItemStack(GardenBotanicalItems.WATER_DYE_MIXER, 1));
+    public void fillFluidStorage() {
+        try(Transaction transaction = Transaction.openOuter()) {
+            fluidStorage.insert(FluidVariant.of(Fluids.WATER), FluidStack.convertDropletsToMb(FluidConstants.BUCKET), transaction);
+            transaction.commit();
+        }
+    }
+
+    public void extractFluidStorage() {
+        try(Transaction transaction = Transaction.openOuter()) {
+            fluidStorage.extract(FluidVariant.of(Fluids.WATER), FluidStack.convertDropletsToMb(FluidConstants.BUCKET), transaction);
+            transaction.commit();
+        }
     }
 
     public ItemStack getOutputSlotDye() {
@@ -145,6 +182,8 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
         nbt.putInt("dye_mixer.progress", progress);
+        nbt.put("dye_mixer.variant", fluidStorage.variant.toNbt());
+        nbt.putLong("dye_mixer.fluid", fluidStorage.amount);
     }
 
     @Override
@@ -152,18 +191,18 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         super.readNbt(nbt);
         Inventories.readNbt(nbt, inventory);
         progress = nbt.getInt("dye_mixer.progress");
+        fluidStorage.variant = FluidVariant.fromNbt((NbtCompound) nbt.get("dye_mixer.variant"));
+        fluidStorage.amount = nbt.getLong("dye_mixer.fluid");
     }
 
     private void updateClientData() {
         PacketByteBuf data = PacketByteBufs.create();
-        data.writeInt(inventory.size());
-        for (ItemStack itemStack : inventory) {
-            data.writeItemStack(itemStack);
-        }
+        fluidStorage.variant.toPacket(data);
+        data.writeLong(fluidStorage.amount);
         data.writeBlockPos(getPos());
 
         for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
-            GardenBotanicalNetwork.WATER_LEVEL_SYNC_PACKET.send(player, data);
+            GardenBotanicalNetwork.FLUID_SYNC_PACKET.send(player, data);
         }
     }
 
@@ -173,13 +212,14 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         }
 
         updateClientData();
-        if (waterIsFull()) {
+        if (fluidStorageIsFull()) {
             if (hasRecipe()) {
                 setProcessState(world, pos, state, true);
                 progress++;
                 markDirty(world, pos, state);
 
                 if (progress >= maxProgress) {
+                    extractFluidStorage();
                     craftItem();
                     resetProgress(state);
                 }
@@ -193,8 +233,6 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     }
 
     private void craftItem() {
-        inventory.set(SLOT_WATER, ItemStack.EMPTY);
-
         Optional<DyeMixerRecipe> recipe = getCurrentRecipe();
 
         this.removeStack(INPUT_SLOT_POWDER, 1);

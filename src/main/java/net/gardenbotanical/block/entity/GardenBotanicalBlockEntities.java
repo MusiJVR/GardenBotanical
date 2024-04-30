@@ -1,6 +1,7 @@
 package net.gardenbotanical.block.entity;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.gardenbotanical.GardenBotanical;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.minecraft.block.entity.BlockEntityType;
@@ -27,5 +28,7 @@ public class GardenBotanicalBlockEntities {
 
     public static void register() {
         GardenBotanical.LOGGER.info("Registering block entities for: " + GardenBotanical.MOD_ID);
+
+        FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.fluidStorage, DYE_MIXER_BLOCK_ENTITY);
     }
 }
