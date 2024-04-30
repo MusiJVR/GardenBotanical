@@ -1,9 +1,8 @@
-package net.gardenbotanical.itemGroup;
+package net.gardenbotanical.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.gardenbotanical.GardenBotanical;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
-import net.gardenbotanical.item.GardenBotanicalItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -12,7 +11,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 
-public class GardenBotanicalItemGroup {
+public class GardenBotanicalItemGroups {
     public static final ItemGroup GARDENBOTANICAL_GROUP = Registry.register(Registries.ITEM_GROUP,
             new Identifier(GardenBotanical.MOD_ID, "gardenbotanical_group"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.gardenbotanical.gardenbotanical_group"))
@@ -22,8 +21,6 @@ public class GardenBotanicalItemGroup {
                         entries.add(GardenBotanicalItems.DYE_MIXER);
 
                         entries.add(GardenBotanicalItems.GARDEN_PRUNER);
-
-                        entries.add(GardenBotanicalItems.DYE);
 
                         entries.add(GardenBotanicalBlocks.BOUVARDIA);
                         entries.add(GardenBotanicalBlocks.BRUNIA);

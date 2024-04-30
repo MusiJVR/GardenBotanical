@@ -2,7 +2,7 @@ package net.gardenbotanical.block;
 
 import net.gardenbotanical.block.entity.DyeMixerBlockEntity;
 import net.gardenbotanical.block.entity.GardenBotanicalBlockEntities;
-import net.gardenbotanical.item.GardenBotanicalItems;
+import net.gardenbotanical.tags.GardenBotanicalTags;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -100,7 +100,7 @@ public class DyeMixerBlock extends BlockWithEntity implements BlockEntityProvide
                         entity.extractFluidStorage();
                         player.setStackInHand(hand, Items.WATER_BUCKET.getDefaultStack());
                         world.playSound(null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1f, 1f);
-                    } else if (itemStack.getItem() == GardenBotanicalItems.POWDERED_BOUVARDIA) {
+                    } else if (itemStack.isIn(GardenBotanicalTags.FLOWER_POWDERS)) {
                         entity.getItems().set(0, new ItemStack(itemStack.getItem(), 1));
                         itemStack.decrement(1);
                         world.playSound(null, pos, SoundEvents.ITEM_BONE_MEAL_USE, SoundCategory.BLOCKS, 1f, 1f);

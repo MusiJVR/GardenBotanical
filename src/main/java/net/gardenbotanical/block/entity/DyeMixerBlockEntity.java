@@ -39,7 +39,7 @@ import java.util.Optional;
 public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
 
-    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<FluidVariant>() {
+    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
         @Override
         protected FluidVariant getBlankVariant() {
             return FluidVariant.blank();
@@ -97,7 +97,12 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     }
 
     public ItemStack getWater() {
-        if (fluidStorageIsFull()) {
+        if (!outputSlotIsEmpty()) {
+            ItemStack itemStack = new ItemStack(GardenBotanicalItems.WATER_DYE_MIXER);
+            if (getOutputSlotDye().getNbt() != null)
+                itemStack.getOrCreateNbt().putInt("color", getOutputSlotDye().getNbt().getInt("color"));
+            return itemStack;
+        } else if (fluidStorageIsFull()) {
             return new ItemStack(GardenBotanicalItems.WATER_DYE_MIXER);
         } else {
             return ItemStack.EMPTY;
@@ -199,6 +204,10 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         PacketByteBuf data = PacketByteBufs.create();
         fluidStorage.variant.toPacket(data);
         data.writeLong(fluidStorage.amount);
+        data.writeInt(inventory.size());
+        for (ItemStack itemStack : inventory) {
+            data.writeItemStack(itemStack);
+        }
         data.writeBlockPos(getPos());
 
         for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
@@ -214,7 +223,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         updateClientData();
         if (fluidStorageIsFull()) {
             if (hasRecipe()) {
-                setProcessState(world, pos, state, true);
+                setProcessState(state, true);
                 progress++;
                 markDirty(world, pos, state);
 
@@ -241,7 +250,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     }
 
     private void putItemInOutputSlot(ItemStack result, int slot) {
-        this.setStack(slot, new ItemStack(result.getItem(), getStack(slot).getCount() + result.getCount()));
+        this.setStack(slot, result);
     }
 
     private boolean hasRecipe() {
@@ -264,12 +273,13 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
                 && (this.getStack(slot).getCount() + itemStack.getCount() <= getStack(slot).getMaxCount());
     }
 
-    private void setProcessState(World world, BlockPos pos, BlockState state, boolean value) {
-        world.setBlockState(pos, state.with(DyeMixerBlock.PROCESS, value));
+    private void setProcessState(BlockState state, boolean value) {
+        if (world != null)
+            world.setBlockState(pos, state.with(DyeMixerBlock.PROCESS, value));
     }
 
     private void resetProgress(BlockState state) {
-        setProcessState(world, pos, state, false);
+        setProcessState(state, false);
         this.progress = 0;
     }
 }

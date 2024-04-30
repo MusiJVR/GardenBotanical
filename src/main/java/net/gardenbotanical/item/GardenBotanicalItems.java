@@ -4,6 +4,9 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.gardenbotanical.GardenBotanical;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
+import net.gardenbotanical.item.custom.DyeItem;
+import net.gardenbotanical.item.custom.DyeMixerItem;
+import net.gardenbotanical.item.custom.GardenPrunerItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
@@ -19,7 +22,7 @@ public class GardenBotanicalItems {
 
     public static final Item WATER_DYE_MIXER = registerItem("water_dye_mixer", new Item(new FabricItemSettings()));
 
-    public static final Item DYE = registerItem("dye", new Item(new FabricItemSettings()));
+    public static final Item DYE = registerItem("dye", new DyeItem(new FabricItemSettings()));
 
     public static final Item BOUVARDIA_PETAL = registerItem("bouvardia_petal", new Item(new FabricItemSettings()));
     public static final Item BRUNIA_PETAL = registerItem("brunia_petal", new Item(new FabricItemSettings()));

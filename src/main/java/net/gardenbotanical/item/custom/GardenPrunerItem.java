@@ -1,4 +1,4 @@
-package net.gardenbotanical.item;
+package net.gardenbotanical.item.custom;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EquipmentSlot;

@@ -16,6 +16,7 @@ import net.gardenbotanical.screen.PreparationTableScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.nbt.NbtCompound;
 
 
 public class GardenBotanicalClient implements ClientModInitializer {
@@ -42,6 +43,18 @@ public class GardenBotanicalClient implements ClientModInitializer {
         BlockEntityRendererFactories.register(GardenBotanicalBlockEntities.POUNDING_TABLE_BLOCK_ENTITY, PoundingTableBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(GardenBotanicalBlockEntities.DYE_MIXER_BLOCK_ENTITY, DyeMixerBlockEntityRenderer::new);
 
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> 0x3F76E4, GardenBotanicalItems.WATER_DYE_MIXER);
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+            NbtCompound nbtCompound = stack.getNbt();
+            if (nbtCompound != null) {
+                return nbtCompound.getInt("color");
+            }
+            return 0x3F76E4;
+        }, GardenBotanicalItems.WATER_DYE_MIXER);
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+            NbtCompound nbtCompound = stack.getNbt();
+            if (nbtCompound != null)
+                return nbtCompound.getInt("color");
+            return 0xFFFFFF;
+        }, GardenBotanicalItems.DYE);
     }
 }

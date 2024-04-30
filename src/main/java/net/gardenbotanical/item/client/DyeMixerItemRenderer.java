@@ -1,6 +1,6 @@
 package net.gardenbotanical.item.client;
 
-import net.gardenbotanical.item.DyeMixerItem;
+import net.gardenbotanical.item.custom.DyeMixerItem;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
 
 

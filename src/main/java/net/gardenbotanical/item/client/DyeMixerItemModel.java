@@ -1,7 +1,7 @@
 package net.gardenbotanical.item.client;
 
 import net.gardenbotanical.GardenBotanical;
-import net.gardenbotanical.item.DyeMixerItem;
+import net.gardenbotanical.item.custom.DyeMixerItem;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib.model.GeoModel;
 

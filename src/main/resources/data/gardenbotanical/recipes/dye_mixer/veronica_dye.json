@@ -1,0 +1,13 @@
+{
+  "type": "gardenbotanical:dye_mixer",
+  "ingredient": {
+    "item": "gardenbotanical:powdered_veronica"
+  },
+  "output": {
+    "dye": {
+      "count": 1,
+      "item": "gardenbotanical:dye"
+    },
+    "color": "#A56DD2"
+  }
+}

@@ -1,4 +1,4 @@
-package net.gardenbotanical.item;
+package net.gardenbotanical.item.custom;
 
 import net.gardenbotanical.item.client.DyeMixerItemRenderer;
 import net.minecraft.block.Block;

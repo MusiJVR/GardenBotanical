@@ -3,23 +3,25 @@ package net.gardenbotanical.recipe;
 import com.google.gson.JsonObject;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
-import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
 
 public class DyeMixerRecipe implements Recipe<SimpleInventory> {
     private final Identifier id;
     private final ItemStack outputDye;
+    private final int dyeColor;
     private final Ingredient ingredient;
 
-    public DyeMixerRecipe(Identifier id, ItemStack itemStack, Ingredient ingredient) {
+    public DyeMixerRecipe(Identifier id, ItemStack outputDye, int dyeColor, Ingredient ingredient) {
         this.id = id;
-        this.outputDye = itemStack;
+        this.outputDye = outputDye;
+        this.dyeColor = dyeColor;
         this.ingredient = ingredient;
     }
 
@@ -49,17 +51,19 @@ public class DyeMixerRecipe implements Recipe<SimpleInventory> {
 
     @Override
     public ItemStack getOutput(DynamicRegistryManager registryManager) {
-        return outputDye.copy();
+        ItemStack itemStack = outputDye.copy();
+        NbtCompound nbtCompound = itemStack.getOrCreateNbt();
+        nbtCompound.putInt("color", getColor());
+        return itemStack;
+    }
+
+    public int getColor() {
+        return dyeColor;
     }
 
     @Override
     public Identifier getId() {
         return id;
-    }
-
-    @Override
-    public DefaultedList<Ingredient> getIngredients() {
-        return DefaultedList.of();
     }
 
     @Override
@@ -86,21 +90,24 @@ public class DyeMixerRecipe implements Recipe<SimpleInventory> {
         public DyeMixerRecipe read(Identifier id, JsonObject json) {
             ItemStack outputDye = ShapedRecipe.outputFromJson(JsonHelper.getObject(JsonHelper.getObject(json, "output"), "dye"));
             Ingredient ingredient = Ingredient.fromJson(JsonHelper.getElement(json, "ingredient"));
+            int dyeColor = Integer.parseInt(JsonHelper.getString(JsonHelper.getObject(json, "output"), "color").substring(1), 16);
 
-            return new DyeMixerRecipe(id, outputDye, ingredient);
+            return new DyeMixerRecipe(id, outputDye, dyeColor, ingredient);
         }
 
         @Override
         public DyeMixerRecipe read(Identifier id, PacketByteBuf buf) {
             Ingredient ingredient = Ingredient.fromPacket(buf);
             ItemStack outputDye = buf.readItemStack();
-            return new DyeMixerRecipe(id, outputDye, ingredient);
+            int dyeColor = buf.readInt();
+            return new DyeMixerRecipe(id, outputDye, dyeColor, ingredient);
         }
 
         @Override
         public void write(PacketByteBuf buf, DyeMixerRecipe recipe) {
             recipe.ingredient.write(buf);
             buf.writeItemStack(recipe.getOutput(null));
+            buf.writeInt(recipe.getColor());
         }
     }
 }
