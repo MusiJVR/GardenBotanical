@@ -16,8 +16,18 @@ public class GardenBotanicalFlowerGeneration {
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.PLAINS, BiomeKeys.FOREST, BiomeKeys.JUNGLE, BiomeKeys.SPARSE_JUNGLE, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, BiomeKeys.FLOWER_FOREST),
                 GenerationStep.Feature.VEGETAL_DECORATION, GardenBotanicalPlacedFeatures.GERBERA_PLACED);
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.PLAINS, BiomeKeys.FOREST, BiomeKeys.JUNGLE, BiomeKeys.SPARSE_JUNGLE, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, BiomeKeys.FLOWER_FOREST),
+                GenerationStep.Feature.VEGETAL_DECORATION, GardenBotanicalPlacedFeatures.HERBAL_PEONY_PLACED);
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.PLAINS, BiomeKeys.FOREST, BiomeKeys.JUNGLE, BiomeKeys.SPARSE_JUNGLE, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, BiomeKeys.FLOWER_FOREST),
                 GenerationStep.Feature.VEGETAL_DECORATION, GardenBotanicalPlacedFeatures.VERONICA_PLACED);
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.PLAINS, BiomeKeys.FOREST, BiomeKeys.JUNGLE, BiomeKeys.SPARSE_JUNGLE, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, BiomeKeys.FLOWER_FOREST),
-                GenerationStep.Feature.VEGETAL_DECORATION, GardenBotanicalPlacedFeatures.HERBAL_PEONY_PLACED);
+                GenerationStep.Feature.VEGETAL_DECORATION, GardenBotanicalPlacedFeatures.DULL_PINK_TULIP_PLACED);
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.PLAINS, BiomeKeys.FOREST, BiomeKeys.JUNGLE, BiomeKeys.SPARSE_JUNGLE, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, BiomeKeys.FLOWER_FOREST),
+                GenerationStep.Feature.VEGETAL_DECORATION, GardenBotanicalPlacedFeatures.POINSETTIA_PLACED);
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.PLAINS, BiomeKeys.FOREST, BiomeKeys.JUNGLE, BiomeKeys.SPARSE_JUNGLE, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, BiomeKeys.FLOWER_FOREST),
+                GenerationStep.Feature.VEGETAL_DECORATION, GardenBotanicalPlacedFeatures.SETARIA_PLACED);
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.PLAINS, BiomeKeys.FOREST, BiomeKeys.JUNGLE, BiomeKeys.SPARSE_JUNGLE, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, BiomeKeys.FLOWER_FOREST),
+                GenerationStep.Feature.VEGETAL_DECORATION, GardenBotanicalPlacedFeatures.ALOE_TRASKI_PLACED);
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.PLAINS, BiomeKeys.FOREST, BiomeKeys.JUNGLE, BiomeKeys.SPARSE_JUNGLE, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, BiomeKeys.FLOWER_FOREST),
+                GenerationStep.Feature.VEGETAL_DECORATION, GardenBotanicalPlacedFeatures.ASTER_PLACED);
     }
 }

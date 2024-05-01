@@ -29,18 +29,33 @@ public class GardenBotanicalItems {
     public static final Item GERBERA_PETAL = registerItem("gerbera_petal", new Item(new FabricItemSettings()));
     public static final Item HERBAL_PEONY_PETAL = registerItem("herbal_peony_petal", new Item(new FabricItemSettings()));
     public static final Item VERONICA_PETAL = registerItem("veronica_petal", new Item(new FabricItemSettings()));
+    public static final Item DULL_PINK_TULIP_PETAL = registerItem("dull_pink_tulip_petal", new Item(new FabricItemSettings()));
+    public static final Item POINSETTIA_PETAL = registerItem("poinsettia_petal", new Item(new FabricItemSettings()));
+    public static final Item SETARIA_PETAL = registerItem("setaria_petal", new Item(new FabricItemSettings()));
+    public static final Item ALOE_TRASKI_PETAL = registerItem("aloe_traski_petal", new Item(new FabricItemSettings()));
+    public static final Item ASTER_PETAL = registerItem("aster_petal", new Item(new FabricItemSettings()));
 
     public static final Item POWDERED_BOUVARDIA = registerItem("powdered_bouvardia", new Item(new FabricItemSettings()));
     public static final Item POWDERED_BRUNIA = registerItem("powdered_brunia", new Item(new FabricItemSettings()));
     public static final Item POWDERED_GERBERA = registerItem("powdered_gerbera", new Item(new FabricItemSettings()));
     public static final Item POWDERED_HERBAL_PEONY = registerItem("powdered_herbal_peony", new Item(new FabricItemSettings()));
     public static final Item POWDERED_VERONICA = registerItem("powdered_veronica", new Item(new FabricItemSettings()));
+    public static final Item POWDERED_DULL_PINK_TULIP = registerItem("powdered_dull_pink_tulip", new Item(new FabricItemSettings()));
+    public static final Item POWDERED_POINSETTIA = registerItem("powdered_poinsettia", new Item(new FabricItemSettings()));
+    public static final Item POWDERED_SETARIA = registerItem("powdered_setaria", new Item(new FabricItemSettings()));
+    public static final Item POWDERED_ALOE_TRASKI = registerItem("powdered_aloe_traski", new Item(new FabricItemSettings()));
+    public static final Item POWDERED_ASTER = registerItem("powdered_aster", new Item(new FabricItemSettings()));
 
     public static final Item BOUVARDIA_SEEDS = registerItem("bouvardia_seeds", new Item(new FabricItemSettings()));
     public static final Item BRUNIA_SEEDS = registerItem("brunia_seeds", new Item(new FabricItemSettings()));
     public static final Item GERBERA_SEEDS = registerItem("gerbera_seeds", new Item(new FabricItemSettings()));
     public static final Item HERBAL_PEONY_SEEDS = registerItem("herbal_peony_seeds", new Item(new FabricItemSettings()));
     public static final Item VERONICA_SEEDS = registerItem("veronica_seeds", new Item(new FabricItemSettings()));
+    public static final Item DULL_PINK_TULIP_SEEDS = registerItem("dull_pink_tulip_seeds", new Item(new FabricItemSettings()));
+    public static final Item POINSETTIA_SEEDS = registerItem("poinsettia_seeds", new Item(new FabricItemSettings()));
+    public static final Item SETARIA_SEEDS = registerItem("setaria_seeds", new Item(new FabricItemSettings()));
+    public static final Item ALOE_TRASKI_SEEDS = registerItem("aloe_traski_seeds", new Item(new FabricItemSettings()));
+    public static final Item ASTER_SEEDS = registerItem("aster_seeds", new Item(new FabricItemSettings()));
 
     public static Item registerItem(String id, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(GardenBotanical.MOD_ID, id), item);

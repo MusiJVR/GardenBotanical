@@ -27,24 +27,44 @@ public class GardenBotanicalItemGroups {
                         entries.add(GardenBotanicalBlocks.GERBERA);
                         entries.add(GardenBotanicalBlocks.HERBAL_PEONY);
                         entries.add(GardenBotanicalBlocks.VERONICA);
+                        entries.add(GardenBotanicalBlocks.DULL_PINK_TULIP);
+                        entries.add(GardenBotanicalBlocks.POINSETTIA);
+                        entries.add(GardenBotanicalBlocks.SETARIA);
+                        entries.add(GardenBotanicalBlocks.ALOE_TRASKI);
+                        entries.add(GardenBotanicalBlocks.ASTER);
 
                         entries.add(GardenBotanicalItems.BOUVARDIA_PETAL);
                         entries.add(GardenBotanicalItems.BRUNIA_PETAL);
                         entries.add(GardenBotanicalItems.GERBERA_PETAL);
                         entries.add(GardenBotanicalItems.HERBAL_PEONY_PETAL);
                         entries.add(GardenBotanicalItems.VERONICA_PETAL);
+                        entries.add(GardenBotanicalItems.DULL_PINK_TULIP_PETAL);
+                        entries.add(GardenBotanicalItems.POINSETTIA_PETAL);
+                        entries.add(GardenBotanicalItems.SETARIA_PETAL);
+                        entries.add(GardenBotanicalItems.ALOE_TRASKI_PETAL);
+                        entries.add(GardenBotanicalItems.ASTER_PETAL);
 
                         entries.add(GardenBotanicalItems.POWDERED_BOUVARDIA);
                         entries.add(GardenBotanicalItems.POWDERED_BRUNIA);
                         entries.add(GardenBotanicalItems.POWDERED_GERBERA);
                         entries.add(GardenBotanicalItems.POWDERED_HERBAL_PEONY);
                         entries.add(GardenBotanicalItems.POWDERED_VERONICA);
+                        entries.add(GardenBotanicalItems.POWDERED_DULL_PINK_TULIP);
+                        entries.add(GardenBotanicalItems.POWDERED_POINSETTIA);
+                        entries.add(GardenBotanicalItems.POWDERED_SETARIA);
+                        entries.add(GardenBotanicalItems.POWDERED_ALOE_TRASKI);
+                        entries.add(GardenBotanicalItems.POWDERED_ASTER);
 
                         entries.add(GardenBotanicalItems.BOUVARDIA_SEEDS);
                         entries.add(GardenBotanicalItems.BRUNIA_SEEDS);
                         entries.add(GardenBotanicalItems.GERBERA_SEEDS);
                         entries.add(GardenBotanicalItems.HERBAL_PEONY_SEEDS);
                         entries.add(GardenBotanicalItems.VERONICA_SEEDS);
+                        entries.add(GardenBotanicalItems.DULL_PINK_TULIP_SEEDS);
+                        entries.add(GardenBotanicalItems.POINSETTIA_SEEDS);
+                        entries.add(GardenBotanicalItems.SETARIA_SEEDS);
+                        entries.add(GardenBotanicalItems.ALOE_TRASKI_SEEDS);
+                        entries.add(GardenBotanicalItems.ASTER_SEEDS);
                     }).build());
 
     public static void register() {

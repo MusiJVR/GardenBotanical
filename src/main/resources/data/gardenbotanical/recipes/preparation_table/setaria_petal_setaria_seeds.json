@@ -1,0 +1,16 @@
+{
+  "type": "gardenbotanical:preparation_table",
+  "ingredient": {
+      "item": "gardenbotanical:setaria"
+  },
+  "output": {
+    "petal": {
+      "count": 1,
+      "item": "gardenbotanical:setaria_petal"
+    },
+    "seeds": {
+      "count": 1,
+      "item": "gardenbotanical:setaria_seeds"
+    }
+  }
+}

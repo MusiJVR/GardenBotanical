@@ -28,6 +28,16 @@ public class GardenBotanicalBlocks {
     public static final Block POTTED_HERBAL_PEONY = registerBlockNoItem("potted_herbal_peony", new FlowerPotBlock(HERBAL_PEONY, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY).nonOpaque()));
     public static final Block VERONICA = registerBlock("veronica", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY).nonOpaque()));
     public static final Block POTTED_VERONICA = registerBlockNoItem("potted_veronica", new FlowerPotBlock(VERONICA, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY).nonOpaque()));
+    public static final Block DULL_PINK_TULIP = registerBlock("dull_pink_tulip", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY).nonOpaque()));
+    public static final Block POTTED_DULL_PINK_TULIP = registerBlockNoItem("potted_dull_pink_tulip", new FlowerPotBlock(DULL_PINK_TULIP, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY).nonOpaque()));
+    public static final Block POINSETTIA = registerBlock("poinsettia", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY).nonOpaque()));
+    public static final Block POTTED_POINSETTIA = registerBlockNoItem("potted_poinsettia", new FlowerPotBlock(POINSETTIA, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY).nonOpaque()));
+    public static final Block SETARIA = registerBlock("setaria", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY).nonOpaque()));
+    public static final Block POTTED_SETARIA = registerBlockNoItem("potted_setaria", new FlowerPotBlock(SETARIA, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY).nonOpaque()));
+    public static final Block ALOE_TRASKI = registerBlock("aloe_traski", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY).nonOpaque()));
+    public static final Block POTTED_ALOE_TRASKI = registerBlockNoItem("potted_aloe_traski", new FlowerPotBlock(ALOE_TRASKI, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY).nonOpaque()));
+    public static final Block ASTER = registerBlock("aster", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY).nonOpaque()));
+    public static final Block POTTED_ASTER = registerBlockNoItem("potted_aster", new FlowerPotBlock(ASTER, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY).nonOpaque()));
 
     private static Block registerBlock(String id, Block block) {
         GardenBotanicalItems.registerItem(id, new BlockItem(block, new Item.Settings()));

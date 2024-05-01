@@ -1,4 +1,4 @@
-package net.gardenbotanical.tags;
+package net.gardenbotanical.tag;
 
 import net.gardenbotanical.GardenBotanical;
 import net.minecraft.item.Item;

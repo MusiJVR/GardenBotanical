@@ -1,0 +1,13 @@
+{
+  "type": "gardenbotanical:dye_mixer",
+  "ingredient": {
+      "item": "gardenbotanical:powdered_aloe_traski"
+  },
+  "output": {
+    "dye": {
+      "count": 1,
+      "item": "gardenbotanical:dye"
+    },
+    "color": "#D7A517"
+  }
+}

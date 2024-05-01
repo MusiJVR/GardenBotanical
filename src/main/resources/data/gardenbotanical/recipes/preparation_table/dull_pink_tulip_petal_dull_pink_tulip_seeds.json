@@ -1,0 +1,16 @@
+{
+  "type": "gardenbotanical:preparation_table",
+  "ingredient": {
+      "item": "gardenbotanical:dull_pink_tulip"
+  },
+  "output": {
+    "petal": {
+      "count": 1,
+      "item": "gardenbotanical:dull_pink_tulip_petal"
+    },
+    "seeds": {
+      "count": 1,
+      "item": "gardenbotanical:dull_pink_tulip_seeds"
+    }
+  }
+}

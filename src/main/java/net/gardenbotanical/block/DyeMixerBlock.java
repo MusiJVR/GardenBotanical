@@ -2,7 +2,7 @@ package net.gardenbotanical.block;
 
 import net.gardenbotanical.block.entity.DyeMixerBlockEntity;
 import net.gardenbotanical.block.entity.GardenBotanicalBlockEntities;
-import net.gardenbotanical.tags.GardenBotanicalTags;
+import net.gardenbotanical.tag.GardenBotanicalTags;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;

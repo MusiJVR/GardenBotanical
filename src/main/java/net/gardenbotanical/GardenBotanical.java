@@ -8,7 +8,7 @@ import net.gardenbotanical.item.GardenBotanicalItemGroups;
 import net.gardenbotanical.network.GardenBotanicalNetwork;
 import net.gardenbotanical.recipe.GardenBotanicalRecipes;
 import net.gardenbotanical.screen.GardenBotanicalScreenHandlers;
-import net.gardenbotanical.tags.GardenBotanicalTags;
+import net.gardenbotanical.tag.GardenBotanicalTags;
 import net.gardenbotanical.world.gen.GardenBotanicalWorldGen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

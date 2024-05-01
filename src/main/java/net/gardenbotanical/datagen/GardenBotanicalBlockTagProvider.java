@@ -16,9 +16,30 @@ public class GardenBotanicalBlockTagProvider extends FabricTagProvider.BlockTagP
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup arg) {
-        getOrCreateTagBuilder(BlockTags.FLOWER_POTS).add(GardenBotanicalBlocks.POTTED_BOUVARDIA, GardenBotanicalBlocks.POTTED_BRUNIA,
-                GardenBotanicalBlocks.POTTED_GERBERA, GardenBotanicalBlocks.POTTED_VERONICA, GardenBotanicalBlocks.POTTED_HERBAL_PEONY);
-        getOrCreateTagBuilder(BlockTags.SMALL_FLOWERS).add(GardenBotanicalBlocks.BOUVARDIA, GardenBotanicalBlocks.BRUNIA,
-                GardenBotanicalBlocks.GERBERA, GardenBotanicalBlocks.HERBAL_PEONY, GardenBotanicalBlocks.VERONICA);
+        getOrCreateTagBuilder(BlockTags.SMALL_FLOWERS).add(
+                GardenBotanicalBlocks.BOUVARDIA,
+                GardenBotanicalBlocks.BRUNIA,
+                GardenBotanicalBlocks.GERBERA,
+                GardenBotanicalBlocks.HERBAL_PEONY,
+                GardenBotanicalBlocks.VERONICA,
+                GardenBotanicalBlocks.DULL_PINK_TULIP,
+                GardenBotanicalBlocks.POINSETTIA,
+                GardenBotanicalBlocks.SETARIA,
+                GardenBotanicalBlocks.ALOE_TRASKI,
+                GardenBotanicalBlocks.ASTER
+        );
+
+        getOrCreateTagBuilder(BlockTags.FLOWER_POTS).add(
+                GardenBotanicalBlocks.POTTED_BOUVARDIA,
+                GardenBotanicalBlocks.POTTED_BRUNIA,
+                GardenBotanicalBlocks.POTTED_GERBERA,
+                GardenBotanicalBlocks.POTTED_HERBAL_PEONY,
+                GardenBotanicalBlocks.POTTED_VERONICA,
+                GardenBotanicalBlocks.POTTED_DULL_PINK_TULIP,
+                GardenBotanicalBlocks.POTTED_POINSETTIA,
+                GardenBotanicalBlocks.POTTED_SETARIA,
+                GardenBotanicalBlocks.POTTED_ALOE_TRASKI,
+                GardenBotanicalBlocks.POTTED_ASTER
+        );
     }
 }

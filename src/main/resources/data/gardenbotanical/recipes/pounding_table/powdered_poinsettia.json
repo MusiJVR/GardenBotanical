@@ -1,0 +1,12 @@
+{
+  "type": "gardenbotanical:pounding_table",
+  "ingredient": {
+      "item": "gardenbotanical:poinsettia_petal"
+  },
+  "output": {
+    "powder": {
+      "count": 1,
+      "item": "gardenbotanical:powdered_poinsettia"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "gardenbotanical:dye_mixer",
+  "ingredient": {
+    "item": "gardenbotanical:powdered_setaria"
+  },
+  "output": {
+    "dye": {
+      "count": 1,
+      "item": "gardenbotanical:dye"
+    },
+    "color": "#7D9A28"
+  }
+}

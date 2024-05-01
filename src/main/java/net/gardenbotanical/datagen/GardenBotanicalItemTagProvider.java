@@ -16,7 +16,17 @@ public class GardenBotanicalItemTagProvider extends FabricTagProvider.ItemTagPro
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup arg) {
-        getOrCreateTagBuilder(ItemTags.SMALL_FLOWERS).add(GardenBotanicalBlocks.BOUVARDIA.asItem(), GardenBotanicalBlocks.BRUNIA.asItem(),
-                GardenBotanicalBlocks.GERBERA.asItem(), GardenBotanicalBlocks.HERBAL_PEONY.asItem(), GardenBotanicalBlocks.VERONICA.asItem());
+        getOrCreateTagBuilder(ItemTags.SMALL_FLOWERS).add(
+                GardenBotanicalBlocks.BOUVARDIA.asItem(),
+                GardenBotanicalBlocks.BRUNIA.asItem(),
+                GardenBotanicalBlocks.GERBERA.asItem(),
+                GardenBotanicalBlocks.HERBAL_PEONY.asItem(),
+                GardenBotanicalBlocks.VERONICA.asItem(),
+                GardenBotanicalBlocks.DULL_PINK_TULIP.asItem(),
+                GardenBotanicalBlocks.POINSETTIA.asItem(),
+                GardenBotanicalBlocks.SETARIA.asItem(),
+                GardenBotanicalBlocks.ALOE_TRASKI.asItem(),
+                GardenBotanicalBlocks.ASTER.asItem()
+        );
     }
 }

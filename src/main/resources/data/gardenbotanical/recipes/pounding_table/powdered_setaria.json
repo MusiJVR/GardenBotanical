@@ -1,0 +1,12 @@
+{
+  "type": "gardenbotanical:pounding_table",
+  "ingredient": {
+      "item": "gardenbotanical:setaria_petal"
+  },
+  "output": {
+    "powder": {
+      "count": 1,
+      "item": "gardenbotanical:powdered_setaria"
+    }
+  }
+}

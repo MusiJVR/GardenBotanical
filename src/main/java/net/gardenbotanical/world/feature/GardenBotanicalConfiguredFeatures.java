@@ -15,6 +15,11 @@ public class GardenBotanicalConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> GERBERA = registerKey("gerbera");
     public static final RegistryKey<ConfiguredFeature<?, ?>> HERBAL_PEONY = registerKey("herbal_peony");
     public static final RegistryKey<ConfiguredFeature<?, ?>> VERONICA = registerKey("veronica");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> DULL_PINK_TULIP = registerKey("dull_pink_tulip");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> POINSETTIA = registerKey("poinsettia");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> SETARIA = registerKey("setaria");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> ALOE_TRASKI = registerKey("aloe_traski");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> ASTER = registerKey("aster");
 
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context) {
         // 36 5 5 demo
@@ -32,6 +37,21 @@ public class GardenBotanicalConfiguredFeatures {
         ));
         register(context, VERONICA, Feature.FLOWER, new RandomPatchFeatureConfig(
                 128, 7, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(GardenBotanicalBlocks.VERONICA)))
+        ));
+        register(context, DULL_PINK_TULIP, Feature.FLOWER, new RandomPatchFeatureConfig(
+                128, 7, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(GardenBotanicalBlocks.DULL_PINK_TULIP)))
+        ));
+        register(context, POINSETTIA, Feature.FLOWER, new RandomPatchFeatureConfig(
+                128, 7, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(GardenBotanicalBlocks.POINSETTIA)))
+        ));
+        register(context, SETARIA, Feature.FLOWER, new RandomPatchFeatureConfig(
+                128, 7, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(GardenBotanicalBlocks.SETARIA)))
+        ));
+        register(context, ALOE_TRASKI, Feature.FLOWER, new RandomPatchFeatureConfig(
+                128, 7, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(GardenBotanicalBlocks.ALOE_TRASKI)))
+        ));
+        register(context, ASTER, Feature.FLOWER, new RandomPatchFeatureConfig(
+                128, 7, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(GardenBotanicalBlocks.ASTER)))
         ));
     }
 

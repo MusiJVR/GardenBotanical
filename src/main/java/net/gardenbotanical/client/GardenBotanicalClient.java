@@ -30,12 +30,22 @@ public class GardenBotanicalClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.BRUNIA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.HERBAL_PEONY, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.VERONICA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.DULL_PINK_TULIP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POINSETTIA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.SETARIA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.ALOE_TRASKI, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.ASTER, RenderLayer.getCutout());
 
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_BOUVARDIA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_GERBERA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_BRUNIA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_HERBAL_PEONY, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_VERONICA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_DULL_PINK_TULIP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_POINSETTIA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_SETARIA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_ALOE_TRASKI, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_ASTER, RenderLayer.getCutout());
 
         HandledScreens.register(GardenBotanicalScreenHandlers.PREPARATION_TABLE_SCREEN_HANDLER, PreparationTableScreen::new);
         HandledScreens.register(GardenBotanicalScreenHandlers.POUNDING_TABLE_SCREEN_HANDLER, PoundingTableScreen::new);

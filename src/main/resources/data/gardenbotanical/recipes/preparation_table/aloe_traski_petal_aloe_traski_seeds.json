@@ -1,0 +1,16 @@
+{
+  "type": "gardenbotanical:preparation_table",
+  "ingredient": {
+      "item": "gardenbotanical:aloe_traski"
+  },
+  "output": {
+    "petal": {
+      "count": 1,
+      "item": "gardenbotanical:aloe_traski_petal"
+    },
+    "seeds": {
+      "count": 1,
+      "item": "gardenbotanical:aloe_traski_seeds"
+    }
+  }
+}
