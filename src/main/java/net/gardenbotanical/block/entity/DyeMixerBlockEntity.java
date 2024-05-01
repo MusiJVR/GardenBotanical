@@ -26,6 +26,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -55,12 +56,22 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         protected void onFinalCommit() {
             markDirty();
         }
+
+        @Override
+        protected boolean canInsert(FluidVariant variant) {
+            return variant.isOf(Fluids.WATER);
+        }
+
+        @Override
+        protected boolean canExtract(FluidVariant variant) {
+            return false;
+        }
     };
 
-    private static final int INPUT_SLOT_POWDER = 0;
-    private static final int INPUT_SLOT_FIRST_DYE = 1;
-    private static final int INPUT_SLOT_SECOND_DYE = 2;
-    private static final int OUTPUT_SLOT_DYE = 3;
+    public static final int INPUT_SLOT_POWDER = 0;
+    public static final int INPUT_SLOT_FIRST_DYE = 1;
+    public static final int INPUT_SLOT_SECOND_DYE = 2;
+    public static final int OUTPUT_SLOT_DYE = 3;
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
@@ -248,6 +259,20 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         }
     }
 
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction side) {
+        return side == Direction.DOWN && slot == OUTPUT_SLOT_DYE;
+    }
+
+    @Override
+    public int[] getAvailableSlots(Direction side) {
+        if (side == Direction.DOWN) {
+            return new int[] {OUTPUT_SLOT_DYE};
+        } else {
+            return new int[] {};
+        }
+    }
+
     private void craftItem() {
         Optional<DyeMixerRecipe> recipe = getCurrentRecipe();
 
@@ -269,7 +294,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     private Optional<DyeMixerRecipe> getCurrentRecipe() {
         SimpleInventory inv = new SimpleInventory(this.size());
         for(int i = 0; i < this.size(); i++) {
-            if (i == 1 || i == 2) {
+            if (i == INPUT_SLOT_FIRST_DYE || i == INPUT_SLOT_SECOND_DYE) {
                 continue;
             }
             inv.setStack(i, this.getStack(i));

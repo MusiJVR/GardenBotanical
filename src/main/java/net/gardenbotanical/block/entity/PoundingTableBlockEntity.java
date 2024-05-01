@@ -24,6 +24,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -167,6 +168,28 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
             resetProgress();
             markDirty(world, pos, state);
         }
+    }
+
+    @Override
+    public int[] getAvailableSlots(Direction side) {
+        if (side == Direction.DOWN) {
+            return new int[] {OUTPUT_SLOT_POWDER};
+        } else {
+            return side == Direction.UP ? new int[] {INPUT_SLOT_PETAL} : new int[] {INPUT_SLOT_FLINT};
+        }
+    }
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
+        if (slot == INPUT_SLOT_FLINT) {
+            return stack.isOf(Items.FLINT);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction side) {
+        return side == Direction.DOWN && slot == OUTPUT_SLOT_POWDER;
     }
 
     private void craftItem() {

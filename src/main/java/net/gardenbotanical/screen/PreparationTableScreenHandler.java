@@ -26,10 +26,10 @@ public class PreparationTableScreenHandler extends ScreenHandler {
     public PreparationTableScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity, PropertyDelegate arrayPropertyDelegate) {
         super(GardenBotanicalScreenHandlers.PREPARATION_TABLE_SCREEN_HANDLER, syncId);
         checkSize(((Inventory) blockEntity), 3);
-        this.inventory = ((Inventory) blockEntity);
+        this.inventory = (Inventory) blockEntity;
         inventory.onOpen(playerInventory.player);
         this.propertyDelegate = arrayPropertyDelegate;
-        this.blockEntity = ((PreparationTableBlockEntity) blockEntity);
+        this.blockEntity = (PreparationTableBlockEntity) blockEntity;
 
         this.addSlot(new Slot(inventory, 0, 70, 35));
         this.addSlot(new Slot(inventory, 1, 124, 26) {
@@ -65,7 +65,7 @@ public class PreparationTableScreenHandler extends ScreenHandler {
     @Override
     public ItemStack quickMove(PlayerEntity player, int invSlot) {
         ItemStack newStack = ItemStack.EMPTY;
-        Slot slot = (Slot)this.slots.get(invSlot);
+        Slot slot = this.slots.get(invSlot);
         if (slot != null && slot.hasStack()) {
             ItemStack originalStack = slot.getStack();
             newStack = originalStack.copy();

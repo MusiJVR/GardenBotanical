@@ -3,6 +3,8 @@ package net.gardenbotanical.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
+import net.gardenbotanical.item.GardenBotanicalItems;
+import net.gardenbotanical.tag.GardenBotanicalTags;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 
@@ -27,6 +29,18 @@ public class GardenBotanicalItemTagProvider extends FabricTagProvider.ItemTagPro
                 GardenBotanicalBlocks.SETARIA.asItem(),
                 GardenBotanicalBlocks.ALOE_TRASKI.asItem(),
                 GardenBotanicalBlocks.ASTER.asItem()
+        );
+        getOrCreateTagBuilder(GardenBotanicalTags.FLOWER_POWDERS).add(
+                GardenBotanicalItems.POWDERED_BOUVARDIA,
+                GardenBotanicalItems.POWDERED_BRUNIA,
+                GardenBotanicalItems.POWDERED_GERBERA,
+                GardenBotanicalItems.POWDERED_HERBAL_PEONY,
+                GardenBotanicalItems.POWDERED_VERONICA,
+                GardenBotanicalItems.POWDERED_DULL_PINK_TULIP,
+                GardenBotanicalItems.POWDERED_POINSETTIA,
+                GardenBotanicalItems.POWDERED_SETARIA,
+                GardenBotanicalItems.POWDERED_ALOE_TRASKI,
+                GardenBotanicalItems.POWDERED_ASTER
         );
     }
 }

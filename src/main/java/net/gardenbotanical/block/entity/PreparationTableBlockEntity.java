@@ -19,6 +19,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -124,6 +125,22 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
             resetProgress();
             markDirty(world, pos, state);
         }
+    }
+
+    @Override
+    public int[] getAvailableSlots(Direction side) {
+        if (side == Direction.DOWN) {
+            return new int[] {OUTPUT_SLOT_PETAL, OUTPUT_SLOT_SEEDS};
+        } else if (side == Direction.UP) {
+            return new int[] {INPUT_SLOT};
+        } else {
+            return new int[] {};
+        }
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction side) {
+        return side == Direction.DOWN && slot != INPUT_SLOT;
     }
 
     private void craftItem() {
