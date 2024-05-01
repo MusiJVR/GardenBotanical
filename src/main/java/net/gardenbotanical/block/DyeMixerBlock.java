@@ -2,6 +2,7 @@ package net.gardenbotanical.block;
 
 import net.gardenbotanical.block.entity.DyeMixerBlockEntity;
 import net.gardenbotanical.block.entity.GardenBotanicalBlockEntities;
+import net.gardenbotanical.item.GardenBotanicalItems;
 import net.gardenbotanical.tag.GardenBotanicalTags;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -19,6 +20,7 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -82,12 +84,24 @@ public class DyeMixerBlock extends BlockWithEntity implements BlockEntityProvide
     }
 
     @Override
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        if (state.getBlock() != newState.getBlock()) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof DyeMixerBlockEntity) {
+                ItemScatterer.spawn(world, pos, (DyeMixerBlockEntity)blockEntity);
+                world.updateComparators(pos, this);
+            }
+            super.onStateReplaced(state, world, pos, newState, moved);
+        }
+    }
+
+    @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient()) {
             DyeMixerBlockEntity entity = (DyeMixerBlockEntity) world.getBlockEntity(pos);
             ItemStack itemStack = player.getStackInHand(hand);
 
-            if (!entity.outputSlotIsEmpty()) {
+            if (!entity.slotIsEmpty(3)) {
                 Vec3d vec3d = Vec3d.add(pos, 0.5, 1.01, 0.5).addRandom(world.random, 0.7F);
                 ItemEntity itemEntity = new ItemEntity(world, vec3d.getX(), vec3d.getY(), vec3d.getZ(), entity.getOutputSlotDye());
                 itemEntity.setToDefaultPickupDelay();
@@ -95,15 +109,27 @@ public class DyeMixerBlock extends BlockWithEntity implements BlockEntityProvide
                 entity.clearOutputSlot();
                 world.playSound(null, pos, SoundEvents.BLOCK_BEEHIVE_EXIT, SoundCategory.BLOCKS, 1f, 1f);
             } else if (entity.fluidStorageIsFull()) {
-                if (entity.inputSlotIsEmpty()) {
-                    if (itemStack.getItem() == Items.BUCKET) {
-                        entity.extractFluidStorage();
-                        player.setStackInHand(hand, Items.WATER_BUCKET.getDefaultStack());
-                        world.playSound(null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1f, 1f);
-                    } else if (itemStack.isIn(GardenBotanicalTags.FLOWER_POWDERS)) {
-                        entity.getItems().set(0, new ItemStack(itemStack.getItem(), 1));
-                        itemStack.decrement(1);
-                        world.playSound(null, pos, SoundEvents.ITEM_BONE_MEAL_USE, SoundCategory.BLOCKS, 1f, 1f);
+                if (entity.slotIsEmpty(0)) {
+                    if (entity.slotIsEmpty(1) || entity.slotIsEmpty(2)) {
+                        if (itemStack.getItem() == GardenBotanicalItems.DYE) {
+                            if (entity.slotIsEmpty(1)) {
+                                entity.getItems().set(1, itemStack.copyWithCount(1));
+                            } else {
+                                entity.getItems().set(2, itemStack.copyWithCount(1));
+                            }
+                            itemStack.decrement(1);
+                            world.playSound(null, pos, SoundEvents.BLOCK_HONEY_BLOCK_SLIDE, SoundCategory.BLOCKS, 1f, 1f);
+                        } else if (entity.slotIsEmpty(1) && entity.slotIsEmpty(2)) {
+                            if (itemStack.getItem() == Items.BUCKET) {
+                                entity.extractFluidStorage();
+                                player.setStackInHand(hand, Items.WATER_BUCKET.getDefaultStack());
+                                world.playSound(null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1f, 1f);
+                            } else if (itemStack.isIn(GardenBotanicalTags.FLOWER_POWDERS)) {
+                                entity.getItems().set(0, itemStack.copyWithCount(1));
+                                itemStack.decrement(1);
+                                world.playSound(null, pos, SoundEvents.ITEM_BONE_MEAL_USE, SoundCategory.BLOCKS, 1f, 1f);
+                            }
+                        }
                     }
                 }
             } else if (!entity.fluidStorageIsFull()) {

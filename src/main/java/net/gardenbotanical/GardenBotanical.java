@@ -19,6 +19,9 @@ public class GardenBotanical implements ModInitializer {
     public static final String MOD_ID = "gardenbotanical";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+    public static final int DEFAULT_WATER_COLOR = 0x3F76E4;
+    public static final int DEFAULT_DYE_COLOR = 0xFFFFFF;
+
     @Override
     public void onInitialize() {
         LOGGER.info("Initialize " + MOD_ID + "...");

@@ -11,6 +11,7 @@ import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.item.GardenBotanicalItems;
 import net.gardenbotanical.network.GardenBotanicalNetwork;
 import net.gardenbotanical.recipe.DyeMixerRecipe;
+import net.gardenbotanical.util.ColorUtils;
 import net.gardenbotanical.util.FluidStack;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -37,7 +38,7 @@ import java.util.Optional;
 
 
 public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, ImplementedInventory {
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(4, ItemStack.EMPTY);
 
     public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
         @Override
@@ -57,7 +58,9 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     };
 
     private static final int INPUT_SLOT_POWDER = 0;
-    private static final int OUTPUT_SLOT_DYE = 1;
+    private static final int INPUT_SLOT_FIRST_DYE = 1;
+    private static final int INPUT_SLOT_SECOND_DYE = 2;
+    private static final int OUTPUT_SLOT_DYE = 3;
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
@@ -97,7 +100,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     }
 
     public ItemStack getWater() {
-        if (!outputSlotIsEmpty()) {
+        if (!slotIsEmpty(OUTPUT_SLOT_DYE)) {
             ItemStack itemStack = new ItemStack(GardenBotanicalItems.WATER_DYE_MIXER);
             if (getOutputSlotDye().getNbt() != null)
                 itemStack.getOrCreateNbt().putInt("color", getOutputSlotDye().getNbt().getInt("color"));
@@ -141,12 +144,8 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         inventory.set(OUTPUT_SLOT_DYE, ItemStack.EMPTY);
     }
 
-    public boolean inputSlotIsEmpty() {
-        return inventory.get(INPUT_SLOT_POWDER).isEmpty();
-    }
-
-    public boolean outputSlotIsEmpty() {
-        return inventory.get(OUTPUT_SLOT_DYE).isEmpty();
+    public boolean slotIsEmpty(int slot) {
+        return inventory.get(slot).isEmpty();
     }
 
     @Override
@@ -224,12 +223,20 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         if (fluidStorageIsFull()) {
             if (hasRecipe()) {
                 setProcessState(state, true);
-                progress++;
                 markDirty(world, pos, state);
 
                 if (progress >= maxProgress) {
                     extractFluidStorage();
                     craftItem();
+                    resetProgress(state);
+                }
+            } else if (hasDyeRecipe()) {
+                setProcessState(state, true);
+                markDirty(world, pos, state);
+
+                if (progress >= maxProgress) {
+                    extractFluidStorage();
+                    mixDyes();
                     resetProgress(state);
                 }
             } else {
@@ -244,7 +251,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     private void craftItem() {
         Optional<DyeMixerRecipe> recipe = getCurrentRecipe();
 
-        this.removeStack(INPUT_SLOT_POWDER, 1);
+        this.removeStack(INPUT_SLOT_POWDER);
 
         putItemInOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_DYE);
     }
@@ -262,6 +269,9 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     private Optional<DyeMixerRecipe> getCurrentRecipe() {
         SimpleInventory inv = new SimpleInventory(this.size());
         for(int i = 0; i < this.size(); i++) {
+            if (i == 1 || i == 2) {
+                continue;
+            }
             inv.setStack(i, this.getStack(i));
         }
 
@@ -274,8 +284,30 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     }
 
     private void setProcessState(BlockState state, boolean value) {
-        if (world != null)
+        this.progress++;
+        if (world != null) {
             world.setBlockState(pos, state.with(DyeMixerBlock.PROCESS, value));
+        }
+    }
+
+    private void mixDyes() {
+        NbtCompound nbtFirstColor = inventory.get(INPUT_SLOT_FIRST_DYE).getNbt();
+        NbtCompound nbtSecondColor = inventory.get(INPUT_SLOT_SECOND_DYE).getNbt();
+
+        int outputColorDye = ColorUtils.blendColors(ColorUtils.checkColorNbt(nbtFirstColor, 0xFFFFFF), ColorUtils.checkColorNbt(nbtSecondColor, 0xFFFFFF));
+
+        this.removeStack(INPUT_SLOT_FIRST_DYE);
+        this.removeStack(INPUT_SLOT_SECOND_DYE);
+
+        ItemStack outputDye = new ItemStack(GardenBotanicalItems.DYE);
+        NbtCompound nbtOutputDye = outputDye.getOrCreateNbt();
+        nbtOutputDye.putInt("color", outputColorDye);
+
+        putItemInOutputSlot(outputDye, OUTPUT_SLOT_DYE);
+    }
+
+    private boolean hasDyeRecipe() {
+        return !slotIsEmpty(INPUT_SLOT_FIRST_DYE) && !slotIsEmpty(INPUT_SLOT_SECOND_DYE);
     }
 
     private void resetProgress(BlockState state) {

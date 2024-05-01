@@ -13,6 +13,7 @@ import net.gardenbotanical.network.GardenBotanicalNetwork;
 import net.gardenbotanical.screen.GardenBotanicalScreenHandlers;
 import net.gardenbotanical.screen.PoundingTableScreen;
 import net.gardenbotanical.screen.PreparationTableScreen;
+import net.gardenbotanical.util.ColorUtils;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
@@ -55,16 +56,11 @@ public class GardenBotanicalClient implements ClientModInitializer {
 
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
             NbtCompound nbtCompound = stack.getNbt();
-            if (nbtCompound != null) {
-                return nbtCompound.getInt("color");
-            }
-            return 0x3F76E4;
+            return ColorUtils.checkColorNbt(nbtCompound, GardenBotanical.DEFAULT_WATER_COLOR);
         }, GardenBotanicalItems.WATER_DYE_MIXER);
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
             NbtCompound nbtCompound = stack.getNbt();
-            if (nbtCompound != null)
-                return nbtCompound.getInt("color");
-            return 0xFFFFFF;
+            return ColorUtils.checkColorNbt(nbtCompound, GardenBotanical.DEFAULT_DYE_COLOR);
         }, GardenBotanicalItems.DYE);
     }
 }
