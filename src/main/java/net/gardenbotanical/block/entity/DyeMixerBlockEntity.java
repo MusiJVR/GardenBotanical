@@ -64,7 +64,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
 
         @Override
         protected boolean canExtract(FluidVariant variant) {
-            return false;
+            return variant.isOf(Fluids.WATER);
         }
     };
 
@@ -310,6 +310,11 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
 
     private void setProcessState(BlockState state, boolean value) {
         this.progress++;
+        PacketByteBuf data = PacketByteBufs.create();
+        data.writeBlockPos(pos);
+        for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
+            GardenBotanicalNetwork.SPAWN_PARTICLE_PACKET.send(player, data);
+        }
         if (world != null) {
             world.setBlockState(pos, state.with(DyeMixerBlock.PROCESS, value));
         }

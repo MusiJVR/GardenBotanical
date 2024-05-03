@@ -19,9 +19,7 @@ import net.minecraft.world.World;
 
 
 public class PoundingTableBlockEntityRenderer implements BlockEntityRenderer<PoundingTableBlockEntity> {
-    public PoundingTableBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
-
-    }
+    public PoundingTableBlockEntityRenderer(BlockEntityRendererFactory.Context context) {}
 
     @Override
     public void render(PoundingTableBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
