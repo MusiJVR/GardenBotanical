@@ -62,6 +62,10 @@ public class GardenBotanicalClient implements ClientModInitializer {
         }, GardenBotanicalItems.WATER_DYE_MIXER);
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
             NbtCompound nbtCompound = stack.getNbt();
+            return ColorUtils.checkColorNbt(nbtCompound, GardenBotanical.DEFAULT_WATER_COLOR);
+        }, GardenBotanicalItems.COLORIZER_DYE);
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+            NbtCompound nbtCompound = stack.getNbt();
             return ColorUtils.checkColorNbt(nbtCompound, GardenBotanical.DEFAULT_DYE_COLOR);
         }, GardenBotanicalItems.DYE);
     }

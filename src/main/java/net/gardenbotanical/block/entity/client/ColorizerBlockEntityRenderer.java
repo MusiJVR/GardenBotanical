@@ -8,5 +8,7 @@ import software.bernie.geckolib.renderer.GeoBlockRenderer;
 public class ColorizerBlockEntityRenderer extends GeoBlockRenderer<ColorizerBlockEntity> {
     public ColorizerBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
         super(new ColorizerBlockEntityModel());
+        addRenderLayer(new ColorizerBlockEntityRendererArmor(this));
+        addRenderLayer(new ColorizerBlockEntityRendererDye(this));
     }
 }

@@ -2,6 +2,7 @@
   "item.gardenbotanical.garden_pruner": "Garden pruner",
 
   "item.gardenbotanical.water_dye_mixer": "Water dye mixer",
+  "item.gardenbotanical.colorizer_dye": "Colorizer dye",
 
   "item.gardenbotanical.dye": "Dye",
   "tooltip.gardenbotanical.dye": "Color code: ",
@@ -42,6 +43,7 @@
   "block.gardenbotanical.preparation_table": "Preparation table",
   "block.gardenbotanical.pounding_table": "Pounding table",
   "block.gardenbotanical.dye_mixer": "Dye mixer",
+  "block.gardenbotanical.colorizer": "Colorizer",
 
   "block.gardenbotanical.bouvardia": "Bouvardia",
   "block.gardenbotanical.brunia": "Brunia",

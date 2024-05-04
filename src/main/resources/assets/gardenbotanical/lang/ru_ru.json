@@ -2,6 +2,7 @@
   "item.gardenbotanical.garden_pruner": "Садовый секатор",
 
   "item.gardenbotanical.water_dye_mixer": "Вода смешивателя красок",
+  "item.gardenbotanical.colorizer_dye": "Краситель раскрашивателя",
 
   "item.gardenbotanical.dye": "Краситель",
   "tooltip.gardenbotanical.dye": "Код цвета: ",
@@ -42,6 +43,7 @@
   "block.gardenbotanical.preparation_table": "Подготовительный стол",
   "block.gardenbotanical.pounding_table": "Стол для толчения",
   "block.gardenbotanical.dye_mixer": "Смешиватель красок",
+  "block.gardenbotanical.colorizer": "Раскрашиватель",
 
   "block.gardenbotanical.bouvardia": "Бувардия",
   "block.gardenbotanical.brunia": "Бруния",

@@ -20,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class ColorizerBlock extends BlockWithEntity implements BlockEntityProvider {
-    private static final VoxelShape SHAPE = VoxelShapes.union(Block.createCuboidShape(4, 0, 3, 13, 15, 12));
+    private static final VoxelShape SHAPE = VoxelShapes.union(Block.createCuboidShape(1, 0, 1, 15, 21, 15));
     public static final BooleanProperty PROCESS = BooleanProperty.of("process");
 
     protected ColorizerBlock(Settings settings) {

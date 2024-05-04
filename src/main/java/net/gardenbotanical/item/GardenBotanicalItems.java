@@ -23,6 +23,7 @@ public class GardenBotanicalItems {
     public static final Item GARDEN_PRUNER = registerItem("garden_pruner", new GardenPrunerItem(new FabricItemSettings().maxDamage(64)));
 
     public static final Item WATER_DYE_MIXER = registerItem("water_dye_mixer", new Item(new FabricItemSettings()));
+    public static final Item COLORIZER_DYE = registerItem("colorizer_dye", new Item(new FabricItemSettings()));
 
     public static final Item DYE = registerItem("dye", new DyeItem(new FabricItemSettings()));
 

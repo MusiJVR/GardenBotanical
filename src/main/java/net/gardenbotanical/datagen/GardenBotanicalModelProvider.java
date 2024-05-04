@@ -33,6 +33,7 @@ public class GardenBotanicalModelProvider extends FabricModelProvider {
         itemModelGenerator.register(GardenBotanicalItems.GARDEN_PRUNER, Models.GENERATED);
 
         itemModelGenerator.register(GardenBotanicalItems.WATER_DYE_MIXER, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.COLORIZER_DYE, Models.GENERATED);
 
         itemModelGenerator.register(GardenBotanicalItems.DYE, Models.GENERATED);
 
