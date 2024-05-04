@@ -21,8 +21,8 @@ import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 
-public class ColorizerBlockEntityRendererDye extends GeoRenderLayer<ColorizerBlockEntity> {
-    public ColorizerBlockEntityRendererDye(GeoRenderer entityRendererIn) {
+public class ColorizerBlockEntityRenderLayerDye extends GeoRenderLayer<ColorizerBlockEntity> {
+    public ColorizerBlockEntityRenderLayerDye(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
     }
 
@@ -30,7 +30,7 @@ public class ColorizerBlockEntityRendererDye extends GeoRenderLayer<ColorizerBlo
     public void render(MatrixStack poseStack, ColorizerBlockEntity animatable, BakedGeoModel bakedModel, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
 
-        ItemStack itemStack = GardenBotanicalItems.COLORIZER_DYE.getDefaultStack();
+        ItemStack itemStack = animatable.getDyeRender();
 
         poseStack.push();
 

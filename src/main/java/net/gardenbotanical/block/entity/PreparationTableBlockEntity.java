@@ -82,14 +82,12 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
 
     @Override
     protected void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
         nbt.putInt("preparation_table.progress", progress);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
         Inventories.readNbt(nbt, inventory);
         progress = nbt.getInt("preparation_table.progress");
     }

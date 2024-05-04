@@ -8,6 +8,12 @@ import net.minecraft.util.Identifier;
 
 public class GardenBotanicalTags {
     public static final TagKey<Item> FLOWER_POWDERS = registerItemTag("flower_powders");
+    public static final TagKey<Item> COLORIZER_ARMOR_TYPES = registerItemTag("colorizer_armor_types");
+    public static final TagKey<Item> COLORIZER_HELMET = registerItemTag("colorizer_helmet");
+    public static final TagKey<Item> COLORIZER_CHESTPLATE = registerItemTag("colorizer_chestplate");
+    public static final TagKey<Item> COLORIZER_LEGGINGS = registerItemTag("colorizer_leggings");
+    public static final TagKey<Item> COLORIZER_BOOTS = registerItemTag("colorizer_boots");
+
 
     public static TagKey<Item> registerItemTag(String id) {
         return TagKey.of(RegistryKeys.ITEM, new Identifier(GardenBotanical.MOD_ID, id));

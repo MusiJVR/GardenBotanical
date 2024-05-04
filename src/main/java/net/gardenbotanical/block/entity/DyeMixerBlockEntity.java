@@ -10,6 +10,7 @@ import net.gardenbotanical.block.DyeMixerBlock;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.item.GardenBotanicalItems;
 import net.gardenbotanical.network.GardenBotanicalNetwork;
+import net.gardenbotanical.network.packet.S2C.DyeMixerSyncPacket;
 import net.gardenbotanical.recipe.DyeMixerRecipe;
 import net.gardenbotanical.util.ColorUtils;
 import net.gardenbotanical.util.FluidStack;
@@ -111,7 +112,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         this.fluidStorage.amount = fluidLevel;
     }
 
-    public ItemStack getWater() {
+    public ItemStack getFluidRender() {
         if (!slotIsEmpty(OUTPUT_SLOT_DYE)) {
             ItemStack itemStack = new ItemStack(GardenBotanicalItems.WATER_DYE_MIXER);
             if (getOutputSlotDye().getNbt() != null)
@@ -195,7 +196,6 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
 
     @Override
     protected void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
         nbt.putInt("dye_mixer.progress", progress);
         nbt.put("dye_mixer.variant", fluidStorage.variant.toNbt());
@@ -204,7 +204,6 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
 
     @Override
     public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
         Inventories.readNbt(nbt, inventory);
         progress = nbt.getInt("dye_mixer.progress");
         fluidStorage.variant = FluidVariant.fromNbt((NbtCompound) nbt.get("dye_mixer.variant"));
@@ -212,17 +211,8 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     }
 
     private void updateClientData() {
-        PacketByteBuf data = PacketByteBufs.create();
-        fluidStorage.variant.toPacket(data);
-        data.writeLong(fluidStorage.amount);
-        data.writeInt(inventory.size());
-        for (ItemStack itemStack : inventory) {
-            data.writeItemStack(itemStack);
-        }
-        data.writeBlockPos(getPos());
-
         for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
-            GardenBotanicalNetwork.FLUID_SYNC_PACKET.send(player, data);
+            GardenBotanicalNetwork.DM_SYNC_PACKET.send(player, DyeMixerSyncPacket.write(inventory, fluidStorage, getPos()));
         }
     }
 

@@ -97,6 +97,6 @@ public class PreparationTableBlock extends BlockWithEntity implements BlockEntit
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, GardenBotanicalBlockEntities.PREPARATION_TABLE_BLOCK_ENTITY, (world1, pos, state1, blockEnity) -> blockEnity.tick(world1, pos, state1));
+        return checkType(type, GardenBotanicalBlockEntities.PREPARATION_TABLE_BLOCK_ENTITY, (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
     }
 }

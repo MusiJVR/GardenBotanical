@@ -25,7 +25,7 @@ public class PoundingTableBlockEntityRenderer implements BlockEntityRenderer<Pou
     public void render(PoundingTableBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
 
-        ItemStack itemStack = entity.getRenderStack();
+        ItemStack itemStack = entity.getItemStackRender();
         matrices.push();
         matrices.translate(0.5f, 0.643f, 0.5f);
         matrices.scale(0.5f, 0.5f, 0.5f);

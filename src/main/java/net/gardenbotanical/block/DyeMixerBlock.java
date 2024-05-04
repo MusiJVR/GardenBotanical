@@ -88,7 +88,7 @@ public class DyeMixerBlock extends BlockWithEntity implements BlockEntityProvide
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof DyeMixerBlockEntity) {
-                ItemScatterer.spawn(world, pos, (DyeMixerBlockEntity)blockEntity);
+                ItemScatterer.spawn(world, pos, (DyeMixerBlockEntity) blockEntity);
                 world.updateComparators(pos, this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
@@ -147,6 +147,6 @@ public class DyeMixerBlock extends BlockWithEntity implements BlockEntityProvide
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, GardenBotanicalBlockEntities.DYE_MIXER_BLOCK_ENTITY, (world1, pos, state1, blockEnity) -> blockEnity.tick(world1, pos, state1));
+        return checkType(type, GardenBotanicalBlockEntities.DYE_MIXER_BLOCK_ENTITY, (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
     }
 }

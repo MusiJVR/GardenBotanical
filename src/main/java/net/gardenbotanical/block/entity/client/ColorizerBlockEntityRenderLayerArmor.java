@@ -1,6 +1,7 @@
 package net.gardenbotanical.block.entity.client;
 
 import net.gardenbotanical.block.entity.ColorizerBlockEntity;
+import net.gardenbotanical.tag.GardenBotanicalTags;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.OverlayTexture;
@@ -11,7 +12,6 @@ import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.LightType;
@@ -21,8 +21,8 @@ import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 
-public class ColorizerBlockEntityRendererArmor extends GeoRenderLayer<ColorizerBlockEntity> {
-    public ColorizerBlockEntityRendererArmor(GeoRenderer entityRendererIn) {
+public class ColorizerBlockEntityRenderLayerArmor extends GeoRenderLayer<ColorizerBlockEntity> {
+    public ColorizerBlockEntityRenderLayerArmor(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
     }
 
@@ -30,13 +30,13 @@ public class ColorizerBlockEntityRendererArmor extends GeoRenderLayer<ColorizerB
     public void render(MatrixStack poseStack, ColorizerBlockEntity animatable, BakedGeoModel bakedModel, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
 
-        ItemStack itemStack = Items.LEATHER_CHESTPLATE.getDefaultStack();
+        ItemStack itemStack = animatable.getArmorRender();
 
         poseStack.push();
 
-        if (itemStack.isOf(Items.LEATHER_HELMET) || itemStack.isOf(Items.LEATHER_BOOTS)) {
+        if (itemStack.isIn(GardenBotanicalTags.COLORIZER_HELMET) || itemStack.isIn(GardenBotanicalTags.COLORIZER_BOOTS)) {
             poseStack.translate(0.125f, 0.91f, 0.125f);
-        } else if (itemStack.isOf(Items.LEATHER_CHESTPLATE) || itemStack.isOf(Items.LEATHER_LEGGINGS)) {
+        } else if (itemStack.isIn(GardenBotanicalTags.COLORIZER_CHESTPLATE) || itemStack.isIn(GardenBotanicalTags.COLORIZER_LEGGINGS)) {
             poseStack.translate(0.125f, 0.875f, 0.125f);
         }
 

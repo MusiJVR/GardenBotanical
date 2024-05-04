@@ -26,7 +26,7 @@ public class DyeMixerBlockEntityRenderLayer extends GeoRenderLayer<DyeMixerBlock
     public void render(MatrixStack poseStack, DyeMixerBlockEntity animatable, BakedGeoModel bakedModel, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
 
-        ItemStack itemStack = animatable.getWater();
+        ItemStack itemStack = animatable.getFluidRender();
 
         poseStack.push();
 

@@ -1,11 +1,20 @@
 package net.gardenbotanical.block.entity;
 
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.gardenbotanical.block.ColorizerBlock;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
+import net.gardenbotanical.item.GardenBotanicalItems;
+import net.gardenbotanical.network.GardenBotanicalNetwork;
+import net.gardenbotanical.network.packet.S2C.ColorizerSyncPacket;
 import net.gardenbotanical.util.ImplementedInventory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -27,8 +36,35 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
     public static final int INPUT_SLOT_DYE = 1;
     public static final int OUTPUT_SLOT_ARMOR = 2;
 
+    protected final PropertyDelegate propertyDelegate;
+    private int progress = 0;
+    private int maxProgress = 100;
+
     public ColorizerBlockEntity(BlockPos pos, BlockState state) {
         super(GardenBotanicalBlockEntities.COLORIZER_BLOCK_ENTITY, pos, state);
+        this.propertyDelegate = new PropertyDelegate() {
+            @Override
+            public int get(int index) {
+                return switch (index) {
+                    case 0 -> ColorizerBlockEntity.this.progress;
+                    case 1 -> ColorizerBlockEntity.this.maxProgress;
+                    default -> 0;
+                };
+            }
+
+            @Override
+            public void set(int index, int value) {
+                switch (index) {
+                    case 0 -> ColorizerBlockEntity.this.progress = value;
+                    case 1 -> ColorizerBlockEntity.this.maxProgress = value;
+                }
+            }
+
+            @Override
+            public int size() {
+                return 2;
+            }
+        };
     }
 
     @Override
@@ -36,8 +72,87 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
         return inventory;
     }
 
-    public void tick(World world, BlockPos pos, BlockState state) {
+    public void setInventory(DefaultedList<ItemStack> inventory) {
+        for (int i = 0; i < inventory.size(); i++) {
+            this.inventory.set(i, inventory.get(i));
+        }
+    }
 
+    public ItemStack getOutputArmor() {
+        return inventory.get(OUTPUT_SLOT_ARMOR);
+    }
+
+    public ItemStack getInputArmor() {
+        return inventory.get(INPUT_SLOT_ARMOR);
+    }
+
+    public ItemStack getInputDye() {
+        return inventory.get(INPUT_SLOT_DYE);
+    }
+
+    public void clearOutputSlot() {
+        inventory.set(OUTPUT_SLOT_ARMOR, ItemStack.EMPTY);
+    }
+
+    public boolean slotIsEmpty(int slot) {
+        return inventory.get(slot).isEmpty();
+    }
+
+    private void setProcessState(BlockState state, boolean value) {
+        this.progress++;
+        if (world != null) {
+            world.setBlockState(pos, state.with(ColorizerBlock.PROCESS, value));
+        }
+    }
+
+    private void resetProgress(BlockState state) {
+        setProcessState(state, false);
+        this.progress = 0;
+    }
+
+    @Override
+    protected void writeNbt(NbtCompound nbt) {
+        Inventories.writeNbt(nbt, inventory);
+        nbt.putInt("colorizer.progress", progress);
+    }
+
+    @Override
+    public void readNbt(NbtCompound nbt) {
+        Inventories.readNbt(nbt, inventory);
+        progress = nbt.getInt("colorizer.progress");
+    }
+
+    public ItemStack getArmorRender() {
+        if (!slotIsEmpty(INPUT_SLOT_ARMOR)) {
+            return getInputArmor();
+        } else {
+            return ItemStack.EMPTY;
+        }
+    }
+
+    public ItemStack getDyeRender() {
+        if (!slotIsEmpty(INPUT_SLOT_DYE)) {
+            ItemStack itemStack = new ItemStack(GardenBotanicalItems.COLORIZER_DYE);
+            if (getInputDye().getNbt() != null)
+                itemStack.getOrCreateNbt().putInt("color", getInputDye().getNbt().getInt("color"));
+            return itemStack;
+        } else {
+            return ItemStack.EMPTY;
+        }
+    }
+
+    public void updateClientData() {
+        for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
+            GardenBotanicalNetwork.C_SYNC_PACKET.send(player, ColorizerSyncPacket.write(inventory, getPos()));
+        }
+    }
+
+    public void tick(World world, BlockPos pos, BlockState state) {
+        if (world.isClient)
+            return;
+
+        updateClientData();
+        markDirty();
     }
 
     @Override

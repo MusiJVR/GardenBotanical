@@ -1,7 +1,8 @@
 package net.gardenbotanical.network.packet.S2C;
 
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
-import net.gardenbotanical.block.entity.PoundingTableBlockEntity;
+import net.gardenbotanical.block.entity.ColorizerBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.item.ItemStack;
@@ -10,7 +11,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 
 
-public class ItemSyncPacket {
+public class ColorizerSyncPacket {
     public static void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         if (client.world != null) {
             int size = buf.readInt();
@@ -20,9 +21,19 @@ public class ItemSyncPacket {
             }
             BlockPos position = buf.readBlockPos();
 
-            if (client.world.getBlockEntity(position) instanceof PoundingTableBlockEntity blockEntity) {
+            if (client.world.getBlockEntity(position) instanceof ColorizerBlockEntity blockEntity) {
                 blockEntity.setInventory(list);
             }
         }
+    }
+
+    public static PacketByteBuf write(DefaultedList<ItemStack> inventory, BlockPos blockPos) {
+        PacketByteBuf data = PacketByteBufs.create();
+        data.writeInt(inventory.size());
+        for (ItemStack itemStack : inventory) {
+            data.writeItemStack(itemStack);
+        }
+        data.writeBlockPos(blockPos);
+        return data;
     }
 }

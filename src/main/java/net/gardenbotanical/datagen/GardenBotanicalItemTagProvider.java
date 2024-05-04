@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.item.GardenBotanicalItems;
 import net.gardenbotanical.tag.GardenBotanicalTags;
+import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 
@@ -41,6 +42,28 @@ public class GardenBotanicalItemTagProvider extends FabricTagProvider.ItemTagPro
                 GardenBotanicalItems.POWDERED_SETARIA,
                 GardenBotanicalItems.POWDERED_ALOE_TRASKI,
                 GardenBotanicalItems.POWDERED_ASTER
+        );
+
+        getOrCreateTagBuilder(GardenBotanicalTags.COLORIZER_ARMOR_TYPES)
+                .addTag(GardenBotanicalTags.COLORIZER_HELMET)
+                .addTag(GardenBotanicalTags.COLORIZER_CHESTPLATE)
+                .addTag(GardenBotanicalTags.COLORIZER_LEGGINGS)
+                .addTag(GardenBotanicalTags.COLORIZER_BOOTS);
+
+        getOrCreateTagBuilder(GardenBotanicalTags.COLORIZER_HELMET).add(
+                Items.LEATHER_HELMET
+        );
+
+        getOrCreateTagBuilder(GardenBotanicalTags.COLORIZER_CHESTPLATE).add(
+                Items.LEATHER_CHESTPLATE
+        );
+
+        getOrCreateTagBuilder(GardenBotanicalTags.COLORIZER_LEGGINGS).add(
+                Items.LEATHER_LEGGINGS
+        );
+
+        getOrCreateTagBuilder(GardenBotanicalTags.COLORIZER_BOOTS).add(
+                Items.LEATHER_BOOTS
         );
     }
 }

@@ -1,9 +1,9 @@
 package net.gardenbotanical.block.entity;
 
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.gardenbotanical.network.GardenBotanicalNetwork;
+import net.gardenbotanical.network.packet.S2C.PoundingTableSyncPacket;
 import net.gardenbotanical.recipe.PoundingTableRecipe;
 import net.gardenbotanical.screen.PoundingTableScreenHandler;
 import net.gardenbotanical.util.ImplementedInventory;
@@ -73,7 +73,7 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
         };
     }
 
-    public ItemStack getRenderStack() {
+    public ItemStack getItemStackRender() {
         if (this.getStack(OUTPUT_SLOT_POWDER).isEmpty()) {
             return ItemStack.EMPTY;
         } else {
@@ -88,15 +88,8 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
     }
 
     public void updateClientData() {
-        PacketByteBuf data = PacketByteBufs.create();
-        data.writeInt(inventory.size());
-        for (ItemStack itemStack : inventory) {
-            data.writeItemStack(itemStack);
-        }
-        data.writeBlockPos(getPos());
-
         for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
-            GardenBotanicalNetwork.ITEM_SYNC_PACKET.send(player, data);
+            GardenBotanicalNetwork.PT_SYNC_PACKET.send(player, PoundingTableSyncPacket.write(inventory, getPos()));
         }
     }
 
@@ -117,7 +110,6 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
 
     @Override
     protected void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
         nbt.putInt("pounding_table.progress", progress);
         nbt.putInt("pounding_table.fuel", fuel);
@@ -125,7 +117,6 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
 
     @Override
     public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
         Inventories.readNbt(nbt, inventory);
         progress = nbt.getInt("pounding_table.progress");
         fuel = nbt.getInt("pounding_table.fuel");
