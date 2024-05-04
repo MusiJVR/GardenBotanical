@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.gardenbotanical.GardenBotanical;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
+import net.gardenbotanical.item.custom.ColorizerItem;
 import net.gardenbotanical.item.custom.DyeItem;
 import net.gardenbotanical.item.custom.DyeMixerItem;
 import net.gardenbotanical.item.custom.GardenPrunerItem;
@@ -17,6 +18,7 @@ import net.minecraft.util.Identifier;
 
 public class GardenBotanicalItems {
     public static final Item DYE_MIXER = registerItem("dye_mixer", new DyeMixerItem(GardenBotanicalBlocks.DYE_MIXER, new FabricItemSettings()));
+    public static final Item COLORIZER = registerItem("colorizer", new ColorizerItem(GardenBotanicalBlocks.COLORIZER, new FabricItemSettings()));
 
     public static final Item GARDEN_PRUNER = registerItem("garden_pruner", new GardenPrunerItem(new FabricItemSettings().maxDamage(64)));
 

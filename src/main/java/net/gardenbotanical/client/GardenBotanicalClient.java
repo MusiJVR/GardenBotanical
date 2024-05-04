@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.gardenbotanical.GardenBotanical;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.block.entity.GardenBotanicalBlockEntities;
+import net.gardenbotanical.block.entity.client.ColorizerBlockEntityRenderer;
 import net.gardenbotanical.block.entity.client.DyeMixerBlockEntityRenderer;
 import net.gardenbotanical.block.entity.client.PoundingTableBlockEntityRenderer;
 import net.gardenbotanical.item.GardenBotanicalItems;
@@ -53,6 +54,7 @@ public class GardenBotanicalClient implements ClientModInitializer {
 
         BlockEntityRendererFactories.register(GardenBotanicalBlockEntities.POUNDING_TABLE_BLOCK_ENTITY, PoundingTableBlockEntityRenderer::new);
         BlockEntityRendererFactories.register(GardenBotanicalBlockEntities.DYE_MIXER_BLOCK_ENTITY, DyeMixerBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(GardenBotanicalBlockEntities.COLORIZER_BLOCK_ENTITY, ColorizerBlockEntityRenderer::new);
 
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
             NbtCompound nbtCompound = stack.getNbt();

@@ -19,6 +19,7 @@ public class GardenBotanicalItemGroups {
                         entries.add(GardenBotanicalBlocks.PREPARATION_TABLE);
                         entries.add(GardenBotanicalBlocks.POUNDING_TABLE);
                         entries.add(GardenBotanicalItems.DYE_MIXER);
+                        entries.add(GardenBotanicalItems.COLORIZER);
 
                         entries.add(GardenBotanicalItems.GARDEN_PRUNER);
 

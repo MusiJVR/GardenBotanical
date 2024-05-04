@@ -1,4 +1,4 @@
-package net.gardenbotanical.block.entity;
+package net.gardenbotanical.util;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;

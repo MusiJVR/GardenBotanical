@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.gardenbotanical.network.GardenBotanicalNetwork;
 import net.gardenbotanical.recipe.PoundingTableRecipe;
 import net.gardenbotanical.screen.PoundingTableScreenHandler;
+import net.gardenbotanical.util.ImplementedInventory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;

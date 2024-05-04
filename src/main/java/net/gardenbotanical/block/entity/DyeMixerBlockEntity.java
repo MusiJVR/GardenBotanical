@@ -13,6 +13,7 @@ import net.gardenbotanical.network.GardenBotanicalNetwork;
 import net.gardenbotanical.recipe.DyeMixerRecipe;
 import net.gardenbotanical.util.ColorUtils;
 import net.gardenbotanical.util.FluidStack;
+import net.gardenbotanical.util.ImplementedInventory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.fluid.Fluids;
@@ -310,11 +311,15 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
 
     private void setProcessState(BlockState state, boolean value) {
         this.progress++;
-        PacketByteBuf data = PacketByteBufs.create();
-        data.writeBlockPos(pos);
-        for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
-            GardenBotanicalNetwork.SPAWN_PARTICLE_PACKET.send(player, data);
+
+        if (value) {
+            PacketByteBuf data = PacketByteBufs.create();
+            data.writeBlockPos(pos);
+            for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
+                GardenBotanicalNetwork.SPAWN_PARTICLE_PACKET.send(player, data);
+            }
         }
+
         if (world != null) {
             world.setBlockState(pos, state.with(DyeMixerBlock.PROCESS, value));
         }
