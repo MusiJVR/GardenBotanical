@@ -134,9 +134,7 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
-        if (world.isClient()) {
-            return;
-        }
+        if (world.isClient()) return;
 
         updateClientData();
         if (isFuelSlotFlint(INPUT_SLOT_FLINT) && fuel <= 0) {

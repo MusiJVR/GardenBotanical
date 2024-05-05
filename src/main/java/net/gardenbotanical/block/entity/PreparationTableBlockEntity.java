@@ -104,9 +104,7 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
-        if (world.isClient()) {
-            return;
-        }
+        if (world.isClient()) return;
 
         if (isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_PETAL) && isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_SEEDS)) {
             if (hasRecipe()) {

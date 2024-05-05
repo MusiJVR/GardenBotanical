@@ -153,9 +153,7 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
-        if (world.isClient) {
-            return;
-        }
+        if (world.isClient) return;
 
         updateClientData();
         if (!slotIsEmpty(INPUT_SLOT_ARMOR) && !slotIsEmpty(INPUT_SLOT_DYE)) {
@@ -207,9 +205,13 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
         NbtCompound nbtArmor = inventory.get(INPUT_SLOT_ARMOR).getNbt();
         NbtCompound nbtDye = inventory.get(INPUT_SLOT_DYE).getNbt();
 
-        int outputColorArmor = ColorUtils.blendColors(ColorUtils.checkArmorColorNbt(nbtArmor, GardenBotanical.DEFAULT_LEATHER_ARMOR_COLOR), ColorUtils.checkColorNbt(nbtDye, GardenBotanical.DEFAULT_DYE_COLOR));
-        ItemStack outputArmor = inventory.get(INPUT_SLOT_ARMOR).copy();
+        int outputColorArmor;
+        if (ColorUtils.checkArmorColorNbt(nbtArmor, GardenBotanical.DEFAULT_LEATHER_ARMOR_COLOR) != GardenBotanical.DEFAULT_LEATHER_ARMOR_COLOR)
+            outputColorArmor = ColorUtils.blendColors(ColorUtils.checkArmorColorNbt(nbtArmor, GardenBotanical.DEFAULT_LEATHER_ARMOR_COLOR), ColorUtils.checkColorNbt(nbtDye, GardenBotanical.DEFAULT_DYE_COLOR));
+        else
+            outputColorArmor = ColorUtils.checkColorNbt(nbtDye, GardenBotanical.DEFAULT_DYE_COLOR);
 
+        ItemStack outputArmor = inventory.get(INPUT_SLOT_ARMOR).copy();
         this.removeStack(INPUT_SLOT_ARMOR);
         this.removeStack(INPUT_SLOT_DYE);
 

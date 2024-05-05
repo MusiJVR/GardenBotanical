@@ -218,9 +218,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
-        if (world.isClient()) {
-            return;
-        }
+        if (world.isClient()) return;
 
         updateClientData();
         if (fluidStorageIsFull()) {
