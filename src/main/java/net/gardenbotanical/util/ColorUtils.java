@@ -24,4 +24,17 @@ public class ColorUtils {
             return defaultColor;
         }
     }
+
+    public static int checkArmorColorNbt(NbtCompound nbt, int defaultColor) {
+        if (nbt != null) {
+            NbtCompound nbtColor = (NbtCompound) nbt.get("display");
+            if (nbtColor != null) {
+                return nbtColor.getInt("color");
+            } else {
+                return defaultColor;
+            }
+        } else {
+            return defaultColor;
+        }
+    }
 }

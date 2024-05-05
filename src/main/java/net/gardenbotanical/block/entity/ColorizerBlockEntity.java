@@ -1,11 +1,14 @@
 package net.gardenbotanical.block.entity;
 
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.gardenbotanical.GardenBotanical;
 import net.gardenbotanical.block.ColorizerBlock;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.item.GardenBotanicalItems;
 import net.gardenbotanical.network.GardenBotanicalNetwork;
 import net.gardenbotanical.network.packet.S2C.ColorizerSyncPacket;
+import net.gardenbotanical.tag.GardenBotanicalTags;
+import net.gardenbotanical.util.ColorUtils;
 import net.gardenbotanical.util.ImplementedInventory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -38,7 +41,7 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
-    private int maxProgress = 100;
+    private int maxProgress = 167;
 
     public ColorizerBlockEntity(BlockPos pos, BlockState state) {
         super(GardenBotanicalBlockEntities.COLORIZER_BLOCK_ENTITY, pos, state);
@@ -125,6 +128,8 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
     public ItemStack getArmorRender() {
         if (!slotIsEmpty(INPUT_SLOT_ARMOR)) {
             return getInputArmor();
+        } else if (!slotIsEmpty(OUTPUT_SLOT_ARMOR)) {
+            return getOutputArmor();
         } else {
             return ItemStack.EMPTY;
         }
@@ -148,11 +153,27 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
-        if (world.isClient)
+        if (world.isClient) {
             return;
+        }
 
         updateClientData();
-        markDirty();
+        if (!slotIsEmpty(INPUT_SLOT_ARMOR) && !slotIsEmpty(INPUT_SLOT_DYE)) {
+            if (hasRecipe()) {
+                setProcessState(state, true);
+                markDirty(world, pos, state);
+
+                if (progress >= maxProgress) {
+                    craftArmor();
+                    resetProgress(state);
+                }
+            } else {
+                resetProgress(state);
+            }
+        } else {
+            resetProgress(state);
+            markDirty(world, pos, state);
+        }
     }
 
     @Override
@@ -176,5 +197,31 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+    private boolean hasRecipe() {
+        return getInputArmor().isIn(GardenBotanicalTags.COLORIZER_ARMOR_TYPES) && getInputDye().isOf(GardenBotanicalItems.DYE) && slotIsEmpty(OUTPUT_SLOT_ARMOR);
+    }
+
+    private void craftArmor() {
+        NbtCompound nbtArmor = inventory.get(INPUT_SLOT_ARMOR).getNbt();
+        NbtCompound nbtDye = inventory.get(INPUT_SLOT_DYE).getNbt();
+
+        int outputColorArmor = ColorUtils.blendColors(ColorUtils.checkArmorColorNbt(nbtArmor, GardenBotanical.DEFAULT_LEATHER_ARMOR_COLOR), ColorUtils.checkColorNbt(nbtDye, GardenBotanical.DEFAULT_DYE_COLOR));
+        ItemStack outputArmor = inventory.get(INPUT_SLOT_ARMOR).copy();
+
+        this.removeStack(INPUT_SLOT_ARMOR);
+        this.removeStack(INPUT_SLOT_DYE);
+
+        NbtCompound nbtOutputArmor = outputArmor.getOrCreateNbt();
+        NbtCompound nbt = new NbtCompound();
+        nbt.putInt("color", outputColorArmor);
+        nbtOutputArmor.put("display", nbt);
+
+        putItemInOutputSlot(outputArmor, OUTPUT_SLOT_ARMOR);
+    }
+
+    private void putItemInOutputSlot(ItemStack itemStack, int slot) {
+        this.setStack(slot, itemStack);
     }
 }

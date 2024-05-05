@@ -21,6 +21,7 @@ public class GardenBotanical implements ModInitializer {
 
     public static final int DEFAULT_WATER_COLOR = 0x3F76E4;
     public static final int DEFAULT_DYE_COLOR = 0xFFFFFF;
+    public static final int DEFAULT_LEATHER_ARMOR_COLOR = 0xA06540;
 
     @Override
     public void onInitialize() {

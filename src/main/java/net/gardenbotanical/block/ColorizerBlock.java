@@ -91,17 +91,19 @@ public class ColorizerBlock extends BlockWithEntity implements BlockEntityProvid
                 itemEntity.setToDefaultPickupDelay();
                 world.spawnEntity(itemEntity);
                 entity.clearOutputSlot();
-                world.playSound(null, pos, SoundEvents.BLOCK_BEEHIVE_EXIT, SoundCategory.BLOCKS, 1f, 1f);
+                world.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.BLOCKS, 1f, 1f);
             } else {
                 if (itemStack.isIn(GardenBotanicalTags.COLORIZER_ARMOR_TYPES)) {
                     if (entity.slotIsEmpty(ColorizerBlockEntity.INPUT_SLOT_ARMOR)) {
                         entity.getItems().set(ColorizerBlockEntity.INPUT_SLOT_ARMOR, itemStack.copyWithCount(1));
                         itemStack.decrement(1);
+                        world.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.BLOCKS, 1f, 1f);
                     }
                 } else if (itemStack.isOf(GardenBotanicalItems.DYE)) {
                     if (entity.slotIsEmpty(ColorizerBlockEntity.INPUT_SLOT_DYE)) {
                         entity.getItems().set(ColorizerBlockEntity.INPUT_SLOT_DYE, itemStack.copyWithCount(1));
                         itemStack.decrement(1);
+                        world.playSound(null, pos, SoundEvents.BLOCK_HONEY_BLOCK_SLIDE, SoundCategory.BLOCKS, 1f, 1f);
                     }
                 }
             }

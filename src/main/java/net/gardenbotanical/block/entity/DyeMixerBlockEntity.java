@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
+import net.gardenbotanical.GardenBotanical;
 import net.gardenbotanical.block.DyeMixerBlock;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.item.GardenBotanicalItems;
@@ -272,8 +273,8 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         putItemInOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_DYE);
     }
 
-    private void putItemInOutputSlot(ItemStack result, int slot) {
-        this.setStack(slot, result);
+    private void putItemInOutputSlot(ItemStack itemStack, int slot) {
+        this.setStack(slot, itemStack);
     }
 
     private boolean hasRecipe() {
@@ -319,7 +320,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         NbtCompound nbtFirstColor = inventory.get(INPUT_SLOT_FIRST_DYE).getNbt();
         NbtCompound nbtSecondColor = inventory.get(INPUT_SLOT_SECOND_DYE).getNbt();
 
-        int outputColorDye = ColorUtils.blendColors(ColorUtils.checkColorNbt(nbtFirstColor, 0xFFFFFF), ColorUtils.checkColorNbt(nbtSecondColor, 0xFFFFFF));
+        int outputColorDye = ColorUtils.blendColors(ColorUtils.checkColorNbt(nbtFirstColor, GardenBotanical.DEFAULT_DYE_COLOR), ColorUtils.checkColorNbt(nbtSecondColor, GardenBotanical.DEFAULT_DYE_COLOR));
 
         this.removeStack(INPUT_SLOT_FIRST_DYE);
         this.removeStack(INPUT_SLOT_SECOND_DYE);
