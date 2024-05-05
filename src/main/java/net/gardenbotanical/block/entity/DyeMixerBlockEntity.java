@@ -198,17 +198,17 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     @Override
     protected void writeNbt(NbtCompound nbt) {
         Inventories.writeNbt(nbt, inventory);
-        nbt.putInt("dye_mixer.progress", progress);
-        nbt.put("dye_mixer.variant", fluidStorage.variant.toNbt());
-        nbt.putLong("dye_mixer.fluid", fluidStorage.amount);
+        nbt.putInt("progress", progress);
+        nbt.put("variant", fluidStorage.variant.toNbt());
+        nbt.putLong("fluid", fluidStorage.amount);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
         Inventories.readNbt(nbt, inventory);
-        progress = nbt.getInt("dye_mixer.progress");
-        fluidStorage.variant = FluidVariant.fromNbt((NbtCompound) nbt.get("dye_mixer.variant"));
-        fluidStorage.amount = nbt.getLong("dye_mixer.fluid");
+        progress = nbt.getInt("progress");
+        fluidStorage.variant = FluidVariant.fromNbt((NbtCompound) nbt.get("variant"));
+        fluidStorage.amount = nbt.getLong("fluid");
     }
 
     private void updateClientData() {
@@ -218,7 +218,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
-        if (world.isClient()) return;
+        if (world.isClient) return;
 
         updateClientData();
         if (fluidStorageIsFull()) {

@@ -97,7 +97,7 @@ public class DyeMixerBlock extends BlockWithEntity implements BlockEntityProvide
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient()) {
+        if (!world.isClient) {
             DyeMixerBlockEntity entity = (DyeMixerBlockEntity) world.getBlockEntity(pos);
             ItemStack itemStack = player.getStackInHand(hand);
 

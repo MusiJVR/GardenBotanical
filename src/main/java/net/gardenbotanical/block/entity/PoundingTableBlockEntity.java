@@ -111,15 +111,15 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
     @Override
     protected void writeNbt(NbtCompound nbt) {
         Inventories.writeNbt(nbt, inventory);
-        nbt.putInt("pounding_table.progress", progress);
-        nbt.putInt("pounding_table.fuel", fuel);
+        nbt.putInt("progress", progress);
+        nbt.putInt("fuel", fuel);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
         Inventories.readNbt(nbt, inventory);
-        progress = nbt.getInt("pounding_table.progress");
-        fuel = nbt.getInt("pounding_table.fuel");
+        progress = nbt.getInt("progress");
+        fuel = nbt.getInt("fuel");
     }
 
     @Override
@@ -134,7 +134,7 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
-        if (world.isClient()) return;
+        if (world.isClient) return;
 
         updateClientData();
         if (isFuelSlotFlint(INPUT_SLOT_FLINT) && fuel <= 0) {

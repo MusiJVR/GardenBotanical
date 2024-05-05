@@ -82,7 +82,7 @@ public class ColorizerBlock extends BlockWithEntity implements BlockEntityProvid
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient()) {
+        if (!world.isClient) {
             ColorizerBlockEntity entity = (ColorizerBlockEntity) world.getBlockEntity(pos);
             ItemStack itemStack = player.getStackInHand(hand);
             if (!entity.slotIsEmpty(ColorizerBlockEntity.OUTPUT_SLOT_ARMOR)) {

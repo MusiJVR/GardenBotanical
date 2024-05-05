@@ -80,7 +80,7 @@ public class PoundingTableBlock extends BlockWithEntity implements BlockEntityPr
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient()) {
+        if (!world.isClient) {
             NamedScreenHandlerFactory screenHandlerFactory = ((PoundingTableBlockEntity) world.getBlockEntity(pos));
 
             if (screenHandlerFactory != null) {

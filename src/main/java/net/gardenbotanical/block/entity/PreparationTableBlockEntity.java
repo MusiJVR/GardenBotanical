@@ -83,13 +83,13 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
     @Override
     protected void writeNbt(NbtCompound nbt) {
         Inventories.writeNbt(nbt, inventory);
-        nbt.putInt("preparation_table.progress", progress);
+        nbt.putInt("progress", progress);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
         Inventories.readNbt(nbt, inventory);
-        progress = nbt.getInt("preparation_table.progress");
+        progress = nbt.getInt("progress");
     }
 
     @Override
@@ -104,7 +104,7 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
-        if (world.isClient()) return;
+        if (world.isClient) return;
 
         if (isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_PETAL) && isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_SEEDS)) {
             if (hasRecipe()) {

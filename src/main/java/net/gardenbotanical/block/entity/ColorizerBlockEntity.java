@@ -116,13 +116,13 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
     @Override
     protected void writeNbt(NbtCompound nbt) {
         Inventories.writeNbt(nbt, inventory);
-        nbt.putInt("colorizer.progress", progress);
+        nbt.putInt("progress", progress);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
         Inventories.readNbt(nbt, inventory);
-        progress = nbt.getInt("colorizer.progress");
+        progress = nbt.getInt("progress");
     }
 
     public ItemStack getArmorRender() {

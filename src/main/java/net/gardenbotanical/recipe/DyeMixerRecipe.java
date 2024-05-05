@@ -27,9 +27,7 @@ public class DyeMixerRecipe implements Recipe<SimpleInventory> {
 
     @Override
     public boolean matches(SimpleInventory inventory, World world) {
-        if (world.isClient()) {
-            return false;
-        }
+        if (world.isClient) return false;
 
         return ingredient.test(inventory.getStack(0));
     }
