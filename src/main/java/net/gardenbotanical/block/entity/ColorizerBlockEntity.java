@@ -20,6 +20,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -199,6 +200,20 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
 
     private boolean hasRecipe() {
         return getInputArmor().isIn(GardenBotanicalTags.COLORIZER_ARMOR_TYPES) && getInputDye().isOf(GardenBotanicalItems.DYE) && slotIsEmpty(OUTPUT_SLOT_ARMOR);
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction side) {
+        return side == Direction.DOWN && slot == OUTPUT_SLOT_ARMOR;
+    }
+
+    @Override
+    public int[] getAvailableSlots(Direction side) {
+        if (side == Direction.DOWN) {
+            return new int[] {OUTPUT_SLOT_ARMOR};
+        } else {
+            return new int[] {};
+        }
     }
 
     private void craftArmor() {

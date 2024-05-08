@@ -2,10 +2,7 @@ package net.gardenbotanical.network;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.gardenbotanical.GardenBotanical;
-import net.gardenbotanical.network.packet.S2C.ColorizerSyncPacket;
-import net.gardenbotanical.network.packet.S2C.DyeMixerSyncPacket;
-import net.gardenbotanical.network.packet.S2C.PoundingTableSyncPacket;
-import net.gardenbotanical.network.packet.S2C.SpawnWaterParticlePacket;
+import net.gardenbotanical.network.packet.S2C.*;
 import net.gardenbotanical.network.packet.ServerPacket;
 
 

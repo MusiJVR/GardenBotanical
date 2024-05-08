@@ -113,6 +113,15 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         this.fluidStorage.amount = fluidLevel;
     }
 
+    public int getFluidColor() {
+        if (!slotIsEmpty(OUTPUT_SLOT_DYE)) {
+            if (getOutputSlotDye().getNbt() != null)
+                return getOutputSlotDye().getNbt().getInt("color");
+        }
+
+        return -1;
+    }
+
     public ItemStack getFluidRender() {
         if (!slotIsEmpty(OUTPUT_SLOT_DYE)) {
             ItemStack itemStack = new ItemStack(GardenBotanicalItems.WATER_DYE_MIXER);
@@ -227,7 +236,6 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
                 markDirty(world, pos, state);
 
                 if (progress >= maxProgress) {
-                    extractFluidStorage();
                     craftItem();
                     resetProgress(state);
                 }

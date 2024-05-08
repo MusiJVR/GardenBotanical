@@ -102,6 +102,7 @@ public class DyeMixerBlock extends BlockWithEntity implements BlockEntityProvide
             ItemStack itemStack = player.getStackInHand(hand);
 
             if (!entity.slotIsEmpty(DyeMixerBlockEntity.OUTPUT_SLOT_DYE)) {
+                entity.extractFluidStorage();
                 Vec3d vec3d = Vec3d.add(pos, 0.5, 1.01, 0.5).addRandom(world.random, 0.7F);
                 ItemEntity itemEntity = new ItemEntity(world, vec3d.getX(), vec3d.getY(), vec3d.getZ(), entity.getOutputSlotDye());
                 itemEntity.setToDefaultPickupDelay();
