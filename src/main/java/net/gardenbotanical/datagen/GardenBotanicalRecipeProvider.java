@@ -68,5 +68,14 @@ public class GardenBotanicalRecipeProvider extends FabricRecipeProvider {
                 .input('S', Items.BOWL)
                 .criterion(hasItem(Items.BRUSH), conditionsFromItem(Items.BRUSH))
                 .offerTo(exporter, new Identifier(getRecipeName(GardenBotanicalBlocks.COLORIZER)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, GardenBotanicalBlocks.BLOCK_COLORIZER, 1)
+                .pattern("L L")
+                .pattern("XXX")
+                .pattern(" X ")
+                .input('X', Blocks.SMOOTH_STONE)
+                .input('L', Items.BRUSH)
+                .criterion(hasItem(Items.BRUSH), conditionsFromItem(Items.BRUSH))
+                .offerTo(exporter, new Identifier(getRecipeName(GardenBotanicalBlocks.BLOCK_COLORIZER)));
     }
 }

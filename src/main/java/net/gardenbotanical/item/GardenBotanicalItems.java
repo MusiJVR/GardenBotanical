@@ -4,10 +4,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.gardenbotanical.GardenBotanical;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
-import net.gardenbotanical.item.custom.ColorizerItem;
-import net.gardenbotanical.item.custom.DyeItem;
-import net.gardenbotanical.item.custom.DyeMixerItem;
-import net.gardenbotanical.item.custom.GardenPrunerItem;
+import net.gardenbotanical.item.custom.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
@@ -19,13 +16,14 @@ import net.minecraft.util.Identifier;
 public class GardenBotanicalItems {
     public static final Item DYE_MIXER = registerItem("dye_mixer", new DyeMixerItem(GardenBotanicalBlocks.DYE_MIXER, new FabricItemSettings()));
     public static final Item COLORIZER = registerItem("colorizer", new ColorizerItem(GardenBotanicalBlocks.COLORIZER, new FabricItemSettings()));
+    public static final Item BLOCK_COLORIZER = registerItem("block_colorizer", new BlockColorizerItem(GardenBotanicalBlocks.BLOCK_COLORIZER, new FabricItemSettings()));
 
     public static final Item GARDEN_PRUNER = registerItem("garden_pruner", new GardenPrunerItem(new FabricItemSettings().maxDamage(64)));
 
     public static final Item WATER_DYE_MIXER = registerItem("water_dye_mixer", new Item(new FabricItemSettings()));
     public static final Item COLORIZER_DYE = registerItem("colorizer_dye", new Item(new FabricItemSettings()));
 
-    public static final Item DYE = registerItem("dye", new DyeItem(new FabricItemSettings()));
+    public static final Item DYE = registerItem("dye", new Item(new FabricItemSettings()));
 
     public static final Item BOUVARDIA_PETAL = registerItem("bouvardia_petal", new Item(new FabricItemSettings()));
     public static final Item BRUNIA_PETAL = registerItem("brunia_petal", new Item(new FabricItemSettings()));

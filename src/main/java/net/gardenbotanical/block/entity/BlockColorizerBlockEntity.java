@@ -2,11 +2,11 @@ package net.gardenbotanical.block.entity;
 
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.gardenbotanical.GardenBotanical;
-import net.gardenbotanical.block.ColorizerBlock;
+import net.gardenbotanical.block.BlockColorizerBlock;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.item.GardenBotanicalItems;
 import net.gardenbotanical.network.GardenBotanicalNetwork;
-import net.gardenbotanical.network.packet.S2C.ColorizerSyncPacket;
+import net.gardenbotanical.network.packet.S2C.BlockColorizerSyncPacket;
 import net.gardenbotanical.tag.GardenBotanicalTags;
 import net.gardenbotanical.util.ColorUtils;
 import net.gardenbotanical.util.ImplementedInventory;
@@ -32,26 +32,26 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 
 
-public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity, ImplementedInventory {
+public class BlockColorizerBlockEntity extends BlockEntity implements GeoBlockEntity, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public static final int INPUT_SLOT_ITEM = 0;
+    public static final int INPUT_SLOT_BLOCK = 0;
     public static final int INPUT_SLOT_DYE = 1;
-    public static final int OUTPUT_SLOT_ITEM = 2;
+    public static final int OUTPUT_SLOT_BLOCK = 2;
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
-    private int maxProgress = 167;
+    private int maxProgress = 140;
 
-    public ColorizerBlockEntity(BlockPos pos, BlockState state) {
-        super(GardenBotanicalBlockEntities.COLORIZER_BLOCK_ENTITY, pos, state);
+    public BlockColorizerBlockEntity(BlockPos pos, BlockState state) {
+        super(GardenBotanicalBlockEntities.BLOCK_COLORIZER_BLOCK_ENTITY, pos, state);
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> ColorizerBlockEntity.this.progress;
-                    case 1 -> ColorizerBlockEntity.this.maxProgress;
+                    case 0 -> BlockColorizerBlockEntity.this.progress;
+                    case 1 -> BlockColorizerBlockEntity.this.maxProgress;
                     default -> 0;
                 };
             }
@@ -59,8 +59,8 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> ColorizerBlockEntity.this.progress = value;
-                    case 1 -> ColorizerBlockEntity.this.maxProgress = value;
+                    case 0 -> BlockColorizerBlockEntity.this.progress = value;
+                    case 1 -> BlockColorizerBlockEntity.this.maxProgress = value;
                 }
             }
 
@@ -82,12 +82,12 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
         }
     }
 
-    public ItemStack getOutputItem() {
-        return inventory.get(OUTPUT_SLOT_ITEM);
+    public ItemStack getOutputBlock() {
+        return inventory.get(OUTPUT_SLOT_BLOCK);
     }
 
-    public ItemStack getInputItem() {
-        return inventory.get(INPUT_SLOT_ITEM);
+    public ItemStack getInputBlock() {
+        return inventory.get(INPUT_SLOT_BLOCK);
     }
 
     public ItemStack getInputDye() {
@@ -95,7 +95,7 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
     }
 
     public void clearOutputSlot() {
-        inventory.set(OUTPUT_SLOT_ITEM, ItemStack.EMPTY);
+        inventory.set(OUTPUT_SLOT_BLOCK, ItemStack.EMPTY);
     }
 
     public boolean slotIsEmpty(int slot) {
@@ -105,7 +105,7 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
     private void setProcessState(BlockState state, boolean value) {
         this.progress++;
         if (world != null) {
-            world.setBlockState(pos, state.with(ColorizerBlock.PROCESS, value));
+            world.setBlockState(pos, state.with(BlockColorizerBlock.PROCESS, value));
         }
     }
 
@@ -126,24 +126,11 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
         progress = nbt.getInt("progress");
     }
 
-    public ItemStack getItemRender() {
-        if (!slotIsEmpty(INPUT_SLOT_ITEM)) {
-            return getInputItem();
-        } else if (!slotIsEmpty(OUTPUT_SLOT_ITEM)) {
-            return getOutputItem();
-        } else {
-            return ItemStack.EMPTY;
-        }
-    }
-
-    public ItemStack getDyeRender() {
-        if (!slotIsEmpty(INPUT_SLOT_DYE)) {
-            ItemStack itemStack = new ItemStack(GardenBotanicalItems.COLORIZER_DYE);
-            NbtCompound nbtColorizerDye = getInputDye().getOrCreateSubNbt("display");
-            if (nbtColorizerDye != null) {
-                itemStack.getOrCreateSubNbt("display").putInt("color", ColorUtils.checkColorNbt(nbtColorizerDye, GardenBotanical.DEFAULT_DYE_COLOR));
-            }
-            return itemStack;
+    public ItemStack getBlockRender() {
+        if (!slotIsEmpty(INPUT_SLOT_BLOCK)) {
+            return getInputBlock();
+        } else if (!slotIsEmpty(OUTPUT_SLOT_BLOCK)) {
+            return getOutputBlock();
         } else {
             return ItemStack.EMPTY;
         }
@@ -151,7 +138,7 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
 
     public void updateClientData() {
         for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
-            GardenBotanicalNetwork.COLORIZER_SYNC_PACKET.send(player, ColorizerSyncPacket.write(inventory, getPos()));
+            GardenBotanicalNetwork.BLOCK_COLORIZER_SYNC_PACKET.send(player, BlockColorizerSyncPacket.write(inventory, getPos()));
         }
     }
 
@@ -159,7 +146,7 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
         if (world.isClient) return;
 
         updateClientData();
-        if (!slotIsEmpty(INPUT_SLOT_ITEM) && !slotIsEmpty(INPUT_SLOT_DYE)) {
+        if (!slotIsEmpty(INPUT_SLOT_BLOCK) && !slotIsEmpty(INPUT_SLOT_DYE)) {
             if (hasRecipe()) {
                 setProcessState(state, true);
                 markDirty(world, pos, state);
@@ -181,8 +168,8 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, state -> {
             if (state.getAnimatable().world != null)
-                if (state.getAnimatable().world.getBlockState(state.getAnimatable().pos).isOf(GardenBotanicalBlocks.COLORIZER))
-                    if (state.getAnimatable().getWorld().getBlockState(state.getAnimatable().pos).get(ColorizerBlock.PROCESS)) {
+                if (state.getAnimatable().world.getBlockState(state.getAnimatable().pos).isOf(GardenBotanicalBlocks.BLOCK_COLORIZER))
+                    if (state.getAnimatable().getWorld().getBlockState(state.getAnimatable().pos).get(BlockColorizerBlock.PROCESS)) {
                         state.setAnimation(RawAnimation.begin().then("process", Animation.LoopType.LOOP));
                         return PlayState.CONTINUE;
                     } else {
@@ -201,42 +188,43 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
     }
 
     private boolean hasRecipe() {
-        return getInputItem().isIn(GardenBotanicalTags.COLORIZER_ITEM_TYPES) && getInputDye().isOf(GardenBotanicalItems.DYE) && slotIsEmpty(OUTPUT_SLOT_ITEM);
+        return getInputBlock().isIn(GardenBotanicalTags.BLOCK_COLORIZER_BLOCK_TYPES) && getInputDye().isOf(GardenBotanicalItems.DYE) && slotIsEmpty(OUTPUT_SLOT_BLOCK);
     }
 
     @Override
     public boolean canExtract(int slot, ItemStack stack, Direction side) {
-        return side == Direction.DOWN && slot == OUTPUT_SLOT_ITEM;
+        return side == Direction.DOWN && slot == OUTPUT_SLOT_BLOCK;
     }
 
     @Override
     public int[] getAvailableSlots(Direction side) {
         if (side == Direction.DOWN) {
-            return new int[] {OUTPUT_SLOT_ITEM};
+            return new int[] {OUTPUT_SLOT_BLOCK};
         } else {
             return new int[] {};
         }
     }
 
     private void craftArmor() {
-        NbtCompound nbtItem = inventory.get(INPUT_SLOT_ITEM).getOrCreateSubNbt("display");
+        NbtCompound nbtBlock = inventory.get(INPUT_SLOT_BLOCK).getOrCreateSubNbt("display");
         NbtCompound nbtDye = inventory.get(INPUT_SLOT_DYE).getOrCreateSubNbt("display");
 
-        int outputColorItem;
-        if (ColorUtils.checkColorNbt(nbtItem, GardenBotanical.DEFAULT_LEATHER_ARMOR_COLOR) != GardenBotanical.DEFAULT_LEATHER_ARMOR_COLOR) {
-            outputColorItem = ColorUtils.blendColors(ColorUtils.checkColorNbt(nbtItem, GardenBotanical.DEFAULT_LEATHER_ARMOR_COLOR), ColorUtils.checkColorNbt(nbtDye, GardenBotanical.DEFAULT_DYE_COLOR));
+        int outputColorBlock;
+        if (ColorUtils.checkColorNbt(nbtBlock, GardenBotanical.DEFAULT_DYE_COLOR) != GardenBotanical.DEFAULT_DYE_COLOR) {
+            outputColorBlock = ColorUtils.blendColors(ColorUtils.checkColorNbt(nbtBlock, GardenBotanical.DEFAULT_DYE_COLOR), ColorUtils.checkColorNbt(nbtDye, GardenBotanical.DEFAULT_DYE_COLOR));
         } else {
-            outputColorItem = ColorUtils.checkColorNbt(nbtDye, GardenBotanical.DEFAULT_DYE_COLOR);
+            outputColorBlock = ColorUtils.checkColorNbt(nbtDye, GardenBotanical.DEFAULT_DYE_COLOR);
         }
 
-        ItemStack outputItem = inventory.get(INPUT_SLOT_ITEM).copy();
-        this.removeStack(INPUT_SLOT_ITEM);
+        this.removeStack(INPUT_SLOT_BLOCK);
         this.removeStack(INPUT_SLOT_DYE);
 
-        NbtCompound nbtOutputItem = outputItem.getOrCreateSubNbt("display");
-        nbtOutputItem.putInt("color", outputColorItem);
+        ItemStack outputBlock = new ItemStack(GardenBotanicalBlocks.DYEBLE_MATERIAL);
+        NbtCompound nbtOutputBlock = outputBlock.getOrCreateSubNbt("display");
+        nbtOutputBlock.putInt("material", 0);
+        nbtOutputBlock.putInt("color", outputColorBlock);
 
-        putItemInOutputSlot(outputItem, OUTPUT_SLOT_ITEM);
+        putItemInOutputSlot(outputBlock, OUTPUT_SLOT_BLOCK);
     }
 
     private void putItemInOutputSlot(ItemStack itemStack, int slot) {

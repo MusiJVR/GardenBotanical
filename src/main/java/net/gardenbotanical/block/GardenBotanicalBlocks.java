@@ -19,6 +19,8 @@ public class GardenBotanicalBlocks {
     public static final Block POUNDING_TABLE = registerBlock("pounding_table", new PoundingTableBlock(FabricBlockSettings.copyOf(Blocks.GRINDSTONE).nonOpaque()));
     public static final Block DYE_MIXER = registerBlockNoItem("dye_mixer", new DyeMixerBlock(FabricBlockSettings.copyOf(Blocks.CRAFTING_TABLE).nonOpaque()));
     public static final Block COLORIZER = registerBlockNoItem("colorizer", new ColorizerBlock(FabricBlockSettings.copyOf(Blocks.CRAFTING_TABLE).nonOpaque()));
+    public static final Block BLOCK_COLORIZER = registerBlockNoItem("block_colorizer", new BlockColorizerBlock(FabricBlockSettings.copyOf(Blocks.CRAFTING_TABLE).nonOpaque()));
+    public static final Block DYEBLE_MATERIAL = registerBlock("dyeble_material", new DyebleMaterialBlock(FabricBlockSettings.copyOf(Blocks.STONE).nonOpaque()));
     public static final Block BOUVARDIA = registerBlock("bouvardia", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY).nonOpaque()));
     public static final Block POTTED_BOUVARDIA = registerBlockNoItem("potted_bouvardia", new FlowerPotBlock(BOUVARDIA, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY).nonOpaque()));
     public static final Block BRUNIA = registerBlock("brunia", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY).nonOpaque()));

@@ -1,6 +1,6 @@
 package net.gardenbotanical.block;
 
-import net.gardenbotanical.block.entity.ColorizerBlockEntity;
+import net.gardenbotanical.block.entity.BlockColorizerBlockEntity;
 import net.gardenbotanical.block.entity.GardenBotanicalBlockEntities;
 import net.gardenbotanical.item.GardenBotanicalItems;
 import net.gardenbotanical.tag.GardenBotanicalTags;
@@ -31,11 +31,15 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 
-public class ColorizerBlock extends BlockWithEntity implements BlockEntityProvider {
-    private static final VoxelShape SHAPE = VoxelShapes.union(Block.createCuboidShape(1, 0, 1, 15, 21, 15));
+public class BlockColorizerBlock extends BlockWithEntity implements BlockEntityProvider {
+    private static final VoxelShape SHAPE = VoxelShapes.union(
+            Block.createCuboidShape(0, 0, 0, 16, 2, 16),
+            Block.createCuboidShape(3, 2, 3, 13, 12, 13),
+            Block.createCuboidShape(0, 12, 0, 16, 25, 16)
+    );
     public static final BooleanProperty PROCESS = BooleanProperty.of("process");
 
-    protected ColorizerBlock(Settings settings) {
+    protected BlockColorizerBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
         setDefaultState(getDefaultState().with(PROCESS, false));
@@ -44,7 +48,7 @@ public class ColorizerBlock extends BlockWithEntity implements BlockEntityProvid
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new ColorizerBlockEntity(pos, state);
+        return new BlockColorizerBlockEntity(pos, state);
     }
 
     @Override
@@ -72,8 +76,8 @@ public class ColorizerBlock extends BlockWithEntity implements BlockEntityProvid
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof ColorizerBlockEntity) {
-                ItemScatterer.spawn(world, pos, (ColorizerBlockEntity) blockEntity);
+            if (blockEntity instanceof BlockColorizerBlockEntity) {
+                ItemScatterer.spawn(world, pos, (BlockColorizerBlockEntity) blockEntity);
                 world.updateComparators(pos, this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
@@ -83,25 +87,25 @@ public class ColorizerBlock extends BlockWithEntity implements BlockEntityProvid
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            ColorizerBlockEntity entity = (ColorizerBlockEntity) world.getBlockEntity(pos);
+            BlockColorizerBlockEntity entity = (BlockColorizerBlockEntity) world.getBlockEntity(pos);
             ItemStack itemStack = player.getStackInHand(hand);
-            if (!entity.slotIsEmpty(ColorizerBlockEntity.OUTPUT_SLOT_ITEM)) {
-                Vec3d vec3d = Vec3d.add(pos, 0.5, 1.01, 0.5).addRandom(world.random, 0.7F);
-                ItemEntity itemEntity = new ItemEntity(world, vec3d.getX(), vec3d.getY(), vec3d.getZ(), entity.getOutputItem());
+            if (!entity.slotIsEmpty(BlockColorizerBlockEntity.OUTPUT_SLOT_BLOCK)) {
+                Vec3d vec3d = Vec3d.add(pos, 0.5, 1.5, 0.5).addRandom(world.random, 0.7F);
+                ItemEntity itemEntity = new ItemEntity(world, vec3d.getX(), vec3d.getY(), vec3d.getZ(), entity.getOutputBlock());
                 itemEntity.setToDefaultPickupDelay();
                 world.spawnEntity(itemEntity);
                 entity.clearOutputSlot();
-                world.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.BLOCKS, 1f, 1f);
+                world.playSound(null, pos, SoundEvents.BLOCK_STONE_PLACE, SoundCategory.BLOCKS, 1f, 1f);
             } else {
-                if (itemStack.isIn(GardenBotanicalTags.COLORIZER_ITEM_TYPES)) {
-                    if (entity.slotIsEmpty(ColorizerBlockEntity.INPUT_SLOT_ITEM)) {
-                        entity.getItems().set(ColorizerBlockEntity.INPUT_SLOT_ITEM, itemStack.copyWithCount(1));
+                if (itemStack.isIn(GardenBotanicalTags.BLOCK_COLORIZER_BLOCK_TYPES)) {
+                    if (entity.slotIsEmpty(BlockColorizerBlockEntity.INPUT_SLOT_BLOCK)) {
+                        entity.getItems().set(BlockColorizerBlockEntity.INPUT_SLOT_BLOCK, itemStack.copyWithCount(1));
                         itemStack.decrement(1);
-                        world.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.BLOCKS, 1f, 1f);
+                        world.playSound(null, pos, SoundEvents.BLOCK_STONE_PLACE, SoundCategory.BLOCKS, 1f, 1f);
                     }
                 } else if (itemStack.isOf(GardenBotanicalItems.DYE)) {
-                    if (entity.slotIsEmpty(ColorizerBlockEntity.INPUT_SLOT_DYE)) {
-                        entity.getItems().set(ColorizerBlockEntity.INPUT_SLOT_DYE, itemStack.copyWithCount(1));
+                    if (entity.slotIsEmpty(BlockColorizerBlockEntity.INPUT_SLOT_DYE) && !entity.slotIsEmpty(BlockColorizerBlockEntity.INPUT_SLOT_BLOCK)) {
+                        entity.getItems().set(BlockColorizerBlockEntity.INPUT_SLOT_DYE, itemStack.copyWithCount(1));
                         itemStack.decrement(1);
                         world.playSound(null, pos, SoundEvents.BLOCK_HONEY_BLOCK_SLIDE, SoundCategory.BLOCKS, 1f, 1f);
                     }
@@ -115,6 +119,6 @@ public class ColorizerBlock extends BlockWithEntity implements BlockEntityProvid
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, GardenBotanicalBlockEntities.COLORIZER_BLOCK_ENTITY, (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
+        return checkType(type, GardenBotanicalBlockEntities.BLOCK_COLORIZER_BLOCK_ENTITY, (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
     }
 }

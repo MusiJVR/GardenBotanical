@@ -31,6 +31,16 @@ public class GardenBotanicalBlockEntities {
                     FabricBlockEntityTypeBuilder.create(ColorizerBlockEntity::new,
                             GardenBotanicalBlocks.COLORIZER).build());
 
+    public static BlockEntityType<BlockColorizerBlockEntity> BLOCK_COLORIZER_BLOCK_ENTITY =
+            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(GardenBotanical.MOD_ID, "block_colorizer_block_entity"),
+                    FabricBlockEntityTypeBuilder.create(BlockColorizerBlockEntity::new,
+                            GardenBotanicalBlocks.BLOCK_COLORIZER).build());
+
+    public static BlockEntityType<DyebleMaterialBlockEntity> DYEBLE_MATERIAL_BLOCK_ENTITY =
+            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(GardenBotanical.MOD_ID, "dyeble_material_block_entity"),
+                    FabricBlockEntityTypeBuilder.create(DyebleMaterialBlockEntity::new,
+                            GardenBotanicalBlocks.DYEBLE_MATERIAL).build());
+
     public static void register() {
         GardenBotanical.LOGGER.info("Registering block entities for: " + GardenBotanical.MOD_ID);
 

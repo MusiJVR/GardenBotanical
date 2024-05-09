@@ -222,7 +222,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
 
     private void updateClientData() {
         for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
-            GardenBotanicalNetwork.DM_SYNC_PACKET.send(player, DyeMixerSyncPacket.write(inventory, fluidStorage, getPos()));
+            GardenBotanicalNetwork.DYE_MIXER_SYNC_PACKET.send(player, DyeMixerSyncPacket.write(inventory, fluidStorage, getPos()));
         }
     }
 
@@ -244,7 +244,6 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
                 markDirty(world, pos, state);
 
                 if (progress >= maxProgress) {
-                    extractFluidStorage();
                     mixDyes();
                     resetProgress(state);
                 }
@@ -323,8 +322,8 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     }
 
     private void mixDyes() {
-        NbtCompound nbtFirstColor = inventory.get(INPUT_SLOT_FIRST_DYE).getNbt();
-        NbtCompound nbtSecondColor = inventory.get(INPUT_SLOT_SECOND_DYE).getNbt();
+        NbtCompound nbtFirstColor = inventory.get(INPUT_SLOT_FIRST_DYE).getOrCreateSubNbt("display");
+        NbtCompound nbtSecondColor = inventory.get(INPUT_SLOT_SECOND_DYE).getOrCreateSubNbt("display");
 
         int outputColorDye = ColorUtils.blendColors(ColorUtils.checkColorNbt(nbtFirstColor, GardenBotanical.DEFAULT_DYE_COLOR), ColorUtils.checkColorNbt(nbtSecondColor, GardenBotanical.DEFAULT_DYE_COLOR));
 
@@ -333,7 +332,9 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
 
         ItemStack outputDye = new ItemStack(GardenBotanicalItems.DYE);
         NbtCompound nbtOutputDye = outputDye.getOrCreateNbt();
-        nbtOutputDye.putInt("color", outputColorDye);
+        NbtCompound nbt = new NbtCompound();
+        nbt.putInt("color", outputColorDye);
+        nbtOutputDye.put("display", nbt);
 
         putItemInOutputSlot(outputDye, OUTPUT_SLOT_DYE);
     }

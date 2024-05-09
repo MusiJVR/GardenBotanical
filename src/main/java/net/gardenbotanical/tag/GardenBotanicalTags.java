@@ -6,13 +6,16 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
+
 public class GardenBotanicalTags {
     public static final TagKey<Item> FLOWER_POWDERS = registerItemTag("flower_powders");
+    public static final TagKey<Item> COLORIZER_ITEM_TYPES = registerItemTag("colorizer_item_types");
     public static final TagKey<Item> COLORIZER_ARMOR_TYPES = registerItemTag("colorizer_armor_types");
     public static final TagKey<Item> COLORIZER_HELMET = registerItemTag("colorizer_helmet");
     public static final TagKey<Item> COLORIZER_CHESTPLATE = registerItemTag("colorizer_chestplate");
     public static final TagKey<Item> COLORIZER_LEGGINGS = registerItemTag("colorizer_leggings");
     public static final TagKey<Item> COLORIZER_BOOTS = registerItemTag("colorizer_boots");
+    public static final TagKey<Item> BLOCK_COLORIZER_BLOCK_TYPES = registerItemTag("block_colorizer_block_types");
 
 
     public static TagKey<Item> registerItemTag(String id) {

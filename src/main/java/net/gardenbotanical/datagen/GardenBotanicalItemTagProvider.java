@@ -44,6 +44,10 @@ public class GardenBotanicalItemTagProvider extends FabricTagProvider.ItemTagPro
                 GardenBotanicalItems.POWDERED_ASTER
         );
 
+        getOrCreateTagBuilder(GardenBotanicalTags.COLORIZER_ITEM_TYPES)
+                .addTag(GardenBotanicalTags.COLORIZER_ARMOR_TYPES)
+                .add(Items.LEATHER_HORSE_ARMOR, Items.PAPER);
+
         getOrCreateTagBuilder(GardenBotanicalTags.COLORIZER_ARMOR_TYPES)
                 .addTag(GardenBotanicalTags.COLORIZER_HELMET)
                 .addTag(GardenBotanicalTags.COLORIZER_CHESTPLATE)
@@ -64,6 +68,13 @@ public class GardenBotanicalItemTagProvider extends FabricTagProvider.ItemTagPro
 
         getOrCreateTagBuilder(GardenBotanicalTags.COLORIZER_BOOTS).add(
                 Items.LEATHER_BOOTS
+        );
+
+        getOrCreateTagBuilder(GardenBotanicalTags.BLOCK_COLORIZER_BLOCK_TYPES).add(
+                Items.WHITE_WOOL,
+                Items.WHITE_CONCRETE,
+                Items.GLASS,
+                GardenBotanicalBlocks.DYEBLE_MATERIAL.asItem()
         );
     }
 }

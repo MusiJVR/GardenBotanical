@@ -51,7 +51,9 @@ public class DyeMixerRecipe implements Recipe<SimpleInventory> {
     public ItemStack getOutput(DynamicRegistryManager registryManager) {
         ItemStack itemStack = outputDye.copy();
         NbtCompound nbtCompound = itemStack.getOrCreateNbt();
-        nbtCompound.putInt("color", getColor());
+        NbtCompound nbt = new NbtCompound();
+        nbt.putInt("color", getColor());
+        nbtCompound.put("display", nbt);
         return itemStack;
     }
 

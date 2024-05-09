@@ -1,12 +1,8 @@
 package net.gardenbotanical.block.entity.client;
 
-import net.gardenbotanical.block.entity.ColorizerBlockEntity;
+import net.gardenbotanical.block.entity.BlockColorizerBlockEntity;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.LightmapTextureManager;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.*;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
@@ -20,24 +16,24 @@ import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 
-public class ColorizerBlockEntityRenderLayerDye extends GeoRenderLayer<ColorizerBlockEntity> {
-    public ColorizerBlockEntityRenderLayerDye(GeoRenderer entityRendererIn) {
+public class BlockColorizerBlockEntityRenderLayerBlock extends GeoRenderLayer<BlockColorizerBlockEntity> {
+    public BlockColorizerBlockEntityRenderLayerBlock(GeoRenderer entityRendererIn) {
         super(entityRendererIn);
     }
 
     @Override
-    public void render(MatrixStack poseStack, ColorizerBlockEntity animatable, BakedGeoModel bakedModel, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
+    public void render(MatrixStack poseStack, BlockColorizerBlockEntity animatable, BakedGeoModel bakedModel, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
 
-        ItemStack itemStack = animatable.getDyeRender();
+        ItemStack itemStack = animatable.getBlockRender();
 
         poseStack.push();
 
-        poseStack.translate(-0.25, 0.21875f, 0.25f);
-
-        poseStack.scale(1f, 1f, 1f);
-        poseStack.multiply(RotationAxis.POSITIVE_X.rotation((float) Math.toRadians(270)));
-        poseStack.multiply(RotationAxis.POSITIVE_Z.rotation((float) Math.toRadians(180)));
+        poseStack.translate(0f, 1.03f, 0f);
+        poseStack.scale(0.5f, 0.5f, 0.5f);
+        poseStack.multiply(RotationAxis.POSITIVE_X.rotation((float) Math.toRadians(330)));
+        poseStack.multiply(RotationAxis.POSITIVE_Y.rotation((float) Math.toRadians(0)));
+        poseStack.multiply(RotationAxis.POSITIVE_Z.rotation((float) Math.toRadians(0)));
 
         itemRenderer.renderItem(itemStack, ModelTransformationMode.GUI, getLightLevel(animatable.getWorld(), animatable.getPos()), OverlayTexture.DEFAULT_UV, poseStack, bufferSource, animatable.getWorld(), 1);
         poseStack.pop();

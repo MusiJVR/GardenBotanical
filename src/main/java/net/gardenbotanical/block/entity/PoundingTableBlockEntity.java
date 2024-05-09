@@ -89,7 +89,7 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
 
     public void updateClientData() {
         for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
-            GardenBotanicalNetwork.PT_SYNC_PACKET.send(player, PoundingTableSyncPacket.write(inventory, getPos()));
+            GardenBotanicalNetwork.POUNDING_TABLE_SYNC_PACKET.send(player, PoundingTableSyncPacket.write(inventory, getPos()));
         }
     }
 

@@ -18,21 +18,8 @@ public class ColorUtils {
     }
 
     public static int checkColorNbt(NbtCompound nbt, int defaultColor) {
-        if (nbt != null) {
+        if (nbt.get("color") != null) {
             return nbt.getInt("color");
-        } else {
-            return defaultColor;
-        }
-    }
-
-    public static int checkArmorColorNbt(NbtCompound nbt, int defaultColor) {
-        if (nbt != null) {
-            NbtCompound nbtColor = (NbtCompound) nbt.get("display");
-            if (nbtColor != null) {
-                return nbtColor.getInt("color");
-            } else {
-                return defaultColor;
-            }
         } else {
             return defaultColor;
         }
