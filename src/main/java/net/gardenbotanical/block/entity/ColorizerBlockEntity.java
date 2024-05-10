@@ -8,8 +8,8 @@ import net.gardenbotanical.item.GardenBotanicalItems;
 import net.gardenbotanical.network.GardenBotanicalNetwork;
 import net.gardenbotanical.network.packet.S2C.ColorizerSyncPacket;
 import net.gardenbotanical.tag.GardenBotanicalTags;
-import net.gardenbotanical.util.ColorUtils;
 import net.gardenbotanical.util.ImplementedInventory;
+import net.gardenbotanical.util.Utils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.Inventories;
@@ -141,11 +141,7 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
     }
 
     public int getFluidColor() {
-        NbtCompound nbtCompound = getInputDye().getOrCreateSubNbt("display");
-        if (nbtCompound.get("color") != null)
-            return nbtCompound.getInt("color");
-
-        return -1;
+        return Utils.checkDisplayColorNbt(getInputDye(), GardenBotanical.DEFAULT_DYE_COLOR);
     }
 
     public void updateClientData() {
@@ -215,14 +211,11 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
     }
 
     private void craftArmor() {
-        NbtCompound nbtItem = getInputItem().getOrCreateSubNbt("display");
-        NbtCompound nbtDye = getInputDye().getOrCreateSubNbt("display");
-
         int outputColorItem;
-        if (ColorUtils.checkColorNbt(nbtItem, GardenBotanical.DEFAULT_LEATHER_ARMOR_COLOR) != GardenBotanical.DEFAULT_LEATHER_ARMOR_COLOR) {
-            outputColorItem = ColorUtils.blendColors(ColorUtils.checkColorNbt(nbtItem, GardenBotanical.DEFAULT_LEATHER_ARMOR_COLOR), ColorUtils.checkColorNbt(nbtDye, GardenBotanical.DEFAULT_DYE_COLOR));
+        if (Utils.checkDisplayColorNbt(getInputItem(), GardenBotanical.DEFAULT_LEATHER_ARMOR_COLOR) != GardenBotanical.DEFAULT_LEATHER_ARMOR_COLOR) {
+            outputColorItem = Utils.blendColors(Utils.checkDisplayColorNbt(getInputItem(), GardenBotanical.DEFAULT_LEATHER_ARMOR_COLOR), Utils.checkDisplayColorNbt(getInputDye(), GardenBotanical.DEFAULT_DYE_COLOR));
         } else {
-            outputColorItem = ColorUtils.checkColorNbt(nbtDye, GardenBotanical.DEFAULT_DYE_COLOR);
+            outputColorItem = Utils.checkDisplayColorNbt(getInputDye(), GardenBotanical.DEFAULT_DYE_COLOR);
         }
 
         ItemStack outputItem = getInputItem().copy();

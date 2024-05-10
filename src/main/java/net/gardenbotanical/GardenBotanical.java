@@ -9,8 +9,11 @@ import net.gardenbotanical.network.GardenBotanicalNetwork;
 import net.gardenbotanical.recipe.GardenBotanicalRecipes;
 import net.gardenbotanical.screen.GardenBotanicalScreenHandlers;
 import net.gardenbotanical.tag.GardenBotanicalTags;
+import net.gardenbotanical.util.Utils;
 import net.gardenbotanical.world.gen.GardenBotanicalWorldGen;
+import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.item.DyeableArmorItem;
+import net.minecraft.item.Items;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
@@ -26,7 +29,10 @@ public class GardenBotanical implements ModInitializer {
     @Override
     public void onInitialize() {
         LOGGER.info("Initialize " + MOD_ID + "...");
+
         GeckoLib.initialize();
+        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(Items.PAPER, Utils.CLEAN_DYEABLE_PAPER);
+
         GardenBotanicalItems.register();
         GardenBotanicalBlocks.register();
         GardenBotanicalItemGroups.register();

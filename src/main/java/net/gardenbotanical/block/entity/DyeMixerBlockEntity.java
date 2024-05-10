@@ -13,9 +13,9 @@ import net.gardenbotanical.item.GardenBotanicalItems;
 import net.gardenbotanical.network.GardenBotanicalNetwork;
 import net.gardenbotanical.network.packet.S2C.DyeMixerSyncPacket;
 import net.gardenbotanical.recipe.DyeMixerRecipe;
-import net.gardenbotanical.util.ColorUtils;
 import net.gardenbotanical.util.FluidStack;
 import net.gardenbotanical.util.ImplementedInventory;
+import net.gardenbotanical.util.Utils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.fluid.Fluids;
@@ -114,11 +114,8 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     }
 
     public int getFluidColor() {
-        if (!slotIsEmpty(OUTPUT_SLOT_DYE)) {
-            NbtCompound nbtCompound = getOutputSlotDye().getOrCreateSubNbt("display");
-            if (nbtCompound.get("color") != null)
-                return nbtCompound.getInt("color");
-        }
+        if (!slotIsEmpty(OUTPUT_SLOT_DYE))
+            return Utils.checkDisplayColorNbt(getOutputSlotDye(), GardenBotanical.DEFAULT_DYE_COLOR);
         return -1;
     }
 
@@ -312,10 +309,10 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     }
 
     private void mixDyes() {
-        NbtCompound nbtFirstColor = inventory.get(INPUT_SLOT_FIRST_DYE).getOrCreateSubNbt("display");
-        NbtCompound nbtSecondColor = inventory.get(INPUT_SLOT_SECOND_DYE).getOrCreateSubNbt("display");
-
-        int outputColorDye = ColorUtils.blendColors(ColorUtils.checkColorNbt(nbtFirstColor, GardenBotanical.DEFAULT_DYE_COLOR), ColorUtils.checkColorNbt(nbtSecondColor, GardenBotanical.DEFAULT_DYE_COLOR));
+        int outputColorDye = Utils.blendColors(
+                Utils.checkDisplayColorNbt(inventory.get(INPUT_SLOT_FIRST_DYE), GardenBotanical.DEFAULT_DYE_COLOR),
+                Utils.checkDisplayColorNbt(inventory.get(INPUT_SLOT_SECOND_DYE), GardenBotanical.DEFAULT_DYE_COLOR)
+        );
 
         this.removeStack(INPUT_SLOT_FIRST_DYE);
         this.removeStack(INPUT_SLOT_SECOND_DYE);

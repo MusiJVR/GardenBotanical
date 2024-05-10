@@ -35,16 +35,18 @@ public class ColorizerBlockEntityRenderLayerItem extends GeoRenderLayer<Colorize
 
         poseStack.push();
 
-        if (itemStack.isIn(GardenBotanicalTags.COLORIZER_ARMOR_TYPES)) {
-            if (itemStack.isIn(GardenBotanicalTags.COLORIZER_HELMET) || itemStack.isIn(GardenBotanicalTags.COLORIZER_BOOTS)) {
-                poseStack.translate(0.125f, 0.9f, 0.125f);
-            } else if (itemStack.isIn(GardenBotanicalTags.COLORIZER_CHESTPLATE) || itemStack.isIn(GardenBotanicalTags.COLORIZER_LEGGINGS)) {
-                poseStack.translate(0.125f, 0.86f, 0.125f);
+        if (itemStack.isIn(GardenBotanicalTags.COLORIZER_ITEM_TYPES)) {
+            if (itemStack.isIn(GardenBotanicalTags.COLORIZER_ARMOR_TYPES)) {
+                if (itemStack.isIn(GardenBotanicalTags.COLORIZER_HELMET) || itemStack.isIn(GardenBotanicalTags.COLORIZER_BOOTS)) {
+                    poseStack.translate(0.125f, 0.9f, 0.125f);
+                } else if (itemStack.isIn(GardenBotanicalTags.COLORIZER_CHESTPLATE) || itemStack.isIn(GardenBotanicalTags.COLORIZER_LEGGINGS)) {
+                    poseStack.translate(0.125f, 0.86f, 0.125f);
+                } else if (itemStack.isIn(GardenBotanicalTags.COLORIZER_HORSE_ARMOR)) {
+                    poseStack.translate(0.13f, 0.86f, 0.13f);
+                }
+            } else {
+                poseStack.translate(0.125f, 0.93f, 0.125f);
             }
-        } else if (itemStack.isOf(Items.LEATHER_HORSE_ARMOR)) {
-            poseStack.translate(0.13f, 0.86f, 0.13f);
-        } else if (itemStack.isOf(Items.PAPER)) {
-            poseStack.translate(0.125f, 0.93f, 0.125f);
         }
 
         poseStack.scale(0.7f, 0.7f, 0.7f);

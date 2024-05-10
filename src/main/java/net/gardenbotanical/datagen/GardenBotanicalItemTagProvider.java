@@ -46,13 +46,14 @@ public class GardenBotanicalItemTagProvider extends FabricTagProvider.ItemTagPro
 
         getOrCreateTagBuilder(GardenBotanicalTags.COLORIZER_ITEM_TYPES)
                 .addTag(GardenBotanicalTags.COLORIZER_ARMOR_TYPES)
-                .add(Items.LEATHER_HORSE_ARMOR, Items.PAPER);
+                .add(Items.PAPER);
 
         getOrCreateTagBuilder(GardenBotanicalTags.COLORIZER_ARMOR_TYPES)
                 .addTag(GardenBotanicalTags.COLORIZER_HELMET)
                 .addTag(GardenBotanicalTags.COLORIZER_CHESTPLATE)
                 .addTag(GardenBotanicalTags.COLORIZER_LEGGINGS)
-                .addTag(GardenBotanicalTags.COLORIZER_BOOTS);
+                .addTag(GardenBotanicalTags.COLORIZER_BOOTS)
+                .addTag(GardenBotanicalTags.COLORIZER_HORSE_ARMOR);
 
         getOrCreateTagBuilder(GardenBotanicalTags.COLORIZER_HELMET).add(
                 Items.LEATHER_HELMET
@@ -68,6 +69,10 @@ public class GardenBotanicalItemTagProvider extends FabricTagProvider.ItemTagPro
 
         getOrCreateTagBuilder(GardenBotanicalTags.COLORIZER_BOOTS).add(
                 Items.LEATHER_BOOTS
+        );
+
+        getOrCreateTagBuilder(GardenBotanicalTags.COLORIZER_HORSE_ARMOR).add(
+                Items.LEATHER_HORSE_ARMOR
         );
     }
 }
