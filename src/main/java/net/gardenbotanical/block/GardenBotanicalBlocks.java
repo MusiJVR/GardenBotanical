@@ -40,6 +40,17 @@ public class GardenBotanicalBlocks {
     public static final Block ASTER = registerBlock("aster", new FlowerBlock(StatusEffects.LUCK, 0, FabricBlockSettings.copyOf(Blocks.POPPY).nonOpaque()));
     public static final Block POTTED_ASTER = registerBlockNoItem("potted_aster", new FlowerPotBlock(ASTER, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY).nonOpaque()));
 
+    public static final Block BOUVARDIA_CROP = registerBlockNoItem("bouvardia_crop", new GrowingFlower("bouvardia_seeds", FabricBlockSettings.copyOf(Blocks.WHEAT)));
+    public static final Block BRUNIA_CROP = registerBlockNoItem("brunia_crop", new GrowingFlower("brunia_seeds", FabricBlockSettings.copyOf(Blocks.WHEAT)));
+    public static final Block GERBERA_CROP = registerBlockNoItem("gerbera_crop", new GrowingFlower("gerbera_seeds", FabricBlockSettings.copyOf(Blocks.WHEAT)));
+    public static final Block HERBAL_PEONY_CROP = registerBlockNoItem("herbal_peony_crop", new GrowingFlower("herbal_peony_seeds", FabricBlockSettings.copyOf(Blocks.WHEAT)));
+    public static final Block VERONICA_CROP = registerBlockNoItem("veronica_crop", new GrowingFlower("veronica_seeds", FabricBlockSettings.copyOf(Blocks.WHEAT)));
+    public static final Block DULL_PINK_TULIP_CROP = registerBlockNoItem("dull_pink_tulip_crop", new GrowingFlower("dull_pink_tulip_seeds", FabricBlockSettings.copyOf(Blocks.WHEAT)));
+    public static final Block POINSETTIA_CROP = registerBlockNoItem("poinsettia_crop", new GrowingFlower("poinsettia_seeds", FabricBlockSettings.copyOf(Blocks.WHEAT)));
+    public static final Block SETARIA_CROP = registerBlockNoItem("setaria_crop", new GrowingFlower("setaria_seeds", FabricBlockSettings.copyOf(Blocks.WHEAT)));
+    public static final Block ALOE_TRASKI_CROP = registerBlockNoItem("aloe_traski_crop", new GrowingFlower("aloe_traski_seeds", FabricBlockSettings.copyOf(Blocks.WHEAT)));
+    public static final Block ASTER_CROP = registerBlockNoItem("aster_crop", new GrowingFlower("aster_seeds", FabricBlockSettings.copyOf(Blocks.WHEAT)));
+
     private static Block registerBlock(String id, Block block) {
         GardenBotanicalItems.registerItem(id, new BlockItem(block, new Item.Settings()));
         return Registry.register(Registries.BLOCK, new Identifier(GardenBotanical.MOD_ID, id), block);

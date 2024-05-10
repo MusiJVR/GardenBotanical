@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.gardenbotanical.GardenBotanical;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.item.custom.*;
+import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
@@ -42,16 +43,16 @@ public class GardenBotanicalItems {
     public static final Item POWDERED_ALOE_TRASKI = registerItem("powdered_aloe_traski", new Item(new FabricItemSettings()));
     public static final Item POWDERED_ASTER = registerItem("powdered_aster", new Item(new FabricItemSettings()));
 
-    public static final Item BOUVARDIA_SEEDS = registerItem("bouvardia_seeds", new Item(new FabricItemSettings()));
-    public static final Item BRUNIA_SEEDS = registerItem("brunia_seeds", new Item(new FabricItemSettings()));
-    public static final Item GERBERA_SEEDS = registerItem("gerbera_seeds", new Item(new FabricItemSettings()));
-    public static final Item HERBAL_PEONY_SEEDS = registerItem("herbal_peony_seeds", new Item(new FabricItemSettings()));
-    public static final Item VERONICA_SEEDS = registerItem("veronica_seeds", new Item(new FabricItemSettings()));
-    public static final Item DULL_PINK_TULIP_SEEDS = registerItem("dull_pink_tulip_seeds", new Item(new FabricItemSettings()));
-    public static final Item POINSETTIA_SEEDS = registerItem("poinsettia_seeds", new Item(new FabricItemSettings()));
-    public static final Item SETARIA_SEEDS = registerItem("setaria_seeds", new Item(new FabricItemSettings()));
-    public static final Item ALOE_TRASKI_SEEDS = registerItem("aloe_traski_seeds", new Item(new FabricItemSettings()));
-    public static final Item ASTER_SEEDS = registerItem("aster_seeds", new Item(new FabricItemSettings()));
+    public static final Item BOUVARDIA_SEEDS = registerItem("bouvardia_seeds", new AliasedBlockItem(GardenBotanicalBlocks.BOUVARDIA_CROP, new FabricItemSettings()));
+    public static final Item BRUNIA_SEEDS = registerItem("brunia_seeds", new AliasedBlockItem(GardenBotanicalBlocks.BRUNIA_CROP, new FabricItemSettings()));
+    public static final Item GERBERA_SEEDS = registerItem("gerbera_seeds", new AliasedBlockItem(GardenBotanicalBlocks.GERBERA_CROP, new FabricItemSettings()));
+    public static final Item HERBAL_PEONY_SEEDS = registerItem("herbal_peony_seeds", new AliasedBlockItem(GardenBotanicalBlocks.HERBAL_PEONY_CROP, new FabricItemSettings()));
+    public static final Item VERONICA_SEEDS = registerItem("veronica_seeds", new AliasedBlockItem(GardenBotanicalBlocks.VERONICA_CROP, new FabricItemSettings()));
+    public static final Item DULL_PINK_TULIP_SEEDS = registerItem("dull_pink_tulip_seeds", new AliasedBlockItem(GardenBotanicalBlocks.DULL_PINK_TULIP_CROP, new FabricItemSettings()));
+    public static final Item POINSETTIA_SEEDS = registerItem("poinsettia_seeds", new AliasedBlockItem(GardenBotanicalBlocks.POINSETTIA_CROP, new FabricItemSettings()));
+    public static final Item SETARIA_SEEDS = registerItem("setaria_seeds", new AliasedBlockItem(GardenBotanicalBlocks.SETARIA_CROP, new FabricItemSettings()));
+    public static final Item ALOE_TRASKI_SEEDS = registerItem("aloe_traski_seeds", new AliasedBlockItem(GardenBotanicalBlocks.ALOE_TRASKI_CROP, new FabricItemSettings()));
+    public static final Item ASTER_SEEDS = registerItem("aster_seeds", new AliasedBlockItem(GardenBotanicalBlocks.ASTER_CROP, new FabricItemSettings()));
 
     public static Item registerItem(String id, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(GardenBotanical.MOD_ID, id), item);

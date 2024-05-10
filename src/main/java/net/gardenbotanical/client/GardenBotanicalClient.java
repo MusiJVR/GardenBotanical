@@ -50,6 +50,17 @@ public class GardenBotanicalClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_ALOE_TRASKI, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_ASTER, RenderLayer.getCutout());
 
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.BOUVARDIA_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.BRUNIA_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.GERBERA_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.HERBAL_PEONY_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.VERONICA_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.DULL_PINK_TULIP_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POINSETTIA_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.SETARIA_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.ALOE_TRASKI_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.ASTER_CROP, RenderLayer.getCutout());
+
         HandledScreens.register(GardenBotanicalScreenHandlers.PREPARATION_TABLE_SCREEN_HANDLER, PreparationTableScreen::new);
         HandledScreens.register(GardenBotanicalScreenHandlers.POUNDING_TABLE_SCREEN_HANDLER, PoundingTableScreen::new);
 

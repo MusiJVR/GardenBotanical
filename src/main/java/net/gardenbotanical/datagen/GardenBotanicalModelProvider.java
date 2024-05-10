@@ -1,10 +1,20 @@
 package net.gardenbotanical.datagen;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.gardenbotanical.GardenBotanical;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
+import net.gardenbotanical.block.GrowingFlower;
 import net.gardenbotanical.item.GardenBotanicalItems;
+import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
+import net.minecraft.registry.Registries;
+import net.minecraft.state.property.Property;
+import net.minecraft.util.Identifier;
+
+import java.util.function.Function;
 
 
 public class GardenBotanicalModelProvider extends FabricModelProvider {
@@ -24,6 +34,17 @@ public class GardenBotanicalModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.SETARIA, GardenBotanicalBlocks.POTTED_SETARIA, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.ALOE_TRASKI, GardenBotanicalBlocks.POTTED_ALOE_TRASKI, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.ASTER, GardenBotanicalBlocks.POTTED_ASTER, BlockStateModelGenerator.TintType.NOT_TINTED);
+
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.BOUVARDIA_CROP, GardenBotanicalBlocks.BOUVARDIA, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.BRUNIA_CROP, GardenBotanicalBlocks.BRUNIA, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.GERBERA_CROP, GardenBotanicalBlocks.GERBERA, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.HERBAL_PEONY_CROP, GardenBotanicalBlocks.HERBAL_PEONY, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.VERONICA_CROP, GardenBotanicalBlocks.VERONICA, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.DULL_PINK_TULIP_CROP, GardenBotanicalBlocks.DULL_PINK_TULIP, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.POINSETTIA_CROP, GardenBotanicalBlocks.POINSETTIA, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.SETARIA_CROP, GardenBotanicalBlocks.SETARIA, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.ALOE_TRASKI_CROP, GardenBotanicalBlocks.ALOE_TRASKI, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.ASTER_CROP, GardenBotanicalBlocks.ASTER, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
     }
 
     @Override
@@ -52,16 +73,31 @@ public class GardenBotanicalModelProvider extends FabricModelProvider {
         itemModelGenerator.register(GardenBotanicalItems.POWDERED_SETARIA, Models.GENERATED);
         itemModelGenerator.register(GardenBotanicalItems.POWDERED_ALOE_TRASKI, Models.GENERATED);
         itemModelGenerator.register(GardenBotanicalItems.POWDERED_ASTER, Models.GENERATED);
+    }
 
-        itemModelGenerator.register(GardenBotanicalItems.BOUVARDIA_SEEDS, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItems.BRUNIA_SEEDS, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItems.GERBERA_SEEDS, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItems.HERBAL_PEONY_SEEDS, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItems.VERONICA_SEEDS, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItems.DULL_PINK_TULIP_SEEDS, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItems.POINSETTIA_SEEDS, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItems.SETARIA_SEEDS, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItems.ALOE_TRASKI_SEEDS, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItems.ASTER_SEEDS, Models.GENERATED);
+    private void registerGrowingFlower(BlockStateModelGenerator blockStateModelGenerator, Block crop, Block flower, Property<Integer> ageProperty, int... ageTextureIndices) {
+        if (ageProperty.getValues().size() != ageTextureIndices.length) {
+            throw new IllegalArgumentException();
+        } else {
+            Int2ObjectMap<Identifier> int2ObjectMap = new Int2ObjectOpenHashMap();
+            BlockStateVariantMap blockStateVariantMap = BlockStateVariantMap.create(ageProperty).register((integer) -> {
+                int i = ageTextureIndices[integer];
+                Identifier identifier = (Identifier) int2ObjectMap.computeIfAbsent(i, (j) -> {
+                    if (i == ageTextureIndices.length - 1) {
+                        Identifier flowerId = Registries.BLOCK.getId(flower);
+                        return createSubModel(blockStateModelGenerator, crop, "block/" + flowerId.getPath(), "_stage" + i, Models.CROSS, TextureMap::cross);
+                    } else {
+                        return createSubModel(blockStateModelGenerator, crop, "block/growing_flower_stage" + i, "_stage" + i, Models.CROSS, TextureMap::cross);
+                    }
+                });
+                return BlockStateVariant.create().put(VariantSettings.MODEL, identifier);
+            });
+            blockStateModelGenerator.registerItemModel(crop.asItem());
+            blockStateModelGenerator.blockStateCollector.accept(VariantsBlockStateSupplier.create(crop).coordinate(blockStateVariantMap));
+        }
+    }
+
+    private Identifier createSubModel(BlockStateModelGenerator blockStateModelGenerator, Block block, String path, String suffix, Model model, Function<Identifier, TextureMap> texturesFactory) {
+        return model.upload(block, suffix, texturesFactory.apply(new Identifier(GardenBotanical.MOD_ID, path)), blockStateModelGenerator.modelCollector);
     }
 }
