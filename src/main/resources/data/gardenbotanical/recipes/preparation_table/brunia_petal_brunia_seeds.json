@@ -1,16 +1,22 @@
 {
   "type": "gardenbotanical:preparation_table",
   "ingredient": {
-      "item": "gardenbotanical:brunia"
+    "item": "gardenbotanical:brunia"
   },
   "output": {
     "petal": {
-      "count": 1,
-      "item": "gardenbotanical:brunia_petal"
+      "bonus": 0,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:brunia_petal"
+      }
     },
     "seeds": {
-      "count": 1,
-      "item": "gardenbotanical:brunia_seeds"
+      "bonus": 2,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:brunia_seeds"
+      }
     }
   }
 }

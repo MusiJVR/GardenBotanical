@@ -1,13 +1,15 @@
 {
   "type": "gardenbotanical:dye_mixer",
   "ingredient": {
-      "item": "gardenbotanical:powdered_dull_pink_tulip"
+    "item": "gardenbotanical:powdered_dull_pink_tulip"
   },
   "output": {
     "dye": {
-      "count": 1,
-      "item": "gardenbotanical:dye"
-    },
-    "color": "#B05658"
+      "color": "#B05658",
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:dye"
+      }
+    }
   }
 }

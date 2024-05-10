@@ -5,9 +5,11 @@
   },
   "output": {
     "dye": {
-      "count": 1,
-      "item": "gardenbotanical:dye"
-    },
-    "color": "#DC6A23"
+      "color": "#DC6A23",
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:dye"
+      }
+    }
   }
 }

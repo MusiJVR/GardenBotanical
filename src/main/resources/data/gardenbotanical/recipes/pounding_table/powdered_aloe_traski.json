@@ -5,8 +5,10 @@
   },
   "output": {
     "powder": {
-      "count": 1,
-      "item": "gardenbotanical:powdered_aloe_traski"
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:powdered_aloe_traski"
+      }
     }
   }
 }

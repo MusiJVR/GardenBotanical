@@ -1,12 +1,14 @@
 {
   "type": "gardenbotanical:pounding_table",
   "ingredient": {
-      "item": "gardenbotanical:herbal_peony_petal"
+    "item": "gardenbotanical:herbal_peony_petal"
   },
   "output": {
     "powder": {
-      "count": 1,
-      "item": "gardenbotanical:powdered_herbal_peony"
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:powdered_herbal_peony"
+      }
     }
   }
 }

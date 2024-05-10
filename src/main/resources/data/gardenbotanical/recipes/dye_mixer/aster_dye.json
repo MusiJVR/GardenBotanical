@@ -1,13 +1,15 @@
 {
   "type": "gardenbotanical:dye_mixer",
   "ingredient": {
-      "item": "gardenbotanical:powdered_aster"
+    "item": "gardenbotanical:powdered_aster"
   },
   "output": {
     "dye": {
-      "count": 1,
-      "item": "gardenbotanical:dye"
-    },
-    "color": "#C78DA3"
+      "color": "#C78DA3",
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:dye"
+      }
+    }
   }
 }

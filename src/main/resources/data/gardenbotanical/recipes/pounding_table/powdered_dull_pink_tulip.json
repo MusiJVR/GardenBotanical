@@ -1,12 +1,14 @@
 {
   "type": "gardenbotanical:pounding_table",
   "ingredient": {
-      "item": "gardenbotanical:dull_pink_tulip_petal"
+    "item": "gardenbotanical:dull_pink_tulip_petal"
   },
   "output": {
     "powder": {
-      "count": 1,
-      "item": "gardenbotanical:powdered_dull_pink_tulip"
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:powdered_dull_pink_tulip"
+      }
     }
   }
 }

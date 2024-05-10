@@ -19,13 +19,17 @@ import net.minecraft.world.World;
 public class PreparationTableRecipe implements Recipe<SimpleInventory> {
     private final Identifier id;
     private final ItemStack outputPetal;
+    private final int outputPetalBonus;
     private final ItemStack outputSeeds;
+    private final int outputSeedsBonus;
     private final Ingredient ingredient;
 
-    public PreparationTableRecipe(Identifier id, ItemStack itemStackFirst, ItemStack itemStackSecond, Ingredient ingredient) {
+    public PreparationTableRecipe(Identifier id, ItemStack itemStackFirst, int bonusFirst, ItemStack itemStackSecond, int bonusSecond, Ingredient ingredient) {
         this.id = id;
         this.outputPetal = itemStackFirst;
+        this.outputPetalBonus = bonusFirst;
         this.outputSeeds = itemStackSecond;
+        this.outputSeedsBonus = bonusSecond;
         this.ingredient = ingredient;
     }
 
@@ -56,12 +60,20 @@ public class PreparationTableRecipe implements Recipe<SimpleInventory> {
         return null;
     }
 
-    public ItemStack getOutputPetals(DynamicRegistryManager registryManager) {
+    public ItemStack getOutputPetals() {
         return outputPetal.copy();
     }
 
-    public ItemStack getOutputSeeds(DynamicRegistryManager registryManager) {
+    public ItemStack getOutputSeeds() {
         return outputSeeds.copy();
+    }
+
+    public int getOutputPetalBonus() {
+        return outputPetalBonus;
+    }
+
+    public int getOutputSeedsBonus() {
+        return outputSeedsBonus;
     }
 
     @Override
@@ -96,11 +108,13 @@ public class PreparationTableRecipe implements Recipe<SimpleInventory> {
 
         @Override
         public PreparationTableRecipe read(Identifier id, JsonObject json) {
-            ItemStack outputPetals = ShapedRecipe.outputFromJson(JsonHelper.getObject(JsonHelper.getObject(json, "output"), "petal"));
-            ItemStack outputSeeds = ShapedRecipe.outputFromJson(JsonHelper.getObject(JsonHelper.getObject(json, "output"), "seeds"));
+            ItemStack outputPetals = ShapedRecipe.outputFromJson(JsonHelper.getObject(JsonHelper.getObject(JsonHelper.getObject(json, "output"), "petal"), "itemStack"));
+            ItemStack outputSeeds = ShapedRecipe.outputFromJson(JsonHelper.getObject(JsonHelper.getObject(JsonHelper.getObject(json, "output"), "seeds"), "itemStack"));
+            int outputPetalBonus = JsonHelper.getInt(JsonHelper.getObject(JsonHelper.getObject(json, "output"), "petal"), "bonus");
+            int outputSeedsBonus = JsonHelper.getInt(JsonHelper.getObject(JsonHelper.getObject(json, "output"), "seeds"), "bonus");
             Ingredient ingredient = Ingredient.fromJson(JsonHelper.getElement(json, "ingredient"));
 
-            return new PreparationTableRecipe(id, outputPetals, outputSeeds, ingredient);
+            return new PreparationTableRecipe(id, outputPetals, outputPetalBonus, outputSeeds, outputSeedsBonus, ingredient);
         }
 
         @Override
@@ -108,14 +122,18 @@ public class PreparationTableRecipe implements Recipe<SimpleInventory> {
             Ingredient ingredient = Ingredient.fromPacket(buf);
             ItemStack outputPetals = buf.readItemStack();
             ItemStack outputSeeds = buf.readItemStack();
-            return new PreparationTableRecipe(id, outputPetals, outputSeeds, ingredient);
+            int outputPetalBonus = buf.readInt();
+            int outputSeedsBonus = buf.readInt();
+            return new PreparationTableRecipe(id, outputPetals, outputPetalBonus, outputSeeds, outputSeedsBonus, ingredient);
         }
 
         @Override
         public void write(PacketByteBuf buf, PreparationTableRecipe recipe) {
             recipe.ingredient.write(buf);
-            buf.writeItemStack(recipe.getOutputPetals(null));
-            buf.writeItemStack(recipe.getOutputSeeds(null));
+            buf.writeItemStack(recipe.getOutputPetals());
+            buf.writeItemStack(recipe.getOutputSeeds());
+            buf.writeInt(recipe.outputPetalBonus);
+            buf.writeInt(recipe.outputSeedsBonus);
         }
     }
 }

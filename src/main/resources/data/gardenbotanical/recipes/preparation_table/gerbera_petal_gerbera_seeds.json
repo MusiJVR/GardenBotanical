@@ -1,16 +1,22 @@
 {
   "type": "gardenbotanical:preparation_table",
   "ingredient": {
-      "item": "gardenbotanical:gerbera"
+    "item": "gardenbotanical:gerbera"
   },
   "output": {
     "petal": {
-      "count": 1,
-      "item": "gardenbotanical:gerbera_petal"
+      "bonus": 0,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:gerbera_petal"
+      }
     },
     "seeds": {
-      "count": 1,
-      "item": "gardenbotanical:gerbera_seeds"
+      "bonus": 2,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:gerbera_seeds"
+      }
     }
   }
 }

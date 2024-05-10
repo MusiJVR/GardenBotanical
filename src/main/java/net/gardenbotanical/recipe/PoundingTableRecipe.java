@@ -82,7 +82,7 @@ public class PoundingTableRecipe implements Recipe<SimpleInventory> {
 
         @Override
         public PoundingTableRecipe read(Identifier id, JsonObject json) {
-            ItemStack outputPowder = ShapedRecipe.outputFromJson(JsonHelper.getObject(JsonHelper.getObject(json, "output"), "powder"));
+            ItemStack outputPowder = ShapedRecipe.outputFromJson(JsonHelper.getObject(JsonHelper.getObject(JsonHelper.getObject(json, "output"), "powder"), "itemStack"));
             Ingredient ingredient = Ingredient.fromJson(JsonHelper.getElement(json, "ingredient"));
 
             return new PoundingTableRecipe(id, outputPowder, ingredient);

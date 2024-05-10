@@ -1,13 +1,15 @@
 {
   "type": "gardenbotanical:dye_mixer",
   "ingredient": {
-      "item": "gardenbotanical:powdered_poinsettia"
+    "item": "gardenbotanical:powdered_poinsettia"
   },
   "output": {
     "dye": {
-      "count": 1,
-      "item": "gardenbotanical:dye"
-    },
-    "color": "#911F1F"
+      "color": "#911F1F",
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:dye"
+      }
+    }
   }
 }

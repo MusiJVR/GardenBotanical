@@ -1,12 +1,14 @@
 {
   "type": "gardenbotanical:pounding_table",
   "ingredient": {
-      "item": "gardenbotanical:gerbera_petal"
+    "item": "gardenbotanical:gerbera_petal"
   },
   "output": {
     "powder": {
-      "count": 1,
-      "item": "gardenbotanical:powdered_gerbera"
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:powdered_gerbera"
+      }
     }
   }
 }

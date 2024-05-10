@@ -1,13 +1,15 @@
 {
   "type": "gardenbotanical:dye_mixer",
   "ingredient": {
-      "item": "gardenbotanical:powdered_bouvardia"
+    "item": "gardenbotanical:powdered_bouvardia"
   },
   "output": {
     "dye": {
-      "count": 1,
-      "item": "gardenbotanical:dye"
-    },
-    "color": "#C13A6D"
+      "color": "#C13A6D",
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:dye"
+      }
+    }
   }
 }

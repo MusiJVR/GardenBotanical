@@ -1,16 +1,22 @@
 {
   "type": "gardenbotanical:preparation_table",
   "ingredient": {
-      "item": "gardenbotanical:poinsettia"
+    "item": "gardenbotanical:poinsettia"
   },
   "output": {
     "petal": {
-      "count": 1,
-      "item": "gardenbotanical:poinsettia_petal"
+      "bonus": 0,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:poinsettia_petal"
+      }
     },
     "seeds": {
-      "count": 1,
-      "item": "gardenbotanical:poinsettia_seeds"
+      "bonus": 2,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:poinsettia_seeds"
+      }
     }
   }
 }

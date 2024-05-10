@@ -1,12 +1,14 @@
 {
   "type": "gardenbotanical:pounding_table",
   "ingredient": {
-      "item": "gardenbotanical:bouvardia_petal"
+    "item": "gardenbotanical:bouvardia_petal"
   },
   "output": {
     "powder": {
-      "count": 1,
-      "item": "gardenbotanical:powdered_bouvardia"
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:powdered_bouvardia"
+      }
     }
   }
 }

@@ -1,16 +1,22 @@
 {
   "type": "gardenbotanical:preparation_table",
   "ingredient": {
-      "item": "gardenbotanical:aster"
+    "item": "gardenbotanical:aster"
   },
   "output": {
     "petal": {
-      "count": 1,
-      "item": "gardenbotanical:aster_petal"
+      "bonus": 0,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:aster_petal"
+      }
     },
     "seeds": {
-      "count": 1,
-      "item": "gardenbotanical:aster_seeds"
+      "bonus": 2,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:aster_seeds"
+      }
     }
   }
 }

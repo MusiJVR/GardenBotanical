@@ -1,16 +1,22 @@
 {
   "type": "gardenbotanical:preparation_table",
   "ingredient": {
-      "item": "gardenbotanical:herbal_peony"
+    "item": "gardenbotanical:herbal_peony"
   },
   "output": {
     "petal": {
-      "count": 1,
-      "item": "gardenbotanical:herbal_peony_petal"
+      "bonus": 0,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:herbal_peony_petal"
+      }
     },
     "seeds": {
-      "count": 1,
-      "item": "gardenbotanical:herbal_peony_seeds"
+      "bonus": 2,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:herbal_peony_seeds"
+      }
     }
   }
 }

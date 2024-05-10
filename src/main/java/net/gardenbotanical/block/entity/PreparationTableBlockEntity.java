@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.gardenbotanical.recipe.PreparationTableRecipe;
 import net.gardenbotanical.screen.PreparationTableScreenHandler;
 import net.gardenbotanical.util.ImplementedInventory;
+import net.gardenbotanical.util.Utils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -145,8 +146,8 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
 
         this.removeStack(INPUT_SLOT, 1);
 
-        putItemInOutputSlot(recipe.get().getOutputPetals(null), OUTPUT_SLOT_PETAL);
-        putItemInOutputSlot(recipe.get().getOutputSeeds(null), OUTPUT_SLOT_SEEDS);
+        putItemInOutputSlot(Utils.applyBonus(recipe.get().getOutputPetals(), recipe.get().getOutputPetalBonus()), OUTPUT_SLOT_PETAL);
+        putItemInOutputSlot(Utils.applyBonus(recipe.get().getOutputSeeds(), recipe.get().getOutputSeedsBonus()), OUTPUT_SLOT_SEEDS);
     }
 
     private void putItemInOutputSlot(ItemStack result, int slot) {
@@ -157,8 +158,8 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
         Optional<PreparationTableRecipe> recipe = getCurrentRecipe();
 
         return recipe.isPresent()
-                && canInsertItemIntoOutputSlot(recipe.get().getOutputPetals(null), OUTPUT_SLOT_PETAL)
-                && canInsertItemIntoOutputSlot(recipe.get().getOutputSeeds(null), OUTPUT_SLOT_SEEDS);
+                && canInsertItemIntoOutputSlot(recipe.get().getOutputPetals(), OUTPUT_SLOT_PETAL)
+                && canInsertItemIntoOutputSlot(recipe.get().getOutputSeeds(), OUTPUT_SLOT_SEEDS);
     }
 
     private Optional<PreparationTableRecipe> getCurrentRecipe() {

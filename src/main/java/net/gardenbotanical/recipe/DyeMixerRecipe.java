@@ -88,9 +88,9 @@ public class DyeMixerRecipe implements Recipe<SimpleInventory> {
 
         @Override
         public DyeMixerRecipe read(Identifier id, JsonObject json) {
-            ItemStack outputDye = ShapedRecipe.outputFromJson(JsonHelper.getObject(JsonHelper.getObject(json, "output"), "dye"));
+            ItemStack outputDye = ShapedRecipe.outputFromJson(JsonHelper.getObject(JsonHelper.getObject(JsonHelper.getObject(json, "output"), "dye"), "itemStack"));
+            int dyeColor = Integer.parseInt(JsonHelper.getString(JsonHelper.getObject(JsonHelper.getObject(json, "output"), "dye"), "color").substring(1), 16);
             Ingredient ingredient = Ingredient.fromJson(JsonHelper.getElement(json, "ingredient"));
-            int dyeColor = Integer.parseInt(JsonHelper.getString(JsonHelper.getObject(json, "output"), "color").substring(1), 16);
 
             return new DyeMixerRecipe(id, outputDye, dyeColor, ingredient);
         }
