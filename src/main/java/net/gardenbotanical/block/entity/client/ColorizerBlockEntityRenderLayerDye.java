@@ -1,20 +1,18 @@
 package net.gardenbotanical.block.entity.client;
 
+import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.gardenbotanical.block.entity.ColorizerBlockEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.LightmapTextureManager;
-import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.item.ItemRenderer;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
+import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RotationAxis;
-import net.minecraft.world.LightType;
-import net.minecraft.world.World;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.util.math.Direction;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
@@ -25,27 +23,69 @@ public class ColorizerBlockEntityRenderLayerDye extends GeoRenderLayer<Colorizer
         super(entityRendererIn);
     }
 
-    @Override
-    public void render(MatrixStack poseStack, ColorizerBlockEntity animatable, BakedGeoModel bakedModel, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-        ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
+    private void drawQuad(Direction direction, VertexConsumer consumer, Matrix4f modelMatrix, Matrix3f normalMatrix, Sprite sprite, int color, int light, int overlay) {
+        Vector3f normal = direction.getUnitVector();
+        float[][] vertexes = new float[][] {
+                {0.69f, 0.25f, 0.69f},
+                {0.81f, 0.25f, 0.69f},
+                {0.81f, 0.25f, 0.81f},
+                {0.69f, 0.25f, 0.81f}
+        };
 
-        ItemStack itemStack = animatable.getDyeRender();
-
-        poseStack.push();
-
-        poseStack.translate(-0.25, 0.21875f, 0.25f);
-
-        poseStack.scale(1f, 1f, 1f);
-        poseStack.multiply(RotationAxis.POSITIVE_X.rotation((float) Math.toRadians(270)));
-        poseStack.multiply(RotationAxis.POSITIVE_Z.rotation((float) Math.toRadians(180)));
-
-        itemRenderer.renderItem(itemStack, ModelTransformationMode.GUI, getLightLevel(animatable.getWorld(), animatable.getPos()), OverlayTexture.DEFAULT_UV, poseStack, bufferSource, animatable.getWorld(), 1);
-        poseStack.pop();
+        consumer.vertex(modelMatrix, vertexes[3][0], vertexes[3][1], vertexes[3][2])
+                .color(color)
+                .texture(sprite.getMinU(), sprite.getMinV())
+                .light(light).overlay(overlay)
+                .normal(normalMatrix, normal.x, normal.y, normal.z)
+                .next();
+        consumer.vertex(modelMatrix, vertexes[2][0], vertexes[2][1], vertexes[2][2])
+                .color(color)
+                .texture(sprite.getMinU(), sprite.getMaxV())
+                .light(light).overlay(overlay)
+                .normal(normalMatrix, normal.x, normal.y, normal.z)
+                .next();
+        consumer.vertex(modelMatrix, vertexes[1][0], vertexes[1][1], vertexes[1][2])
+                .color(color)
+                .texture(sprite.getMaxU(), sprite.getMaxV())
+                .light(light).overlay(overlay)
+                .normal(normalMatrix, normal.x, normal.y, normal.z)
+                .next();
+        consumer.vertex(modelMatrix, vertexes[0][0], vertexes[0][1], vertexes[0][2])
+                .color(color)
+                .texture(sprite.getMaxU(), sprite.getMinV())
+                .light(light).overlay(overlay)
+                .normal(normalMatrix, normal.x, normal.y, normal.z)
+                .next();
     }
 
-    private int getLightLevel(World world, BlockPos pos) {
-        int bLight = world.getLightLevel(LightType.BLOCK, pos);
-        int sLight = world.getLightLevel(LightType.SKY, pos);
-        return LightmapTextureManager.pack(bLight, sLight);
+    @Override
+    public void render(MatrixStack poseStack, ColorizerBlockEntity animatable, BakedGeoModel bakedModel, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, float partialTick, int light, int overlay) {
+        if (!animatable.renderFluid()) return;
+
+        int color = animatable.getFluidColor();
+        FluidVariant fluid = FluidVariant.of(Fluids.WATER);
+
+        Sprite sprite = FluidVariantRendering.getSprite(fluid);
+        if (color == -1) {
+            color = FluidVariantRendering.getColor(fluid);
+        } else {
+            color = color - 0xFFFFFF;
+            if (color == 0) {
+                color = -1;
+            }
+        }
+        VertexConsumer consumer = bufferSource.getBuffer(RenderLayer.getTranslucent());
+
+        poseStack.push();
+        poseStack.translate(-1, 0, -0.5);
+        poseStack.scale(1, 1, 1);
+
+        MatrixStack.Entry entry = poseStack.peek();
+        Matrix4f modelMatrix = entry.getPositionMatrix();
+        Matrix3f normalMatrix = entry.getNormalMatrix();
+
+        drawQuad(Direction.UP, consumer, modelMatrix, normalMatrix, sprite, color, light, overlay);
+
+        poseStack.pop();
     }
 }

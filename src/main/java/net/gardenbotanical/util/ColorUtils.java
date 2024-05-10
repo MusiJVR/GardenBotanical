@@ -1,7 +1,7 @@
 package net.gardenbotanical.util;
 
-
 import net.minecraft.nbt.NbtCompound;
+
 
 public class ColorUtils {
     public static int blendColors(int color1, int color2) {

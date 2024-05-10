@@ -115,24 +115,15 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
 
     public int getFluidColor() {
         if (!slotIsEmpty(OUTPUT_SLOT_DYE)) {
-            if (getOutputSlotDye().getNbt() != null)
-                return getOutputSlotDye().getNbt().getInt("color");
+            NbtCompound nbtCompound = getOutputSlotDye().getOrCreateSubNbt("display");
+            if (nbtCompound.get("color") != null)
+                return nbtCompound.getInt("color");
         }
-
         return -1;
     }
 
-    public ItemStack getFluidRender() {
-        if (!slotIsEmpty(OUTPUT_SLOT_DYE)) {
-            ItemStack itemStack = new ItemStack(GardenBotanicalItems.WATER_DYE_MIXER);
-            if (getOutputSlotDye().getNbt() != null)
-                itemStack.getOrCreateNbt().putInt("color", getOutputSlotDye().getNbt().getInt("color"));
-            return itemStack;
-        } else if (fluidStorageIsFull()) {
-            return new ItemStack(GardenBotanicalItems.WATER_DYE_MIXER);
-        } else {
-            return ItemStack.EMPTY;
-        }
+    public boolean renderFluid() {
+        return fluidStorageIsFull() || !slotIsEmpty(OUTPUT_SLOT_DYE);
     }
 
     public void setInventory(DefaultedList<ItemStack> inventory) {
@@ -174,18 +165,15 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, state -> {
-            if (state.getAnimatable().world != null)
-                if (state.getAnimatable().world.getBlockState(state.getAnimatable().pos).isOf(GardenBotanicalBlocks.DYE_MIXER))
-                    if (state.getAnimatable().getWorld().getBlockState(state.getAnimatable().pos).get(DyeMixerBlock.PROCESS)) {
+            if (state.getAnimatable().world != null) {
+                BlockState blockState = state.getAnimatable().world.getBlockState(state.getAnimatable().pos);
+                if (blockState.isOf(GardenBotanicalBlocks.DYE_MIXER))
+                    if (blockState.get(DyeMixerBlock.PROCESS)) {
                         state.setAnimation(RawAnimation.begin().then("process", Animation.LoopType.LOOP));
                         return PlayState.CONTINUE;
-                    } else {
-                        return PlayState.STOP;
                     }
-                else
-                    return PlayState.STOP;
-            else
-                return PlayState.STOP;
+            }
+            return PlayState.STOP;
         }));
     }
 
@@ -236,6 +224,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
                 markDirty(world, pos, state);
 
                 if (progress >= maxProgress) {
+                    extractFluidStorage();
                     craftItem();
                     resetProgress(state);
                 }
@@ -244,6 +233,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
                 markDirty(world, pos, state);
 
                 if (progress >= maxProgress) {
+                    extractFluidStorage();
                     mixDyes();
                     resetProgress(state);
                 }

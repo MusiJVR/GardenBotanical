@@ -1,9 +1,5 @@
 {
   "item.gardenbotanical.garden_pruner": "Garden Pruner",
-
-  "item.gardenbotanical.water_dye_mixer": "Water Dye Mixer",
-  "item.gardenbotanical.colorizer_dye": "Colorizer Dye",
-
   "item.gardenbotanical.dye": "Dye",
 
   "item.gardenbotanical.bouvardia_petal": "Bouvardia Petal",
@@ -54,9 +50,6 @@
   "block.gardenbotanical.pounding_table": "Pounding Table",
   "block.gardenbotanical.dye_mixer": "Dye Mixer",
   "block.gardenbotanical.colorizer": "Colorizer",
-  "block.gardenbotanical.block_colorizer": "Block Colorizer",
-
-  "block.gardenbotanical.dyeble_material": "Dyeble Block",
 
   "itemgroup.gardenbotanical.gardenbotanical_group": "GardenBotanical"
 }

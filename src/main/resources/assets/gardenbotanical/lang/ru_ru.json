@@ -1,9 +1,5 @@
 {
   "item.gardenbotanical.garden_pruner": "Садовый Секатор",
-
-  "item.gardenbotanical.water_dye_mixer": "Вода Смешивателя Красок",
-  "item.gardenbotanical.colorizer_dye": "Краситель Раскрашивателя",
-
   "item.gardenbotanical.dye": "Краситель",
 
   "item.gardenbotanical.bouvardia_petal": "Лепесток  Бувардии",
@@ -54,9 +50,6 @@
   "block.gardenbotanical.pounding_table": "Стол для Толчения",
   "block.gardenbotanical.dye_mixer": "Смешиватель Красок",
   "block.gardenbotanical.colorizer": "Раскрашиватель",
-  "block.gardenbotanical.block_colorizer": "Раскрашиватель Блоков",
-
-  "block.gardenbotanical.dyeble_material": "Крашеный Блок",
 
   "itemgroup.gardenbotanical.gardenbotanical_group": "GardenBotanical"
 }

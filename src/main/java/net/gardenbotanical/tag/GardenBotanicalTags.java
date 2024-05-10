@@ -15,8 +15,6 @@ public class GardenBotanicalTags {
     public static final TagKey<Item> COLORIZER_CHESTPLATE = registerItemTag("colorizer_chestplate");
     public static final TagKey<Item> COLORIZER_LEGGINGS = registerItemTag("colorizer_leggings");
     public static final TagKey<Item> COLORIZER_BOOTS = registerItemTag("colorizer_boots");
-    public static final TagKey<Item> BLOCK_COLORIZER_BLOCK_TYPES = registerItemTag("block_colorizer_block_types");
-
 
     public static TagKey<Item> registerItemTag(String id) {
         return TagKey.of(RegistryKeys.ITEM, new Identifier(GardenBotanical.MOD_ID, id));

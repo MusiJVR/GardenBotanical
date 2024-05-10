@@ -136,17 +136,16 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
         }
     }
 
-    public ItemStack getDyeRender() {
-        if (!slotIsEmpty(INPUT_SLOT_DYE)) {
-            ItemStack itemStack = new ItemStack(GardenBotanicalItems.COLORIZER_DYE);
-            NbtCompound nbtColorizerDye = getInputDye().getOrCreateSubNbt("display");
-            if (nbtColorizerDye != null) {
-                itemStack.getOrCreateSubNbt("display").putInt("color", ColorUtils.checkColorNbt(nbtColorizerDye, GardenBotanical.DEFAULT_DYE_COLOR));
-            }
-            return itemStack;
-        } else {
-            return ItemStack.EMPTY;
-        }
+    public boolean renderFluid() {
+        return !slotIsEmpty(INPUT_SLOT_DYE);
+    }
+
+    public int getFluidColor() {
+        NbtCompound nbtCompound = getInputDye().getOrCreateSubNbt("display");
+        if (nbtCompound.get("color") != null)
+            return nbtCompound.getInt("color");
+
+        return -1;
     }
 
     public void updateClientData() {
@@ -180,18 +179,15 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, state -> {
-            if (state.getAnimatable().world != null)
-                if (state.getAnimatable().world.getBlockState(state.getAnimatable().pos).isOf(GardenBotanicalBlocks.COLORIZER))
-                    if (state.getAnimatable().getWorld().getBlockState(state.getAnimatable().pos).get(ColorizerBlock.PROCESS)) {
+            if (state.getAnimatable().world != null) {
+                BlockState blockState = state.getAnimatable().world.getBlockState(state.getAnimatable().pos);
+                if (blockState.isOf(GardenBotanicalBlocks.COLORIZER))
+                    if (blockState.get(ColorizerBlock.PROCESS)) {
                         state.setAnimation(RawAnimation.begin().then("process", Animation.LoopType.LOOP));
                         return PlayState.CONTINUE;
-                    } else {
-                        return PlayState.STOP;
                     }
-                else
-                    return PlayState.STOP;
-            else
-                return PlayState.STOP;
+            }
+            return PlayState.STOP;
         }));
     }
 
@@ -219,8 +215,8 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
     }
 
     private void craftArmor() {
-        NbtCompound nbtItem = inventory.get(INPUT_SLOT_ITEM).getOrCreateSubNbt("display");
-        NbtCompound nbtDye = inventory.get(INPUT_SLOT_DYE).getOrCreateSubNbt("display");
+        NbtCompound nbtItem = getInputItem().getOrCreateSubNbt("display");
+        NbtCompound nbtDye = getInputDye().getOrCreateSubNbt("display");
 
         int outputColorItem;
         if (ColorUtils.checkColorNbt(nbtItem, GardenBotanical.DEFAULT_LEATHER_ARMOR_COLOR) != GardenBotanical.DEFAULT_LEATHER_ARMOR_COLOR) {
@@ -229,7 +225,7 @@ public class ColorizerBlockEntity extends BlockEntity implements GeoBlockEntity,
             outputColorItem = ColorUtils.checkColorNbt(nbtDye, GardenBotanical.DEFAULT_DYE_COLOR);
         }
 
-        ItemStack outputItem = inventory.get(INPUT_SLOT_ITEM).copy();
+        ItemStack outputItem = getInputItem().copy();
         this.removeStack(INPUT_SLOT_ITEM);
         this.removeStack(INPUT_SLOT_DYE);
 

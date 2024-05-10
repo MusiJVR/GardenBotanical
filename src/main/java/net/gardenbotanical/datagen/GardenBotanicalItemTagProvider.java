@@ -69,12 +69,5 @@ public class GardenBotanicalItemTagProvider extends FabricTagProvider.ItemTagPro
         getOrCreateTagBuilder(GardenBotanicalTags.COLORIZER_BOOTS).add(
                 Items.LEATHER_BOOTS
         );
-
-        getOrCreateTagBuilder(GardenBotanicalTags.BLOCK_COLORIZER_BLOCK_TYPES).add(
-                Items.WHITE_WOOL,
-                Items.WHITE_CONCRETE,
-                Items.GLASS,
-                GardenBotanicalBlocks.DYEBLE_MATERIAL.asItem()
-        );
     }
 }

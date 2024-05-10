@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "facing=north": { "model": "gardenbotanical:block/block_colorizer" },
-    "facing=east":  { "model": "gardenbotanical:block/block_colorizer", "y":  90 },
-    "facing=south": { "model": "gardenbotanical:block/block_colorizer", "y": 180 },
-    "facing=west":  { "model": "gardenbotanical:block/block_colorizer", "y": 270 }
-  }
-}

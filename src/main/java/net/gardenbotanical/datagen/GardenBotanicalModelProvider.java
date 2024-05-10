@@ -4,9 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
 import net.gardenbotanical.item.GardenBotanicalItems;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Models;
+import net.minecraft.data.client.*;
 
 
 public class GardenBotanicalModelProvider extends FabricModelProvider {
@@ -26,17 +24,11 @@ public class GardenBotanicalModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.SETARIA, GardenBotanicalBlocks.POTTED_SETARIA, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.ALOE_TRASKI, GardenBotanicalBlocks.POTTED_ALOE_TRASKI, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.ASTER, GardenBotanicalBlocks.POTTED_ASTER, BlockStateModelGenerator.TintType.NOT_TINTED);
-
-        blockStateModelGenerator.registerSimpleCubeAll(GardenBotanicalBlocks.DYEBLE_MATERIAL);
     }
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(GardenBotanicalItems.GARDEN_PRUNER, Models.GENERATED);
-
-        itemModelGenerator.register(GardenBotanicalItems.WATER_DYE_MIXER, Models.GENERATED);
-        itemModelGenerator.register(GardenBotanicalItems.COLORIZER_DYE, Models.GENERATED);
-
         itemModelGenerator.register(GardenBotanicalItems.DYE, Models.GENERATED);
 
         itemModelGenerator.register(GardenBotanicalItems.BOUVARDIA_PETAL, Models.GENERATED);
