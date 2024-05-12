@@ -10,6 +10,7 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -133,7 +134,7 @@ public class DyeMixerBlock extends BlockWithEntity implements BlockEntityProvide
                                 entity.extractFluidStorage();
                                 player.setStackInHand(hand, Items.WATER_BUCKET.getDefaultStack());
                                 world.playSound(null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1f, 1f);
-                            } else if (itemStack.isIn(GardenBotanicalTags.FLOWER_POWDERS)) {
+                            } else if (itemStack.isIn(GardenBotanicalTags.FLOWER_POWDERS) || itemStack.getItem() instanceof DyeItem) {
                                 entity.getItems().set(DyeMixerBlockEntity.INPUT_SLOT_POWDER, itemStack.copyWithCount(1));
                                 itemStack.decrement(1);
                                 world.playSound(null, pos, SoundEvents.ITEM_BONE_MEAL_USE, SoundCategory.BLOCKS, 1f, 1f);

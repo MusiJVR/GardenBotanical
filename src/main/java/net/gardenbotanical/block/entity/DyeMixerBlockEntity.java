@@ -284,7 +284,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
             inv.setStack(i, this.getStack(i));
         }
 
-        return getWorld().getRecipeManager().getFirstMatch(DyeMixerRecipe.Type.INSTANCE, inv, getWorld());
+        return world.getRecipeManager().getFirstMatch(DyeMixerRecipe.Type.INSTANCE, inv, world);
     }
 
     private boolean canInsertItemIntoOutputSlot(ItemStack itemStack, int slot) {

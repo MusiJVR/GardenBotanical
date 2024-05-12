@@ -209,6 +209,7 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
 
     private Optional<PoundingTableRecipe> getCurrentRecipe() {
         SimpleInventory inv = new SimpleInventory(this.size());
+
         for(int i = 0; i < this.size(); i++) {
             inv.setStack(i, this.getStack(i));
         }
