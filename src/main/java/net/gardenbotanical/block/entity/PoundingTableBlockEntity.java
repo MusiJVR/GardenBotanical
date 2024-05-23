@@ -6,7 +6,7 @@ import net.gardenbotanical.network.GardenBotanicalNetwork;
 import net.gardenbotanical.network.packet.S2C.PoundingTableSyncPacket;
 import net.gardenbotanical.recipe.PoundingTableRecipe;
 import net.gardenbotanical.screen.PoundingTableScreenHandler;
-import net.gardenbotanical.util.ImplementedInventory;
+import net.gardenbotanical.util.interfaces.ImplementedInventory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;

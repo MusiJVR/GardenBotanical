@@ -3,7 +3,7 @@ package net.gardenbotanical.block.entity;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.gardenbotanical.recipe.PreparationTableRecipe;
 import net.gardenbotanical.screen.PreparationTableScreenHandler;
-import net.gardenbotanical.util.ImplementedInventory;
+import net.gardenbotanical.util.interfaces.ImplementedInventory;
 import net.gardenbotanical.util.Utils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;

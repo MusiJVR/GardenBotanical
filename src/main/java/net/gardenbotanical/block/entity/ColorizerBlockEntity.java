@@ -8,7 +8,7 @@ import net.gardenbotanical.item.GardenBotanicalItems;
 import net.gardenbotanical.network.GardenBotanicalNetwork;
 import net.gardenbotanical.network.packet.S2C.ColorizerSyncPacket;
 import net.gardenbotanical.tag.GardenBotanicalTags;
-import net.gardenbotanical.util.ImplementedInventory;
+import net.gardenbotanical.util.interfaces.ImplementedInventory;
 import net.gardenbotanical.util.Utils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;

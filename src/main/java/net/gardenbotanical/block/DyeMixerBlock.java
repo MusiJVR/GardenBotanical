@@ -1,5 +1,6 @@
 package net.gardenbotanical.block;
 
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.gardenbotanical.block.entity.DyeMixerBlockEntity;
 import net.gardenbotanical.block.entity.GardenBotanicalBlockEntities;
 import net.gardenbotanical.item.GardenBotanicalItems;
@@ -10,6 +11,7 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -113,12 +115,12 @@ public class DyeMixerBlock extends BlockWithEntity implements BlockEntityProvide
 
             if (!entity.slotIsEmpty(DyeMixerBlockEntity.OUTPUT_SLOT_DYE)) {
                 Vec3d vec3d = Vec3d.add(pos, 0.5, 1.01, 0.5).addRandom(world.random, 0.7F);
-                ItemEntity itemEntity = new ItemEntity(world, vec3d.getX(), vec3d.getY(), vec3d.getZ(), entity.getOutputSlotDye());
+                ItemEntity itemEntity = new ItemEntity(world, vec3d.getX(), vec3d.getY(), vec3d.getZ(), entity.getStack(DyeMixerBlockEntity.OUTPUT_SLOT_DYE));
                 itemEntity.setToDefaultPickupDelay();
                 world.spawnEntity(itemEntity);
-                entity.clearOutputSlot();
+                entity.removeStack(DyeMixerBlockEntity.OUTPUT_SLOT_DYE);
                 world.playSound(null, pos, SoundEvents.BLOCK_BEEHIVE_EXIT, SoundCategory.BLOCKS, 1f, 1f);
-            } else if (entity.fluidStorageIsFull()) {
+            } else if (entity.fluidIsFull()) {
                 if (entity.slotIsEmpty(DyeMixerBlockEntity.INPUT_SLOT_POWDER)) {
                     if (entity.slotIsEmpty(DyeMixerBlockEntity.INPUT_SLOT_FIRST_DYE) || entity.slotIsEmpty(DyeMixerBlockEntity.INPUT_SLOT_SECOND_DYE)) {
                         if (itemStack.isOf(GardenBotanicalItems.DYE)) {
@@ -131,7 +133,7 @@ public class DyeMixerBlock extends BlockWithEntity implements BlockEntityProvide
                             world.playSound(null, pos, SoundEvents.BLOCK_HONEY_BLOCK_SLIDE, SoundCategory.BLOCKS, 1f, 1f);
                         } else if (entity.slotIsEmpty(DyeMixerBlockEntity.INPUT_SLOT_FIRST_DYE) && entity.slotIsEmpty(DyeMixerBlockEntity.INPUT_SLOT_SECOND_DYE)) {
                             if (itemStack.isOf(Items.BUCKET)) {
-                                entity.extractFluidStorage();
+                                entity.extractFluid();
                                 player.setStackInHand(hand, Items.WATER_BUCKET.getDefaultStack());
                                 world.playSound(null, pos, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1f, 1f);
                             } else if (itemStack.isIn(GardenBotanicalTags.FLOWER_POWDERS) || itemStack.getItem() instanceof DyeItem) {
@@ -142,9 +144,9 @@ public class DyeMixerBlock extends BlockWithEntity implements BlockEntityProvide
                         }
                     }
                 }
-            } else if (!entity.fluidStorageIsFull()) {
+            } else if (!entity.fluidIsFull()) {
                 if (itemStack.isOf(Items.WATER_BUCKET)) {
-                    entity.fillFluidStorage();
+                    entity.fillFluid(Fluids.WATER, FluidConstants.BUCKET);
                     player.setStackInHand(hand, Items.BUCKET.getDefaultStack());
                     world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1f, 1f);
                 }

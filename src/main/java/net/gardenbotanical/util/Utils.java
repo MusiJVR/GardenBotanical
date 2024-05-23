@@ -74,4 +74,13 @@ public class Utils {
     public static ItemStack applyBonus(ItemStack stack, int bonus) {
         return stack.copyWithCount(stack.getCount() + RANDOM.nextInt(bonus + 1));
     }
+
+    public static boolean containInterface(Class<?> myClass, Class<?> myInterface) {
+        for (Class<?> inter : myClass.getInterfaces()) {
+            if (inter == myInterface) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
