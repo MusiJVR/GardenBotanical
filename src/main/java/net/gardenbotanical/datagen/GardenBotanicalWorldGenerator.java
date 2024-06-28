@@ -8,6 +8,7 @@ import net.minecraft.registry.RegistryWrapper;
 
 import java.util.concurrent.CompletableFuture;
 
+
 public class GardenBotanicalWorldGenerator extends FabricDynamicRegistryProvider {
     public GardenBotanicalWorldGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);

@@ -24,7 +24,6 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.collection.DefaultedList;
@@ -77,35 +76,11 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     public static final int INPUT_SLOT_SECOND_DYE = 2;
     public static final int OUTPUT_SLOT_DYE = 3;
 
-    protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
     private int maxProgress = 100;
 
     public DyeMixerBlockEntity(BlockPos pos, BlockState state) {
         super(GardenBotanicalBlockEntities.DYE_MIXER_BLOCK_ENTITY, pos, state);
-        this.propertyDelegate = new PropertyDelegate() {
-            @Override
-            public int get(int index) {
-                return switch (index) {
-                    case 0 -> DyeMixerBlockEntity.this.progress;
-                    case 1 -> DyeMixerBlockEntity.this.maxProgress;
-                    default -> 0;
-                };
-            }
-
-            @Override
-            public void set(int index, int value) {
-                switch (index) {
-                    case 0 -> DyeMixerBlockEntity.this.progress = value;
-                    case 1 -> DyeMixerBlockEntity.this.maxProgress = value;
-                }
-            }
-
-            @Override
-            public int size() {
-                return 2;
-            }
-        };
     }
 
     @Override
@@ -191,8 +166,8 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
     // RECIPES
     private void craftItem() {
         Optional<DyeMixerRecipe> recipe = getCurrentRecipe();
-        this.removeStack(INPUT_SLOT_POWDER);
-        this.setStack(OUTPUT_SLOT_DYE, recipe.get().getOutput(null));
+        removeStack(INPUT_SLOT_POWDER);
+        setStack(OUTPUT_SLOT_DYE, recipe.get().getOutput(null));
     }
 
     private void mixDyes() {
@@ -201,8 +176,8 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
                 Utils.checkDisplayColorNbt(getStack(INPUT_SLOT_SECOND_DYE), GardenBotanical.DEFAULT_DYE_COLOR)
         );
 
-        this.removeStack(INPUT_SLOT_FIRST_DYE);
-        this.removeStack(INPUT_SLOT_SECOND_DYE);
+        removeStack(INPUT_SLOT_FIRST_DYE);
+        removeStack(INPUT_SLOT_SECOND_DYE);
 
         ItemStack outputDye = new ItemStack(GardenBotanicalItems.DYE);
         NbtCompound nbtOutputDye = outputDye.getOrCreateNbt();
@@ -210,7 +185,7 @@ public class DyeMixerBlockEntity extends BlockEntity implements GeoBlockEntity, 
         nbt.putInt("color", outputColorDye);
         nbtOutputDye.put("display", nbt);
 
-        this.setStack(OUTPUT_SLOT_DYE, outputDye);
+        setStack(OUTPUT_SLOT_DYE, outputDye);
     }
 
     private boolean hasDyeRecipe() {

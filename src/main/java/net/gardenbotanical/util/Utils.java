@@ -8,12 +8,10 @@ import net.minecraft.item.Items;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 public class Utils {
-    public static final Random RANDOM = new Random();
-
     public static final CauldronBehavior CLEAN_DYEABLE_PAPER = (state, world, pos, player, hand, stack) -> {
         Item item = stack.getItem();
         if (item == Items.PAPER && nbtContains(stack, "display", "color")) {
@@ -72,7 +70,7 @@ public class Utils {
     }
 
     public static ItemStack applyBonus(ItemStack stack, int bonus) {
-        return stack.copyWithCount(stack.getCount() + RANDOM.nextInt(bonus + 1));
+        return stack.copyWithCount(stack.getCount() + ThreadLocalRandom.current().nextInt(bonus + 1));
     }
 
     public static boolean containInterface(Class<?> myClass, Class<?> myInterface) {

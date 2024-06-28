@@ -7,23 +7,16 @@ import net.gardenbotanical.network.packet.ServerPacket;
 
 
 public class GardenBotanicalNetwork {
-    public static ServerPacket POUNDING_TABLE_SYNC_PACKET = new ServerPacket("pounding_table_sync");
-    public static ServerPacket DYE_MIXER_SYNC_PACKET = new ServerPacket("dye_mixer_sync");
-    public static ServerPacket COLORIZER_SYNC_PACKET = new ServerPacket("colorizer_sync");
-    public static ServerPacket SPAWN_PARTICLE_PACKET = new ServerPacket("spawn_particle");
-
     public static ServerPacket INVENTORY_SYNC_PACKET = new ServerPacket("inventory_sync");
     public static ServerPacket FLUID_STORAGE_SYNC_PACKET = new ServerPacket("fluid_storage_sync");
+    public static ServerPacket SPAWN_PARTICLE_PACKET = new ServerPacket("spawn_particle");
 
     public static void registerS2CPacket() {
         GardenBotanical.LOGGER.info("Registering s2c packets for: " + GardenBotanical.MOD_ID);
 
-        ClientPlayNetworking.registerGlobalReceiver(POUNDING_TABLE_SYNC_PACKET.ID, PoundingTableSyncPacket::receive);
-        ClientPlayNetworking.registerGlobalReceiver(DYE_MIXER_SYNC_PACKET.ID, DyeMixerSyncPacket::receive);
-        ClientPlayNetworking.registerGlobalReceiver(COLORIZER_SYNC_PACKET.ID, ColorizerSyncPacket::receive);
-        ClientPlayNetworking.registerGlobalReceiver(SPAWN_PARTICLE_PACKET.ID, SpawnWaterParticlePacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(INVENTORY_SYNC_PACKET.ID, InventorySyncPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(FLUID_STORAGE_SYNC_PACKET.ID, FluidStorageSyncPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(SPAWN_PARTICLE_PACKET.ID, SpawnWaterParticlePacket::receive);
     }
 
     public static void registerC2SPacket() {
