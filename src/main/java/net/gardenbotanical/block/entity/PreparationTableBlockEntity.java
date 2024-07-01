@@ -3,8 +3,8 @@ package net.gardenbotanical.block.entity;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.gardenbotanical.recipe.PreparationTableRecipe;
 import net.gardenbotanical.screen.PreparationTableScreenHandler;
-import net.gardenbotanical.util.ImplementedInventory;
 import net.gardenbotanical.util.Utils;
+import net.gardenbotanical.util.interfaces.InventoryInterface;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 
-public class PreparationTableBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
+public class PreparationTableBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, InventoryInterface {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
 
     private static final int INPUT_SLOT = 0;
@@ -67,22 +67,30 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
     }
 
     @Override
-    public boolean canPlayerUse(PlayerEntity player) {
-        return Inventory.canPlayerUse(this, player);
-    }
-
-    @Override
-    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
-        buf.writeBlockPos(this.pos);
-    }
-
-    @Override
     public DefaultedList<ItemStack> getItems() {
         return inventory;
     }
 
+    // INVENTORY METHODS
     @Override
-    protected void writeNbt(NbtCompound nbt) {
+    public int[] getAvailableSlots(Direction side) {
+        if (side == Direction.DOWN) {
+            return new int[] {OUTPUT_SLOT_PETAL, OUTPUT_SLOT_SEEDS};
+        } else if (side == Direction.UP) {
+            return new int[] {INPUT_SLOT};
+        } else {
+            return new int[] {};
+        }
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction side) {
+        return side == Direction.DOWN && slot != INPUT_SLOT;
+    }
+
+    // NBT
+    @Override
+    public void writeNbt(NbtCompound nbt) {
         Inventories.writeNbt(nbt, inventory);
         nbt.putInt("progress", progress);
     }
@@ -93,21 +101,11 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
         progress = nbt.getInt("progress");
     }
 
-    @Override
-    public Text getDisplayName() {
-        return Text.translatable("block.gardenbotanical.preparation_table");
-    }
-
-    @Nullable
-    @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new PreparationTableScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
-    }
-
+    // MAIN
     public void tick(World world, BlockPos pos, BlockState state) {
         if (world.isClient) return;
 
-        if (isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_PETAL) && isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_SEEDS)) {
+        if (canSlotReceive(OUTPUT_SLOT_PETAL) && canSlotReceive(OUTPUT_SLOT_SEEDS)) {
             if (hasRecipe()) {
                 progress++;
                 markDirty(world, pos, state);
@@ -125,41 +123,21 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
         }
     }
 
-    @Override
-    public int[] getAvailableSlots(Direction side) {
-        if (side == Direction.DOWN) {
-            return new int[] {OUTPUT_SLOT_PETAL, OUTPUT_SLOT_SEEDS};
-        } else if (side == Direction.UP) {
-            return new int[] {INPUT_SLOT};
-        } else {
-            return new int[] {};
-        }
-    }
-
-    @Override
-    public boolean canExtract(int slot, ItemStack stack, Direction side) {
-        return side == Direction.DOWN && slot != INPUT_SLOT;
-    }
-
+    // RECIPES
     private void craftItem() {
         Optional<PreparationTableRecipe> recipe = getCurrentRecipe();
 
         this.removeStack(INPUT_SLOT, 1);
 
-        putItemInOutputSlot(Utils.applyBonus(recipe.get().getOutputPetals(), recipe.get().getOutputPetalBonus()), OUTPUT_SLOT_PETAL);
-        putItemInOutputSlot(Utils.applyBonus(recipe.get().getOutputSeeds(), recipe.get().getOutputSeedsBonus()), OUTPUT_SLOT_SEEDS);
-    }
-
-    private void putItemInOutputSlot(ItemStack result, int slot) {
-        this.setStack(slot, new ItemStack(result.getItem(), getStack(slot).getCount() + result.getCount()));
+        putStack(OUTPUT_SLOT_PETAL, Utils.applyBonus(recipe.get().getOutputPetals(), recipe.get().getOutputPetalBonus()));
+        putStack(OUTPUT_SLOT_SEEDS, Utils.applyBonus(recipe.get().getOutputSeeds(), recipe.get().getOutputSeedsBonus()));
     }
 
     private boolean hasRecipe() {
         Optional<PreparationTableRecipe> recipe = getCurrentRecipe();
 
-        return recipe.isPresent()
-                && canInsertItemIntoOutputSlot(recipe.get().getOutputPetals(), OUTPUT_SLOT_PETAL)
-                && canInsertItemIntoOutputSlot(recipe.get().getOutputSeeds(), OUTPUT_SLOT_SEEDS);
+        return recipe.isPresent() &&
+                canInsertItem(recipe.get().getOutputPetals(), OUTPUT_SLOT_PETAL) && canInsertItem(recipe.get().getOutputSeeds(), OUTPUT_SLOT_SEEDS);
     }
 
     private Optional<PreparationTableRecipe> getCurrentRecipe() {
@@ -171,16 +149,30 @@ public class PreparationTableBlockEntity extends BlockEntity implements Extended
         return getWorld().getRecipeManager().getFirstMatch(PreparationTableRecipe.Type.INSTANCE, inv, getWorld());
     }
 
-    private boolean canInsertItemIntoOutputSlot(ItemStack itemStack, int slot) {
-        return (this.getStack(slot).getItem() == itemStack.getItem() || this.getStack(slot).isEmpty())
-                && (this.getStack(slot).getCount() + itemStack.getCount() <= getStack(slot).getMaxCount());
-    }
-
-    private boolean isOutputSlotEmptyOrReceivable(int slot) {
-        return this.getStack(slot).isEmpty() || this.getStack(slot).getCount() < this.getStack(slot).getMaxCount();
-    }
-
+    // PROGRESS
     private void resetProgress() {
         this.progress = 0;
+    }
+
+    // SCREEN
+    @Nullable
+    @Override
+    public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
+        return new PreparationTableScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+    }
+
+    @Override
+    public boolean canPlayerUse(PlayerEntity player) {
+        return Inventory.canPlayerUse(this, player);
+    }
+
+    @Override
+    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
+        buf.writeBlockPos(this.pos);
+    }
+
+    @Override
+    public Text getDisplayName() {
+        return Text.translatable("block.gardenbotanical.preparation_table");
     }
 }

@@ -96,10 +96,10 @@ public class ColorizerBlock extends BlockWithEntity implements BlockEntityProvid
             ItemStack itemStack = player.getStackInHand(hand);
             if (!entity.slotIsEmpty(ColorizerBlockEntity.OUTPUT_SLOT_ITEM)) {
                 Vec3d vec3d = Vec3d.add(pos, 0.5, 1.01, 0.5).addRandom(world.random, 0.7F);
-                ItemEntity itemEntity = new ItemEntity(world, vec3d.getX(), vec3d.getY(), vec3d.getZ(), entity.getOutputItem());
+                ItemEntity itemEntity = new ItemEntity(world, vec3d.getX(), vec3d.getY(), vec3d.getZ(), entity.getStack(ColorizerBlockEntity.OUTPUT_SLOT_ITEM));
                 itemEntity.setToDefaultPickupDelay();
                 world.spawnEntity(itemEntity);
-                entity.clearOutputSlot();
+                entity.removeStack(ColorizerBlockEntity.OUTPUT_SLOT_ITEM);
                 world.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.BLOCKS, 1f, 1f);
             } else {
                 if (itemStack.isIn(GardenBotanicalTags.COLORIZER_ITEM_TYPES)) {

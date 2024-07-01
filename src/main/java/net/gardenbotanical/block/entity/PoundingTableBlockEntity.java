@@ -3,15 +3,14 @@ package net.gardenbotanical.block.entity;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.gardenbotanical.network.GardenBotanicalNetwork;
-import net.gardenbotanical.network.packet.S2C.PoundingTableSyncPacket;
+import net.gardenbotanical.network.packet.S2C.InventorySyncPacket;
 import net.gardenbotanical.recipe.PoundingTableRecipe;
 import net.gardenbotanical.screen.PoundingTableScreenHandler;
-import net.gardenbotanical.util.ImplementedInventory;
+import net.gardenbotanical.util.interfaces.InventoryInterface;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -32,14 +31,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 
-public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
+public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, InventoryInterface {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
 
     private static final int INPUT_SLOT_FLINT = 0;
     private static final int INPUT_SLOT_PETAL = 1;
     private static final int OUTPUT_SLOT_POWDER = 2;
 
-    protected final PropertyDelegate propertyDelegate;
+    private final PropertyDelegate propertyDelegate;
     private int progress = 0;
     private int maxProgress = 72;
     private int fuel = 0;
@@ -73,93 +72,12 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
         };
     }
 
-    public ItemStack getItemStackRender() {
-        if (this.getStack(OUTPUT_SLOT_POWDER).isEmpty()) {
-            return ItemStack.EMPTY;
-        } else {
-            return this.getStack(OUTPUT_SLOT_POWDER);
-        }
-    }
-
-    public void setInventory(DefaultedList<ItemStack> inventory) {
-        for (int i = 0; i < inventory.size(); i++) {
-            this.inventory.set(i, inventory.get(i));
-        }
-    }
-
-    public void updateClientData() {
-        for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
-            GardenBotanicalNetwork.POUNDING_TABLE_SYNC_PACKET.send(player, PoundingTableSyncPacket.write(inventory, getPos()));
-        }
-    }
-
-    @Override
-    public boolean canPlayerUse(PlayerEntity player) {
-        return Inventory.canPlayerUse(this, player);
-    }
-
-    @Override
-    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
-        buf.writeBlockPos(this.pos);
-    }
-
     @Override
     public DefaultedList<ItemStack> getItems() {
         return inventory;
     }
 
-    @Override
-    protected void writeNbt(NbtCompound nbt) {
-        Inventories.writeNbt(nbt, inventory);
-        nbt.putInt("progress", progress);
-        nbt.putInt("fuel", fuel);
-    }
-
-    @Override
-    public void readNbt(NbtCompound nbt) {
-        Inventories.readNbt(nbt, inventory);
-        progress = nbt.getInt("progress");
-        fuel = nbt.getInt("fuel");
-    }
-
-    @Override
-    public Text getDisplayName() {
-        return Text.translatable("block.gardenbotanical.pounding_table");
-    }
-
-    @Nullable
-    @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new PoundingTableScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
-    }
-
-    public void tick(World world, BlockPos pos, BlockState state) {
-        if (world.isClient) return;
-
-        updateClientData();
-        if (isFuelSlotFlint(INPUT_SLOT_FLINT) && fuel <= 0) {
-            decreaseStackFuel(INPUT_SLOT_FLINT);
-            markDirty(world, pos, state);
-        }
-
-        if (isOutputSlotEmptyOrReceivable(OUTPUT_SLOT_POWDER) && fuel > 0) {
-            if (hasRecipe()) {
-                progress++;
-                markDirty(world, pos, state);
-
-                if (progress >= maxProgress) {
-                    craftItem();
-                    resetProgress();
-                }
-            } else {
-                resetProgress();
-            }
-        } else {
-            resetProgress();
-            markDirty(world, pos, state);
-        }
-    }
-
+    // INVENTORY METHODS
     @Override
     public int[] getAvailableSlots(Direction side) {
         if (side == Direction.DOWN) {
@@ -182,34 +100,72 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
         return side == Direction.DOWN && slot == OUTPUT_SLOT_POWDER;
     }
 
+    // NBT
+    @Override
+    public void writeNbt(NbtCompound nbt) {
+        InventoryInterface.super.writeNbt(nbt);
+        nbt.putInt("progress", progress);
+        nbt.putInt("fuel", fuel);
+    }
+
+    @Override
+    public void readNbt(NbtCompound nbt) {
+        InventoryInterface.super.readNbt(nbt);
+        progress = nbt.getInt("progress");
+        fuel = nbt.getInt("fuel");
+    }
+
+    // MAIN
+    public void updateClientData() {
+        for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
+            GardenBotanicalNetwork.INVENTORY_SYNC_PACKET.send(player, InventorySyncPacket.write(inventory, getPos()));
+        }
+    }
+
+    public void tick(World world, BlockPos pos, BlockState state) {
+        if (world.isClient) return;
+
+        updateClientData();
+        if (getStack(INPUT_SLOT_FLINT).isOf(Items.FLINT) && fuel <= 0) {
+            fuel = 5;
+            getStack(INPUT_SLOT_FLINT).decrement(1);
+            markDirty(world, pos, state);
+        }
+
+        if (canSlotReceive(OUTPUT_SLOT_POWDER) && fuel > 0) {
+            if (hasRecipe()) {
+                progress++;
+                markDirty(world, pos, state);
+
+                if (progress >= maxProgress) {
+                    craftItem();
+                    resetProgress();
+                }
+            } else {
+                resetProgress();
+            }
+        } else {
+            resetProgress();
+            markDirty(world, pos, state);
+        }
+    }
+
+    // RECIPES
     private void craftItem() {
         fuel--;
-
         Optional<PoundingTableRecipe> recipe = getCurrentRecipe();
-
-        this.removeStack(INPUT_SLOT_PETAL, 1);
-
-        putItemInOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_POWDER);
-    }
-
-    private void putItemInOutputSlot(ItemStack result, int slot) {
-        this.setStack(slot, new ItemStack(result.getItem(), getStack(slot).getCount() + result.getCount()));
-    }
-
-    private void decreaseStackFuel(int slot) {
-        fuel = 5;
-        inventory.get(slot).decrement(1);
+        removeStack(INPUT_SLOT_PETAL, 1);
+        putStack(OUTPUT_SLOT_POWDER, recipe.get().getOutput(null));
     }
 
     private boolean hasRecipe() {
         Optional<PoundingTableRecipe> recipe = getCurrentRecipe();
 
-        return recipe.isPresent() && canInsertItemIntoOutputSlot(recipe.get().getOutput(null), OUTPUT_SLOT_POWDER);
+        return recipe.isPresent() && canInsertItem(recipe.get().getOutput(null), OUTPUT_SLOT_POWDER);
     }
 
     private Optional<PoundingTableRecipe> getCurrentRecipe() {
         SimpleInventory inv = new SimpleInventory(this.size());
-
         for(int i = 0; i < this.size(); i++) {
             inv.setStack(i, this.getStack(i));
         }
@@ -217,20 +173,39 @@ public class PoundingTableBlockEntity extends BlockEntity implements ExtendedScr
         return getWorld().getRecipeManager().getFirstMatch(PoundingTableRecipe.Type.INSTANCE, inv, getWorld());
     }
 
-    private boolean canInsertItemIntoOutputSlot(ItemStack itemStack, int slot) {
-        return (this.getStack(slot).getItem() == itemStack.getItem() || this.getStack(slot).isEmpty())
-                && (this.getStack(slot).getCount() + itemStack.getCount() <= getStack(slot).getMaxCount());
-    }
-
-    private boolean isFuelSlotFlint(int slot) {
-        return inventory.get(slot).isOf(Items.FLINT);
-    }
-
-    private boolean isOutputSlotEmptyOrReceivable(int slot) {
-        return this.getStack(slot).isEmpty() || this.getStack(slot).getCount() < this.getStack(slot).getMaxCount();
-    }
-
+    // PROGRESS
     private void resetProgress() {
         this.progress = 0;
+    }
+
+    // SCREEN
+    @Nullable
+    @Override
+    public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
+        return new PoundingTableScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+    }
+
+    @Override
+    public boolean canPlayerUse(PlayerEntity player) {
+        return Inventory.canPlayerUse(this, player);
+    }
+
+    @Override
+    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
+        buf.writeBlockPos(this.pos);
+    }
+
+    @Override
+    public Text getDisplayName() {
+        return Text.translatable("block.gardenbotanical.pounding_table");
+    }
+
+    // RENDER
+    public ItemStack getItemStackRender() {
+        if (getStack(OUTPUT_SLOT_POWDER).isEmpty()) {
+            return ItemStack.EMPTY;
+        } else {
+            return getStack(OUTPUT_SLOT_POWDER);
+        }
     }
 }
