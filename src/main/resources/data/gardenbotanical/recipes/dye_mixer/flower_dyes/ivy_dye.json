@@ -1,0 +1,15 @@
+{
+  "type": "gardenbotanical:dye_mixer",
+  "ingredient": {
+    "item": "gardenbotanical:powdered_ivy"
+  },
+  "output": {
+    "dye": {
+      "color": "#DC1885",
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:dye"
+      }
+    }
+  }
+}

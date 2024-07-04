@@ -33,6 +33,21 @@ public class GardenBotanicalItemGroups {
                         entries.add(GardenBotanicalBlocks.SETARIA);
                         entries.add(GardenBotanicalBlocks.ALOE_TRASKI);
                         entries.add(GardenBotanicalBlocks.ASTER);
+                        entries.add(GardenBotanicalBlocks.SNOW_HYDRANGEA);
+                        entries.add(GardenBotanicalBlocks.CHICORY);
+                        entries.add(GardenBotanicalBlocks.IVY);
+                        entries.add(GardenBotanicalBlocks.AQUILEGIA);
+                        entries.add(GardenBotanicalBlocks.BLUE_MOUNTAIN_TULIP);
+                        entries.add(GardenBotanicalBlocks.DRY_VIOLA);
+                        entries.add(GardenBotanicalBlocks.BIG_DANDELION);
+                        entries.add(GardenBotanicalBlocks.AHSOKA);
+                        entries.add(GardenBotanicalBlocks.BURGUNDY_ROSE);
+                        entries.add(GardenBotanicalBlocks.CALENDULA);
+                        entries.add(GardenBotanicalBlocks.STRONGYLODON);
+                        entries.add(GardenBotanicalBlocks.SCULK_FLOWER);
+                        entries.add(GardenBotanicalBlocks.DIANTHUS);
+                        entries.add(GardenBotanicalBlocks.DARK_RED_PHLOX);
+                        entries.add(GardenBotanicalBlocks.PINK_MATTHIOLA);
 
                         entries.add(GardenBotanicalItems.BOUVARDIA_PETAL);
                         entries.add(GardenBotanicalItems.BRUNIA_PETAL);
@@ -44,6 +59,21 @@ public class GardenBotanicalItemGroups {
                         entries.add(GardenBotanicalItems.SETARIA_PETAL);
                         entries.add(GardenBotanicalItems.ALOE_TRASKI_PETAL);
                         entries.add(GardenBotanicalItems.ASTER_PETAL);
+                        entries.add(GardenBotanicalItems.SNOW_HYDRANGEA_PETAL);
+                        entries.add(GardenBotanicalItems.CHICORY_PETAL);
+                        entries.add(GardenBotanicalItems.IVY_PETAL);
+                        entries.add(GardenBotanicalItems.AQUILEGIA_PETAL);
+                        entries.add(GardenBotanicalItems.BLUE_MOUNTAIN_TULIP_PETAL);
+                        entries.add(GardenBotanicalItems.DRY_VIOLA_PETAL);
+                        entries.add(GardenBotanicalItems.BIG_DANDELION_PETAL);
+                        entries.add(GardenBotanicalItems.AHSOKA_PETAL);
+                        entries.add(GardenBotanicalItems.BURGUNDY_ROSE_PETAL);
+                        entries.add(GardenBotanicalItems.CALENDULA_PETAL);
+                        entries.add(GardenBotanicalItems.STRONGYLODON_PETAL);
+                        entries.add(GardenBotanicalItems.SCULK_FLOWER_PETAL);
+                        entries.add(GardenBotanicalItems.DIANTHUS_PETAL);
+                        entries.add(GardenBotanicalItems.DARK_RED_PHLOX_PETAL);
+                        entries.add(GardenBotanicalItems.PINK_MATTHIOLA_PETAL);
 
                         entries.add(GardenBotanicalItems.POWDERED_BOUVARDIA);
                         entries.add(GardenBotanicalItems.POWDERED_BRUNIA);
@@ -55,6 +85,21 @@ public class GardenBotanicalItemGroups {
                         entries.add(GardenBotanicalItems.POWDERED_SETARIA);
                         entries.add(GardenBotanicalItems.POWDERED_ALOE_TRASKI);
                         entries.add(GardenBotanicalItems.POWDERED_ASTER);
+                        entries.add(GardenBotanicalItems.POWDERED_SNOW_HYDRANGEA);
+                        entries.add(GardenBotanicalItems.POWDERED_CHICORY);
+                        entries.add(GardenBotanicalItems.POWDERED_IVY);
+                        entries.add(GardenBotanicalItems.POWDERED_AQUILEGIA);
+                        entries.add(GardenBotanicalItems.POWDERED_BLUE_MOUNTAIN_TULIP);
+                        entries.add(GardenBotanicalItems.POWDERED_DRY_VIOLA);
+                        entries.add(GardenBotanicalItems.POWDERED_BIG_DANDELION);
+                        entries.add(GardenBotanicalItems.POWDERED_AHSOKA);
+                        entries.add(GardenBotanicalItems.POWDERED_BURGUNDY_ROSE);
+                        entries.add(GardenBotanicalItems.POWDERED_CALENDULA);
+                        entries.add(GardenBotanicalItems.POWDERED_STRONGYLODON);
+                        entries.add(GardenBotanicalItems.POWDERED_SCULK_FLOWER);
+                        entries.add(GardenBotanicalItems.POWDERED_DIANTHUS);
+                        entries.add(GardenBotanicalItems.POWDERED_DARK_RED_PHLOX);
+                        entries.add(GardenBotanicalItems.POWDERED_PINK_MATTHIOLA);
 
                         entries.add(GardenBotanicalItems.BOUVARDIA_SEEDS);
                         entries.add(GardenBotanicalItems.BRUNIA_SEEDS);
@@ -66,6 +111,21 @@ public class GardenBotanicalItemGroups {
                         entries.add(GardenBotanicalItems.SETARIA_SEEDS);
                         entries.add(GardenBotanicalItems.ALOE_TRASKI_SEEDS);
                         entries.add(GardenBotanicalItems.ASTER_SEEDS);
+                        entries.add(GardenBotanicalItems.SNOW_HYDRANGEA_SEEDS);
+                        entries.add(GardenBotanicalItems.CHICORY_SEEDS);
+                        entries.add(GardenBotanicalItems.IVY_SEEDS);
+                        entries.add(GardenBotanicalItems.AQUILEGIA_SEEDS);
+                        entries.add(GardenBotanicalItems.BLUE_MOUNTAIN_TULIP_SEEDS);
+                        entries.add(GardenBotanicalItems.DRY_VIOLA_SEEDS);
+                        entries.add(GardenBotanicalItems.BIG_DANDELION_SEEDS);
+                        entries.add(GardenBotanicalItems.AHSOKA_SEEDS);
+                        entries.add(GardenBotanicalItems.BURGUNDY_ROSE_SEEDS);
+                        entries.add(GardenBotanicalItems.CALENDULA_SEEDS);
+                        entries.add(GardenBotanicalItems.STRONGYLODON_SEEDS);
+                        entries.add(GardenBotanicalItems.SCULK_FLOWER_SEEDS);
+                        entries.add(GardenBotanicalItems.DIANTHUS_SEEDS);
+                        entries.add(GardenBotanicalItems.DARK_RED_PHLOX_SEEDS);
+                        entries.add(GardenBotanicalItems.PINK_MATTHIOLA_SEEDS);
                     }).build());
 
     public static void register() {

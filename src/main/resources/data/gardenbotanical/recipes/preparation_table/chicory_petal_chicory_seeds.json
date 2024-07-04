@@ -1,0 +1,22 @@
+{
+  "type": "gardenbotanical:preparation_table",
+  "ingredient": {
+    "item": "gardenbotanical:chicory"
+  },
+  "output": {
+    "petal": {
+      "bonus": 0,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:chicory_petal"
+      }
+    },
+    "seeds": {
+      "bonus": 2,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:chicory_seeds"
+      }
+    }
+  }
+}

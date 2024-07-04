@@ -1,0 +1,22 @@
+{
+  "type": "gardenbotanical:preparation_table",
+  "ingredient": {
+    "item": "gardenbotanical:dark_red_phlox"
+  },
+  "output": {
+    "petal": {
+      "bonus": 0,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:dark_red_phlox_petal"
+      }
+    },
+    "seeds": {
+      "bonus": 2,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:dark_red_phlox_seeds"
+      }
+    }
+  }
+}

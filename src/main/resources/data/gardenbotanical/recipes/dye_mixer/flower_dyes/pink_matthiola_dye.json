@@ -1,0 +1,15 @@
+{
+  "type": "gardenbotanical:dye_mixer",
+  "ingredient": {
+    "item": "gardenbotanical:powdered_pink_matthiola"
+  },
+  "output": {
+    "dye": {
+      "color": "#C63072",
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:dye"
+      }
+    }
+  }
+}

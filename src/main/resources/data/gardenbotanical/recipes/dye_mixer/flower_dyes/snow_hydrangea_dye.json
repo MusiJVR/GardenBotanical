@@ -1,0 +1,15 @@
+{
+  "type": "gardenbotanical:dye_mixer",
+  "ingredient": {
+    "item": "gardenbotanical:powdered_snow_hydrangea"
+  },
+  "output": {
+    "dye": {
+      "color": "#B7C3DC",
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:dye"
+      }
+    }
+  }
+}

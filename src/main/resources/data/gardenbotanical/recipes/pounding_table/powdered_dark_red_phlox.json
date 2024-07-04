@@ -1,0 +1,14 @@
+{
+  "type": "gardenbotanical:pounding_table",
+  "ingredient": {
+    "item": "gardenbotanical:dark_red_phlox_petal"
+  },
+  "output": {
+    "powder": {
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:powdered_dark_red_phlox"
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "gardenbotanical:dye_mixer",
+  "ingredient": {
+    "item": "gardenbotanical:powdered_big_dandelion"
+  },
+  "output": {
+    "dye": {
+      "color": "#E0A736",
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:dye"
+      }
+    }
+  }
+}

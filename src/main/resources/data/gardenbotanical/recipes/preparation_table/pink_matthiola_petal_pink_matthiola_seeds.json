@@ -1,0 +1,22 @@
+{
+  "type": "gardenbotanical:preparation_table",
+  "ingredient": {
+    "item": "gardenbotanical:pink_matthiola"
+  },
+  "output": {
+    "petal": {
+      "bonus": 0,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:pink_matthiola_petal"
+      }
+    },
+    "seeds": {
+      "bonus": 2,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:pink_matthiola_seeds"
+      }
+    }
+  }
+}

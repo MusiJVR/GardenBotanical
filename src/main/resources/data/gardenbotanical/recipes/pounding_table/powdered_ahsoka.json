@@ -1,0 +1,14 @@
+{
+  "type": "gardenbotanical:pounding_table",
+  "ingredient": {
+    "item": "gardenbotanical:ahsoka_petal"
+  },
+  "output": {
+    "powder": {
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:powdered_ahsoka"
+      }
+    }
+  }
+}

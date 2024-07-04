@@ -34,6 +34,21 @@ public class GardenBotanicalModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.SETARIA, GardenBotanicalBlocks.POTTED_SETARIA, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.ALOE_TRASKI, GardenBotanicalBlocks.POTTED_ALOE_TRASKI, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.ASTER, GardenBotanicalBlocks.POTTED_ASTER, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.SNOW_HYDRANGEA, GardenBotanicalBlocks.POTTED_SNOW_HYDRANGEA, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.CHICORY, GardenBotanicalBlocks.POTTED_CHICORY, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.IVY, GardenBotanicalBlocks.POTTED_IVY, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.AQUILEGIA, GardenBotanicalBlocks.POTTED_AQUILEGIA, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.BLUE_MOUNTAIN_TULIP, GardenBotanicalBlocks.POTTED_BLUE_MOUNTAIN_TULIP, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.DRY_VIOLA, GardenBotanicalBlocks.POTTED_DRY_VIOLA, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.BIG_DANDELION, GardenBotanicalBlocks.POTTED_BIG_DANDELION, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.AHSOKA, GardenBotanicalBlocks.POTTED_AHSOKA, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.BURGUNDY_ROSE, GardenBotanicalBlocks.POTTED_BURGUNDY_ROSE, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.CALENDULA, GardenBotanicalBlocks.POTTED_CALENDULA, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.STRONGYLODON, GardenBotanicalBlocks.POTTED_STRONGYLODON, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.SCULK_FLOWER, GardenBotanicalBlocks.POTTED_SCULK_FLOWER, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.DIANTHUS, GardenBotanicalBlocks.POTTED_DIANTHUS, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.DARK_RED_PHLOX, GardenBotanicalBlocks.POTTED_DARK_RED_PHLOX, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(GardenBotanicalBlocks.PINK_MATTHIOLA, GardenBotanicalBlocks.POTTED_PINK_MATTHIOLA, BlockStateModelGenerator.TintType.NOT_TINTED);
 
         registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.BOUVARDIA_CROP, GardenBotanicalBlocks.BOUVARDIA, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
         registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.BRUNIA_CROP, GardenBotanicalBlocks.BRUNIA, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
@@ -45,6 +60,21 @@ public class GardenBotanicalModelProvider extends FabricModelProvider {
         registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.SETARIA_CROP, GardenBotanicalBlocks.SETARIA, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
         registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.ALOE_TRASKI_CROP, GardenBotanicalBlocks.ALOE_TRASKI, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
         registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.ASTER_CROP, GardenBotanicalBlocks.ASTER, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.SNOW_HYDRANGEA_CROP, GardenBotanicalBlocks.SNOW_HYDRANGEA, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.CHICORY_CROP, GardenBotanicalBlocks.CHICORY, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.IVY_CROP, GardenBotanicalBlocks.IVY, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.AQUILEGIA_CROP, GardenBotanicalBlocks.AQUILEGIA, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.BLUE_MOUNTAIN_TULIP_CROP, GardenBotanicalBlocks.BLUE_MOUNTAIN_TULIP, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.DRY_VIOLA_CROP, GardenBotanicalBlocks.DRY_VIOLA, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.BIG_DANDELION_CROP, GardenBotanicalBlocks.BIG_DANDELION, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.AHSOKA_CROP, GardenBotanicalBlocks.AHSOKA, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.BURGUNDY_ROSE_CROP, GardenBotanicalBlocks.BURGUNDY_ROSE, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.CALENDULA_CROP, GardenBotanicalBlocks.CALENDULA, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.STRONGYLODON_CROP, GardenBotanicalBlocks.STRONGYLODON, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.SCULK_FLOWER_CROP, GardenBotanicalBlocks.SCULK_FLOWER, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.DIANTHUS_CROP, GardenBotanicalBlocks.DIANTHUS, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.DARK_RED_PHLOX_CROP, GardenBotanicalBlocks.DARK_RED_PHLOX, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
+        registerGrowingFlower(blockStateModelGenerator, GardenBotanicalBlocks.PINK_MATTHIOLA_CROP, GardenBotanicalBlocks.PINK_MATTHIOLA, GrowingFlower.AGE, 0, 1, 2, 3, 4, 5);
     }
 
     @Override
@@ -62,6 +92,21 @@ public class GardenBotanicalModelProvider extends FabricModelProvider {
         itemModelGenerator.register(GardenBotanicalItems.SETARIA_PETAL, Models.GENERATED);
         itemModelGenerator.register(GardenBotanicalItems.ALOE_TRASKI_PETAL, Models.GENERATED);
         itemModelGenerator.register(GardenBotanicalItems.ASTER_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.SNOW_HYDRANGEA_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.CHICORY_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.IVY_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.AQUILEGIA_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.BLUE_MOUNTAIN_TULIP_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.DRY_VIOLA_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.BIG_DANDELION_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.AHSOKA_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.BURGUNDY_ROSE_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.CALENDULA_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.STRONGYLODON_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.SCULK_FLOWER_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.DIANTHUS_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.DARK_RED_PHLOX_PETAL, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.PINK_MATTHIOLA_PETAL, Models.GENERATED);
 
         itemModelGenerator.register(GardenBotanicalItems.POWDERED_BOUVARDIA, Models.GENERATED);
         itemModelGenerator.register(GardenBotanicalItems.POWDERED_BRUNIA, Models.GENERATED);
@@ -73,6 +118,21 @@ public class GardenBotanicalModelProvider extends FabricModelProvider {
         itemModelGenerator.register(GardenBotanicalItems.POWDERED_SETARIA, Models.GENERATED);
         itemModelGenerator.register(GardenBotanicalItems.POWDERED_ALOE_TRASKI, Models.GENERATED);
         itemModelGenerator.register(GardenBotanicalItems.POWDERED_ASTER, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_SNOW_HYDRANGEA, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_CHICORY, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_IVY, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_AQUILEGIA, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_BLUE_MOUNTAIN_TULIP, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_DRY_VIOLA, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_BIG_DANDELION, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_AHSOKA, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_BURGUNDY_ROSE, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_CALENDULA, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_STRONGYLODON, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_SCULK_FLOWER, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_DIANTHUS, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_DARK_RED_PHLOX, Models.GENERATED);
+        itemModelGenerator.register(GardenBotanicalItems.POWDERED_PINK_MATTHIOLA, Models.GENERATED);
     }
 
     private void registerGrowingFlower(BlockStateModelGenerator blockStateModelGenerator, Block crop, Block flower, Property<Integer> ageProperty, int... ageTextureIndices) {
@@ -82,12 +142,12 @@ public class GardenBotanicalModelProvider extends FabricModelProvider {
             Int2ObjectMap<Identifier> int2ObjectMap = new Int2ObjectOpenHashMap();
             BlockStateVariantMap blockStateVariantMap = BlockStateVariantMap.create(ageProperty).register((integer) -> {
                 int i = ageTextureIndices[integer];
+                Identifier flowerId = Registries.BLOCK.getId(flower);
                 Identifier identifier = (Identifier) int2ObjectMap.computeIfAbsent(i, (j) -> {
                     if (i == ageTextureIndices.length - 1) {
-                        Identifier flowerId = Registries.BLOCK.getId(flower);
                         return createSubModel(blockStateModelGenerator, crop, "block/" + flowerId.getPath(), "_stage" + i, Models.CROSS, TextureMap::cross);
                     } else {
-                        return createSubModel(blockStateModelGenerator, crop, "block/growing_flower_stage" + i, "_stage" + i, Models.CROSS, TextureMap::cross);
+                        return createSubModel(blockStateModelGenerator, crop, "block/" + flowerId.getPath() + "_stage" + i, "_stage" + i, Models.CROSS, TextureMap::cross);
                     }
                 });
                 return BlockStateVariant.create().put(VariantSettings.MODEL, identifier);

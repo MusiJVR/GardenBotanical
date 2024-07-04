@@ -1,0 +1,15 @@
+{
+  "type": "gardenbotanical:dye_mixer",
+  "ingredient": {
+    "item": "gardenbotanical:powdered_strongylodon"
+  },
+  "output": {
+    "dye": {
+      "color": "#1D678D",
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:dye"
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "gardenbotanical:preparation_table",
+  "ingredient": {
+    "item": "gardenbotanical:blue_mountain_tulip"
+  },
+  "output": {
+    "petal": {
+      "bonus": 0,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:blue_mountain_tulip_petal"
+      }
+    },
+    "seeds": {
+      "bonus": 2,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:blue_mountain_tulip_seeds"
+      }
+    }
+  }
+}

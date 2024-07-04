@@ -1,0 +1,22 @@
+{
+  "type": "gardenbotanical:preparation_table",
+  "ingredient": {
+    "item": "gardenbotanical:ivy"
+  },
+  "output": {
+    "petal": {
+      "bonus": 0,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:ivy_petal"
+      }
+    },
+    "seeds": {
+      "bonus": 2,
+      "itemStack": {
+        "count": 1,
+        "item": "gardenbotanical:ivy_seeds"
+      }
+    }
+  }
+}

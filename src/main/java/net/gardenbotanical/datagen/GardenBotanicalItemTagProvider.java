@@ -29,7 +29,22 @@ public class GardenBotanicalItemTagProvider extends FabricTagProvider.ItemTagPro
                 GardenBotanicalBlocks.POINSETTIA.asItem(),
                 GardenBotanicalBlocks.SETARIA.asItem(),
                 GardenBotanicalBlocks.ALOE_TRASKI.asItem(),
-                GardenBotanicalBlocks.ASTER.asItem()
+                GardenBotanicalBlocks.ASTER.asItem(),
+                GardenBotanicalBlocks.SNOW_HYDRANGEA.asItem(),
+                GardenBotanicalBlocks.CHICORY.asItem(),
+                GardenBotanicalBlocks.IVY.asItem(),
+                GardenBotanicalBlocks.AQUILEGIA.asItem(),
+                GardenBotanicalBlocks.BLUE_MOUNTAIN_TULIP.asItem(),
+                GardenBotanicalBlocks.DRY_VIOLA.asItem(),
+                GardenBotanicalBlocks.BIG_DANDELION.asItem(),
+                GardenBotanicalBlocks.AHSOKA.asItem(),
+                GardenBotanicalBlocks.BURGUNDY_ROSE.asItem(),
+                GardenBotanicalBlocks.CALENDULA.asItem(),
+                GardenBotanicalBlocks.STRONGYLODON.asItem(),
+                GardenBotanicalBlocks.SCULK_FLOWER.asItem(),
+                GardenBotanicalBlocks.DIANTHUS.asItem(),
+                GardenBotanicalBlocks.DARK_RED_PHLOX.asItem(),
+                GardenBotanicalBlocks.PINK_MATTHIOLA.asItem()
         );
         getOrCreateTagBuilder(GardenBotanicalTags.FLOWER_POWDERS).add(
                 GardenBotanicalItems.POWDERED_BOUVARDIA,
@@ -41,7 +56,22 @@ public class GardenBotanicalItemTagProvider extends FabricTagProvider.ItemTagPro
                 GardenBotanicalItems.POWDERED_POINSETTIA,
                 GardenBotanicalItems.POWDERED_SETARIA,
                 GardenBotanicalItems.POWDERED_ALOE_TRASKI,
-                GardenBotanicalItems.POWDERED_ASTER
+                GardenBotanicalItems.POWDERED_ASTER,
+                GardenBotanicalItems.POWDERED_SNOW_HYDRANGEA,
+                GardenBotanicalItems.POWDERED_CHICORY,
+                GardenBotanicalItems.POWDERED_IVY,
+                GardenBotanicalItems.POWDERED_AQUILEGIA,
+                GardenBotanicalItems.POWDERED_BLUE_MOUNTAIN_TULIP,
+                GardenBotanicalItems.POWDERED_DRY_VIOLA,
+                GardenBotanicalItems.POWDERED_BIG_DANDELION,
+                GardenBotanicalItems.POWDERED_AHSOKA,
+                GardenBotanicalItems.POWDERED_BURGUNDY_ROSE,
+                GardenBotanicalItems.POWDERED_CALENDULA,
+                GardenBotanicalItems.POWDERED_STRONGYLODON,
+                GardenBotanicalItems.POWDERED_SCULK_FLOWER,
+                GardenBotanicalItems.POWDERED_DIANTHUS,
+                GardenBotanicalItems.POWDERED_DARK_RED_PHLOX,
+                GardenBotanicalItems.POWDERED_PINK_MATTHIOLA
         );
 
         getOrCreateTagBuilder(GardenBotanicalTags.COLORIZER_ITEM_TYPES)

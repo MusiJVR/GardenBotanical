@@ -37,6 +37,21 @@ public class GardenBotanicalClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.SETARIA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.ALOE_TRASKI, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.ASTER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.SNOW_HYDRANGEA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.CHICORY, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.IVY, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.AQUILEGIA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.BLUE_MOUNTAIN_TULIP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.DRY_VIOLA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.BIG_DANDELION, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.AHSOKA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.BURGUNDY_ROSE, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.CALENDULA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.STRONGYLODON, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.SCULK_FLOWER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.DIANTHUS, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.DARK_RED_PHLOX, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.PINK_MATTHIOLA, RenderLayer.getCutout());
 
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_BOUVARDIA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_GERBERA, RenderLayer.getCutout());
@@ -48,6 +63,21 @@ public class GardenBotanicalClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_SETARIA, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_ALOE_TRASKI, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_ASTER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_SNOW_HYDRANGEA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_CHICORY, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_IVY, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_AQUILEGIA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_BLUE_MOUNTAIN_TULIP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_DRY_VIOLA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_BIG_DANDELION, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_AHSOKA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_BURGUNDY_ROSE, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_CALENDULA, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_STRONGYLODON, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_SCULK_FLOWER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_DIANTHUS, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_DARK_RED_PHLOX, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.POTTED_PINK_MATTHIOLA, RenderLayer.getCutout());
 
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.BOUVARDIA_CROP, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.BRUNIA_CROP, RenderLayer.getCutout());
@@ -59,6 +89,21 @@ public class GardenBotanicalClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.SETARIA_CROP, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.ALOE_TRASKI_CROP, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.ASTER_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.SNOW_HYDRANGEA_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.CHICORY_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.IVY_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.AQUILEGIA_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.BLUE_MOUNTAIN_TULIP_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.DRY_VIOLA_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.BIG_DANDELION_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.AHSOKA_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.BURGUNDY_ROSE_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.CALENDULA_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.STRONGYLODON_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.SCULK_FLOWER_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.DIANTHUS_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.DARK_RED_PHLOX_CROP, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GardenBotanicalBlocks.PINK_MATTHIOLA_CROP, RenderLayer.getCutout());
 
         HandledScreens.register(GardenBotanicalScreenHandlers.PREPARATION_TABLE_SCREEN_HANDLER, PreparationTableScreen::new);
         HandledScreens.register(GardenBotanicalScreenHandlers.POUNDING_TABLE_SCREEN_HANDLER, PoundingTableScreen::new);
