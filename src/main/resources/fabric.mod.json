@@ -3,14 +3,14 @@
   "id": "gardenbotanical",
   "version": "${version}",
   "name": "GardenBotanical",
-  "description": "This mod adds flowers",
+  "description": "The mod adds 25 new colors that can be found all over the world! There are very rare flowers that can be found in the darkest corners of the world.",
   "authors": [
     "MouseJava",
     "redbad"
   ],
   "contact": {
-    "website": "https://modrinth.com/mod/gardenbotanical",
-    "repo": "https://github.com/MouseJava/GardenBotanical"
+    "homepage": "https://modrinth.com/mod/gardenbotanical",
+    "issues": "https://github.com/MusiJVR/GardenBotanical/issues"
   },
   "license": "MIT",
   "icon": "assets/gardenbotanical/icon.png",
@@ -33,5 +33,14 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.modrinth": "https://modrinth.com/mod/gardenbotanical",
+        "modmenu.source": "https://github.com/MusiJVR/GardenBotanical",
+        "modmenu.discord": "https://discord.gg/xY8WJt7VGr"
+      }
+    }
   }
 }

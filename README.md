@@ -86,7 +86,7 @@ Every flower from **GardenBotanical** has seeds. They can also, like the seeds f
 ![Garden Pruner](https://github.com/MusiJVR/GardenBotanical/blob/main/docs/showing_seeds.png?raw=true)
 
 ## Dependencies
-The **GardenBotanical** uses the [Geckolib](https://modrinth.com/mod/geckolib) library to animate function blocks.
+The **GardenBotanical** uses the [Geckolib](https://github.com/bernie-g/geckolib) library to animate function blocks.
 
 ## Issues
 Please leave messages about any errors you find [here](https://github.com/MusiJVR/GardenBotanical/issues) or on the [Discord](https://discord.gg/xY8WJt7VGr)
