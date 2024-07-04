@@ -2,10 +2,10 @@
 **GardenBotanical** adds flowers in Minecraft!
 
 The mod adds 25 new colors that can be found all over the world! There are very rare flowers that can be found in the darkest corners of the world.
-All flowers can be collected using _Garden Pruners_, and then the flower can be divided into petals and seeds on the _Preparation Table_. Seeds can be planted in farmland, and you will get a new flower!
-Flower petals can be ground in a _Pounding Table_ to make flower powder.
+All flowers can be collected using <a href="https://github.com/MusiJVR/GardenBotanical#garden_pruner">_Garden Pruners_</a>, and then the flower can be divided into petals and <a href="https://github.com/MusiJVR/GardenBotanical#seeds">seeds</a> on the <a href="https://github.com/MusiJVR/GardenBotanical#preparation_table">_Preparation Table_</a>. Seeds can be planted in farmland, and you will get a new flower!
+Flower petals can be ground in a <a href="https://github.com/MusiJVR/GardenBotanical#pounding_table">_Pounding Table_</a> to make flower powder.
 
-Also, **GardenBotanical** adds a new dye system! The mod adds a _Dye Mixer_ block that mixes flower powder, and as a result you can get a unique dye with HEX color.
+Also, **GardenBotanical** adds a new dye system! The mod adds a <a href="https://github.com/MusiJVR/GardenBotanical#dye_mixer">_Dye Mixer_</a> block that mixes flower powder, and as a result you can get a unique dye with HEX color.
 
 All technical settings and features presented here are for the latest version of the plugin and will not always work on older versions.
 
@@ -41,14 +41,14 @@ All technical settings and features presented here are for the latest version of
 
 ## Functional Blocks and Tools
 
-### Garden Pruner
+### <a name="garden_pruner">Garden Pruner</a>
 _Garden Pruner_ is needed to collect flowers from the mod. Without it, it is impossible to collect them in survival!
 #### Using
 ![Garden Pruner](https://github.com/MusiJVR/GardenBotanical/blob/main/docs/using_garden_pruner.png?raw=true)
 #### Crafting
-![Garden Pruner](https://github.com/MusiJVR/GardenBotanical/docs/crafting_garden_pruner.png?raw=true)
+![Garden Pruner](https://github.com/MusiJVR/GardenBotanical/blob/main/docs/crafting_garden_pruner.png?raw=true)
 
-### Preparation Table
+### <a name="preparation_table">Preparation Table</a>
 _Preparation Table_ is needed to separate the flower into petals and seeds. _Preparation Table_ always produces 1 petal and 1 to 3 seeds.
 #### Showing
 ![Garden Pruner](https://github.com/MusiJVR/GardenBotanical/blob/main/docs/showing_preparation_table.png?raw=true)
@@ -57,7 +57,7 @@ _Preparation Table_ is needed to separate the flower into petals and seeds. _Pre
 #### Crafting
 ![Garden Pruner](https://github.com/MusiJVR/GardenBotanical/blob/main/docs/crafting_preparation_table.png?raw=true)
 
-### Pounding Table
+### <a name="pounding_table">Pounding Table</a>
 _Pounding Table_ is needed for grinding petals into flower powder. To use _Pounding Table_, you need silicon, which must be placed in a special slot.
 #### Showing
 ![Garden Pruner](https://github.com/MusiJVR/GardenBotanical/blob/main/docs/showing_pounding_table.png?raw=true)
@@ -66,21 +66,21 @@ _Pounding Table_ is needed for grinding petals into flower powder. To use _Pound
 #### Crafting
 ![Garden Pruner](https://github.com/MusiJVR/GardenBotanical/blob/main/docs/crafting_pounding_table.png?raw=true)
 
-### Dye Mixer
+### <a name="dye_mixer">Dye Mixer</a>
 _Dye Mixer_ is needed to create dye from flower powder. You can also mix two different dyes on _Dye Mixer_ and get a unique new color. For both cases you need a bucket of water. Use occurs by right-clicking on the block while holding the desired powder or dye.
 #### Using
 ![Garden Pruner](https://github.com/MusiJVR/GardenBotanical/blob/main/docs/using_dye_mixer.png?raw=true)
 #### Crafting
 ![Garden Pruner](https://github.com/MusiJVR/GardenBotanical/blob/main/docs/crafting_dye_mixer.png?raw=true)
 
-### Colorizer
+### <a name="colorizer">Colorizer</a>
 _Colorizer_ is needed for painting various types of leather armor, as well as for painting leather horse armor and paper. To use, you need to right-click on _Colorizer_ while holding the desired item.
 #### Showing
 ![Garden Pruner](https://github.com/MusiJVR/GardenBotanical/blob/main/docs/showing_colorizer.png?raw=true)
 #### Crafting
 ![Garden Pruner](https://github.com/MusiJVR/GardenBotanical/blob/main/docs/crafting_colorizer.png?raw=true)
 
-### Seeds
+### <a name="seeds">Seeds</a>
 Every flower from **GardenBotanical** has seeds. They can also, like the seeds from vanilla Minecraft, be planted in farmland, and after completing the growth stages, cut the flower with _Garden Pruners_.
 #### Showing
 ![Garden Pruner](https://github.com/MusiJVR/GardenBotanical/blob/main/docs/showing_seeds.png?raw=true)
