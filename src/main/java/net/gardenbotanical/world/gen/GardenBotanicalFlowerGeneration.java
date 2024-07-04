@@ -39,7 +39,7 @@ public class GardenBotanicalFlowerGeneration {
                 GenerationStep.Feature.VEGETAL_DECORATION, GardenBotanicalPlacedFeatures.AQUILEGIA_PLACED);
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.MEADOW),
                 GenerationStep.Feature.VEGETAL_DECORATION, GardenBotanicalPlacedFeatures.BLUE_MOUNTAIN_TULIP_PLACED);
-        BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.WINDSWEPT_HILLS, BiomeKeys.WINDSWEPT_FOREST, BiomeKeys.WINDSWEPT_GRAVELLY_HILLS),
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.WINDSWEPT_FOREST, BiomeKeys.WINDSWEPT_HILLS, BiomeKeys.WINDSWEPT_GRAVELLY_HILLS),
                 GenerationStep.Feature.VEGETAL_DECORATION, GardenBotanicalPlacedFeatures.DRY_VIOLA_PLACED);
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.PLAINS, BiomeKeys.SUNFLOWER_PLAINS),
                 GenerationStep.Feature.VEGETAL_DECORATION, GardenBotanicalPlacedFeatures.BIG_DANDELION_PLACED);

@@ -1,15 +1,11 @@
 package net.gardenbotanical.world.feature;
 
-
 import net.gardenbotanical.GardenBotanical;
 import net.gardenbotanical.block.GardenBotanicalBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.registry.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
-import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 
 
 public class GardenBotanicalConfiguredFeatures {
@@ -103,10 +99,6 @@ public class GardenBotanicalConfiguredFeatures {
         register(context, STRONGYLODON, Feature.FLOWER, new RandomPatchFeatureConfig(
                 6, 2, 2, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(GardenBotanicalBlocks.STRONGYLODON)))
         ));
-        //Test generation
-        /*register(context, SCULK_FLOWER, Feature.NETHER_FOREST_VEGETATION, new NetherForestVegetationFeatureConfig(
-                WeightedBlockStateProvider.of(GardenBotanicalBlocks.SCULK_FLOWER), 2, 2
-        ));*/
         register(context, SCULK_FLOWER, Feature.FLOWER, new RandomPatchFeatureConfig(
                 5, 2, 2, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(GardenBotanicalBlocks.SCULK_FLOWER)))
         ));
@@ -120,11 +112,6 @@ public class GardenBotanicalConfiguredFeatures {
                 6, 3, 1, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(BlockStateProvider.of(GardenBotanicalBlocks.PINK_MATTHIOLA)))
         ));
     }
-
-    //Test method
-    /*private static void register(Registerable<ConfiguredFeature<?,?>> context, RegistryKey<ConfiguredFeature<?,?>> key, Feature<NetherForestVegetationFeatureConfig> feature, RandomPatchFeatureConfig configuration) {
-        context.register(key, new ConfiguredFeature<>(feature, configuration));
-    }*/
 
     public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {
         return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, new Identifier(GardenBotanical.MOD_ID, name));
